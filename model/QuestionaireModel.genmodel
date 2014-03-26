@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/Questionaire/src" modelPluginID="Questionaire"
+    modelName="QuestionaireModel" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
+    importerID="org.eclipse.emf.importer.ecore" complianceLevel="7.0" copyrightFields="false"
+    operationReflection="true" importOrganizing="true">
+  <foreignModel>QuestionaireModel.ecore</foreignModel>
+  <genPackages prefix="Questionairemodel" disposableProviderFactory="true" ecorePackage="QuestionaireModel.ecore#/">
+    <genClasses ecoreClass="QuestionaireModel.ecore#//Questionaire">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QuestionaireModel.ecore#//Questionaire/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QuestionaireModel.ecore#//Questionaire/elements"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QuestionaireModel.ecore#//Questionaire/resultEmail"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="QuestionaireModel.ecore#//Element"/>
+    <genClasses ecoreClass="QuestionaireModel.ecore#//Heading">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QuestionaireModel.ecore#//Heading/text"/>
+    </genClasses>
+    <genClasses ecoreClass="QuestionaireModel.ecore#//Paragraph">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QuestionaireModel.ecore#//Paragraph/text"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="QuestionaireModel.ecore#//Question">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QuestionaireModel.ecore#//Question/id"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QuestionaireModel.ecore#//Question/title"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QuestionaireModel.ecore#//Question/description"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QuestionaireModel.ecore#//Question/mandatory"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QuestionaireModel.ecore#//Question/conditions"/>
+    </genClasses>
+    <genClasses ecoreClass="QuestionaireModel.ecore#//TextQuestion">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QuestionaireModel.ecore#//TextQuestion/multiline"/>
+    </genClasses>
+    <genClasses ecoreClass="QuestionaireModel.ecore#//ChoiceQuestion">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QuestionaireModel.ecore#//ChoiceQuestion/options"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QuestionaireModel.ecore#//ChoiceQuestion/minSelections"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QuestionaireModel.ecore#//ChoiceQuestion/maxSelections"/>
+    </genClasses>
+    <genClasses ecoreClass="QuestionaireModel.ecore#//Option">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QuestionaireModel.ecore#//Option/id"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QuestionaireModel.ecore#//Option/text"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QuestionaireModel.ecore#//Option/question"/>
+    </genClasses>
+    <genClasses ecoreClass="QuestionaireModel.ecore#//MatrixQuestion">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QuestionaireModel.ecore#//MatrixQuestion/columnNames"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QuestionaireModel.ecore#//MatrixQuestion/rowNames"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QuestionaireModel.ecore#//MatrixQuestion/maxPerRow"/>
+    </genClasses>
+    <genClasses ecoreClass="QuestionaireModel.ecore#//CalendarQuestion">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QuestionaireModel.ecore#//CalendarQuestion/year"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QuestionaireModel.ecore#//CalendarQuestion/month"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QuestionaireModel.ecore#//CalendarQuestion/day"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QuestionaireModel.ecore#//CalendarQuestion/hour"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QuestionaireModel.ecore#//CalendarQuestion/minute"/>
+    </genClasses>
+    <genClasses ecoreClass="QuestionaireModel.ecore#//IntegerQuestion">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QuestionaireModel.ecore#//IntegerQuestion/minValue"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QuestionaireModel.ecore#//IntegerQuestion/step"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QuestionaireModel.ecore#//IntegerQuestion/maxValue"/>
+    </genClasses>
+    <genClasses ecoreClass="QuestionaireModel.ecore#//QuestionCondition">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QuestionaireModel.ecore#//QuestionCondition/option"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>

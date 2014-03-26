@@ -1,0 +1,15 @@
+De laver en android base app
+Del op i to mindre hold?
+Don't generate anything that can be static (android)
+Generate as few things as possible
+Generate java not xml (maybe)
+
+Hvis vi ikke er færdige med grammar i næste uge kan vi komme med en fast liste spørgsmål og få hjælp.
+Supervision meeting: I kalender
+
+QuestionCondition-option: A condition is fulfilled, if one (or more) of the referenced options have been selected
+Option-id: Must be unique for the whole questinonaire
+Option-question: The referenced question must have this option among its options
+ChoiceQuestion-options:Every option must reference back to this question
+Question-conditions:Conditions must be on options from questions earlier in the questionaire
+Question-conditions:A question is only shown, if ALL conditions are fulfilled

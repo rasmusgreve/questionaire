@@ -22,7 +22,10 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="mandatory" lowerBound="1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="conditions" upperBound="-1"
-        eType="#//QuestionCondition"/>
+        eType="#//QuestionCondition">
+      <eAnnotations source="Conditions must be on options from questions earlier in the questionaire"/>
+      <eAnnotations source="A question is only shown, if ALL conditions are fulfilled"/>
+    </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="TextQuestion" eSuperTypes="#//Question">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="multiline" lowerBound="1"
@@ -30,13 +33,20 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ChoiceQuestion" eSuperTypes="#//Question">
     <eStructuralFeatures xsi:type="ecore:EReference" name="options" lowerBound="1"
-        upperBound="-1" eType="#//Option" containment="true"/>
+        upperBound="-1" eType="#//Option" containment="true">
+      <eAnnotations source="Every option must reference back to this question"/>
+    </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="minSelections" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="maxSelections" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Option">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations source="Must be unique for the whole questinonaire"/>
+    </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="text" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="question" lowerBound="1">
+      <eAnnotations source="The referenced question must have this option among its options"/>
+    </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="MatrixQuestion" eSuperTypes="#//Question">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="columnNames" upperBound="-1"
@@ -55,8 +65,6 @@
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="IntegerQuestion" eSuperTypes="#//Question">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="compact" lowerBound="1"
-        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="minValue" lowerBound="1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="step" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
@@ -64,7 +72,9 @@
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="QuestionCondition">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="options" lowerBound="1"
-        upperBound="-1" eType="#//Option"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="option" lowerBound="1"
+        upperBound="-1" eType="#//Option">
+      <eAnnotations source="A condition is fulfilled, if one (or more) of the referenced options have been selected"/>
+    </eStructuralFeatures>
   </eClassifiers>
 </ecore:EPackage>

@@ -247,10 +247,6 @@
   <children xmi:type="notation:Node" xmi:id="__MvtwqrBEeOsgpBty_j7MQ" type="1001">
     <children xmi:type="notation:Node" xmi:id="__MwU0KrBEeOsgpBty_j7MQ" type="4001"/>
     <children xmi:type="notation:Node" xmi:id="__MwU0arBEeOsgpBty_j7MQ" type="5001">
-      <children xmi:type="notation:Node" xmi:id="__Mw75KrBEeOsgpBty_j7MQ" type="2001">
-        <element xmi:type="ecore:EAttribute" href="QuestionaireModel.ecore#//IntegerQuestion/compact"/>
-        <layoutConstraint xmi:type="notation:Location" xmi:id="__Mw75arBEeOsgpBty_j7MQ"/>
-      </children>
       <children xmi:type="notation:Node" xmi:id="__Mxi8KrBEeOsgpBty_j7MQ" type="2001">
         <element xmi:type="ecore:EAttribute" href="QuestionaireModel.ecore#//IntegerQuestion/minValue"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="__Mxi8arBEeOsgpBty_j7MQ"/>
@@ -399,20 +395,6 @@
     <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="__NBak6rBEeOsgpBty_j7MQ" points="[0, 0, 149, 60]$[0, -30, 149, 30]$[-149, -30, 0, 30]$[-149, -60, 0, 0]"/>
     <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="__TsDQKrBEeOsgpBty_j7MQ" id="(0.5,0.0)"/>
     <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="__TsDQarBEeOsgpBty_j7MQ" id="(0.48905109489051096,1.0)"/>
-  </edges>
-  <edges xmi:type="notation:Edge" xmi:id="__NBalKrBEeOsgpBty_j7MQ" type="3002" source="__MyKAqrBEeOsgpBty_j7MQ" target="__Mmj0KrBEeOsgpBty_j7MQ">
-    <children xmi:type="notation:Node" xmi:id="__NCBoKrBEeOsgpBty_j7MQ" type="4011">
-      <layoutConstraint xmi:type="notation:Location" xmi:id="__NCBoarBEeOsgpBty_j7MQ" x="-10" y="-10"/>
-    </children>
-    <children xmi:type="notation:Node" xmi:id="__NCBoqrBEeOsgpBty_j7MQ" type="4012">
-      <layoutConstraint xmi:type="notation:Location" xmi:id="__NCBo6rBEeOsgpBty_j7MQ" x="10" y="10"/>
-    </children>
-    <styles xmi:type="notation:ConnectorStyle" xmi:id="__NBalarBEeOsgpBty_j7MQ" lineColor="4210752"/>
-    <styles xmi:type="notation:FontStyle" xmi:id="__NBalqrBEeOsgpBty_j7MQ" fontColor="4210752" fontName="Lucida Grande" fontHeight="10"/>
-    <element xmi:type="ecore:EReference" href="QuestionaireModel.ecore#//QuestionCondition/question"/>
-    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="__NBal6rBEeOsgpBty_j7MQ" points="[0, 0, 135, -149]$[0, 161, 135, 12]$[-58, 161, 77, 12]$[-129, 150, 6, 1]"/>
-    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="__TufgKrBEeOsgpBty_j7MQ" id="(0.6902654867256637,1.0)"/>
-    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="__TufgarBEeOsgpBty_j7MQ" id="(0.9534883720930233,0.5846153846153846)"/>
   </edges>
   <edges xmi:type="notation:Edge" xmi:id="__NCosKrBEeOsgpBty_j7MQ" type="3002" source="__MyKAqrBEeOsgpBty_j7MQ" target="__MoZAqrBEeOsgpBty_j7MQ">
     <children xmi:type="notation:Node" xmi:id="__NCotKrBEeOsgpBty_j7MQ" type="4011">

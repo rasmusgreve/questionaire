@@ -22,7 +22,7 @@
     </children>
     <styles xmi:type="notation:ShapeStyle" xmi:id="__LzSkarBEeOsgpBty_j7MQ" fontColor="4210752" fontName="Lucida Grande" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
     <element xmi:type="ecore:EClass" href="QuestionaireModel.ecore#//Questionaire"/>
-    <layoutConstraint xmi:type="notation:Bounds" xmi:id="__LzSkqrBEeOsgpBty_j7MQ" x="306" y="9"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="__LzSkqrBEeOsgpBty_j7MQ" x="96" y="108"/>
   </children>
   <children xmi:type="notation:Node" xmi:id="__MdZ4KrBEeOsgpBty_j7MQ" type="1001">
     <children xmi:type="notation:Node" xmi:id="__MdZ46rBEeOsgpBty_j7MQ" type="4001"/>
@@ -178,7 +178,7 @@
     </children>
     <styles xmi:type="notation:ShapeStyle" xmi:id="__MoZA6rBEeOsgpBty_j7MQ" fontColor="4210752" fontName="Lucida Grande" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
     <element xmi:type="ecore:EClass" href="QuestionaireModel.ecore#//Option"/>
-    <layoutConstraint xmi:type="notation:Bounds" xmi:id="__MoZBKrBEeOsgpBty_j7MQ" x="729" y="504"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="__MoZBKrBEeOsgpBty_j7MQ" x="732" y="516"/>
   </children>
   <children xmi:type="notation:Node" xmi:id="__MqOMqrBEeOsgpBty_j7MQ" type="1001">
     <children xmi:type="notation:Node" xmi:id="__Mq1QKrBEeOsgpBty_j7MQ" type="4001"/>
@@ -356,7 +356,7 @@
   </edges>
   <edges xmi:type="notation:Edge" xmi:id="__M_lYKrBEeOsgpBty_j7MQ" type="3002" source="__Mmj0KrBEeOsgpBty_j7MQ" target="__MoZAqrBEeOsgpBty_j7MQ">
     <children xmi:type="notation:Node" xmi:id="__M_lZKrBEeOsgpBty_j7MQ" type="4011">
-      <layoutConstraint xmi:type="notation:Location" xmi:id="__M_lZarBEeOsgpBty_j7MQ" x="-10" y="-10"/>
+      <layoutConstraint xmi:type="notation:Location" xmi:id="__M_lZarBEeOsgpBty_j7MQ" x="-18" y="-32"/>
     </children>
     <children xmi:type="notation:Node" xmi:id="__M_lZqrBEeOsgpBty_j7MQ" type="4012">
       <layoutConstraint xmi:type="notation:Location" xmi:id="__M_lZ6rBEeOsgpBty_j7MQ" x="10" y="10"/>

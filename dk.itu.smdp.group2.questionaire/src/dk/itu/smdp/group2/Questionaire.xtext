@@ -5,115 +5,81 @@ import "platform:/resource/Questionaire/model/QuestionaireModel.ecore"
 import "http://www.eclipse.org/emf/2002/Ecore" as ecore
 
 Questionaire returns Questionaire:
-	'Questionaire'
-	name=EString
-	'{'
-		'resultEmail' resultEmail=EString
-		('elements' '{' elements+=Element ( "," elements+=Element)* '}' )?
-	'}';
+	name=EString 										// Eating Habbits
+	'email:' resultEmail=EString						// email: ragr@itu.dk
+		(elements+=Element ( elements+=Element)* )?		// Alle questions (minimum 1)
+	;
 
 Element returns Element:
 	Heading | Paragraph | TextQuestion | ChoiceQuestion | MatrixQuestion | CalendarQuestion | IntegerQuestion;
-
-
 
 
 EString returns ecore::EString:
 	STRING | ID;
 
 Heading returns Heading:
-	'Heading'
-	'{'
-		'text' text=EString
-	'}';
+	'#' text=EString									// #Blablabla heading woo
+	;
 
 Paragraph returns Paragraph:
-	'Paragraph'
-	'{'
-		'text' text=EString
-	'}';
+	'!'text=EString										// !Tell me your eating habbits
+	;
+
+QuestionBase:
+	'?' title=EString (mandatory?='*')?	// ?Hvad er din ynglingsmad (*)
+	(description=EString)?	
+	(conditions+=QuestionCondition)*
+;
 
 TextQuestion returns TextQuestion:
-	mandatory?='mandatory'
-	multiline?='multiline'
-	'TextQuestion'
-	'{'
-		'id' id=EString
-		'title' title=EString
-		('description' description=EString)?
-		('conditions' '(' conditions+=[QuestionCondition|EString] ( "," conditions+=[QuestionCondition|EString])* ')' )?
-	'}';
+	questionBase=QuestionBase
+	'text[' multiline?='long' ']'						// text[long]
+	;
 
 ChoiceQuestion returns ChoiceQuestion:
-	mandatory?='mandatory'
-	'ChoiceQuestion'
-	'{'
-		'id' id=EString
-		'title' title=EString
-		('description' description=EString)?
-		('minSelections' minSelections=EInt)?
-		('maxSelections' maxSelections=EInt)?
-		('conditions' '(' conditions+=[QuestionCondition|EString] ( "," conditions+=[QuestionCondition|EString])* ')' )?
-		'options' '{' options+=Option ( "," options+=Option)* '}' 
-	'}';
+	questionBase=QuestionBase
+	'choice[' (minSelections=EInt | (minSelections=EInt 'to' maxSelections=EInt)) ']'
+	options+=Option+
+	;
 
 MatrixQuestion returns MatrixQuestion:
-	mandatory?='mandatory'
-	'MatrixQuestion'
-	'{'
-		'id' id=EString
-		'title' title=EString
-		('description' description=EString)?
-		('columnNames' '{' columnNames+=EString ( "," columnNames+=EString)* '}' )?
-		('rowNames' '{' rowNames+=EString ( "," rowNames+=EString)* '}' )?
-		'maxPerRow' maxPerRow=EInt
-		('conditions' '(' conditions+=[QuestionCondition|EString] ( "," conditions+=[QuestionCondition|EString])* ')' )?
-	'}';
+	questionBase=QuestionBase																	// Description
+	'matrix[' maxPerRow=EInt '][' (columnNames+=EString ( "," columnNames+=EString)* ']')?		// matrix[maxPerRow][columnNames+]
+	('-' rowNames+=EString)+																	// -rownames
+	;
 
 CalendarQuestion returns CalendarQuestion:
-	mandatory?='mandatory'
-	year?='year'
-	month?='month'
-	day?='day'
-	hour?='hour'
-	minute?='minute'
-	'CalendarQuestion'
-	'{'
-		'id' id=EString
-		'title' title=EString
-		('description' description=EString)?
-		('conditions' '(' conditions+=[QuestionCondition|EString] ( "," conditions+=[QuestionCondition|EString])* ')' )?
-	'}';
+	questionBase=QuestionBase			
+	//'calendar[' ((year?=	'year'	)? ','?) &  TODO: VIRKER IKKE
+	//			((month?=	'month'	)? ','?) & 
+	//			((day?=		'day'	)? ','?) & 
+	//			((hour?=	'hour'	)? ','?) & 
+	//			((minute?=	'minute')? ','?) ']'
+	// [year, day,] [month, day, hour] [hour minute] [minute, day, hour,]
+	'calendar[' (
+					(year?='year')? ','? 
+					(month?='month')? ','? 
+					(day?='day')? ','? 
+					(hour?='hour')? ','? 
+					(minute?='minute')?
+				) ']' // TODO: Det er nu muligt at lave calendar[]
+	;
 
 IntegerQuestion returns IntegerQuestion:
-	mandatory?='mandatory'
-	'IntegerQuestion'
-	'{'
-		'id' id=EString
-		'title' title=EString
-		('description' description=EString)?
-		'minValue' minValue=EInt
-		'step' step=EInt
-		'maxValue' maxValue=EInt
-		('conditions' '(' conditions+=[QuestionCondition|EString] ( "," conditions+=[QuestionCondition|EString])* ')' )?
-	'}';
+	questionBase=QuestionBase
+	'number[' minValue=EInt 'to' maxValue=EInt ( 'step' step=EInt)? ']'
+	;
 
 EBoolean returns ecore::EBoolean:
 	'true' | 'false';
 
 QuestionCondition returns QuestionCondition:
-	'QuestionCondition'
 	'{'
-		'option' '(' option+=[Option|EString] ( "," option+=[Option|EString])* ')' 
+		option+=[Option|EString] ( "/" option+=[Option|EString])* // TODO: Why Option|EString? We only want to demand the id 
 	'}';
 
 Option returns Option:
-	'Option'
-	'{'
-		('id' id=EString)?
-		('text' text=EString)?
-		'question' question=[ChoiceQuestion|EString]
-	'}';
+	'-' text=EString  ('{' name=EString '}')?;
 
 EInt returns ecore::EInt:
 	'-'? INT;

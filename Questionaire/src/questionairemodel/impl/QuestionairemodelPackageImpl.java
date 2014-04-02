@@ -18,6 +18,7 @@ import questionairemodel.MatrixQuestion;
 import questionairemodel.Option;
 import questionairemodel.Paragraph;
 import questionairemodel.Question;
+import questionairemodel.QuestionBase;
 import questionairemodel.QuestionCondition;
 import questionairemodel.Questionaire;
 import questionairemodel.QuestionairemodelFactory;
@@ -114,6 +115,13 @@ public class QuestionairemodelPackageImpl extends EPackageImpl implements Questi
 	 * @generated
 	 */
 	private EClass questionConditionEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass questionBaseEClass = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -271,44 +279,8 @@ public class QuestionairemodelPackageImpl extends EPackageImpl implements Questi
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getQuestion_Id() {
-		return (EAttribute)questionEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getQuestion_Title() {
-		return (EAttribute)questionEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getQuestion_Description() {
-		return (EAttribute)questionEClass.getEStructuralFeatures().get(2);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getQuestion_Mandatory() {
-		return (EAttribute)questionEClass.getEStructuralFeatures().get(3);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getQuestion_Conditions() {
-		return (EReference)questionEClass.getEStructuralFeatures().get(4);
+	public EReference getQuestion_QuestionBase() {
+		return (EReference)questionEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -379,7 +351,7 @@ public class QuestionairemodelPackageImpl extends EPackageImpl implements Questi
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getOption_Id() {
+	public EAttribute getOption_Name() {
 		return (EAttribute)optionEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -390,15 +362,6 @@ public class QuestionairemodelPackageImpl extends EPackageImpl implements Questi
 	 */
 	public EAttribute getOption_Text() {
 		return (EAttribute)optionEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getOption_Question() {
-		return (EReference)optionEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -550,6 +513,51 @@ public class QuestionairemodelPackageImpl extends EPackageImpl implements Questi
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getQuestionBase() {
+		return questionBaseEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getQuestionBase_Title() {
+		return (EAttribute)questionBaseEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getQuestionBase_Description() {
+		return (EAttribute)questionBaseEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getQuestionBase_Conditions() {
+		return (EReference)questionBaseEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getQuestionBase_Mandatory() {
+		return (EAttribute)questionBaseEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public QuestionairemodelFactory getQuestionairemodelFactory() {
 		return (QuestionairemodelFactory)getEFactoryInstance();
 	}
@@ -587,11 +595,7 @@ public class QuestionairemodelPackageImpl extends EPackageImpl implements Questi
 		createEAttribute(paragraphEClass, PARAGRAPH__TEXT);
 
 		questionEClass = createEClass(QUESTION);
-		createEAttribute(questionEClass, QUESTION__ID);
-		createEAttribute(questionEClass, QUESTION__TITLE);
-		createEAttribute(questionEClass, QUESTION__DESCRIPTION);
-		createEAttribute(questionEClass, QUESTION__MANDATORY);
-		createEReference(questionEClass, QUESTION__CONDITIONS);
+		createEReference(questionEClass, QUESTION__QUESTION_BASE);
 
 		textQuestionEClass = createEClass(TEXT_QUESTION);
 		createEAttribute(textQuestionEClass, TEXT_QUESTION__MULTILINE);
@@ -602,9 +606,8 @@ public class QuestionairemodelPackageImpl extends EPackageImpl implements Questi
 		createEAttribute(choiceQuestionEClass, CHOICE_QUESTION__MAX_SELECTIONS);
 
 		optionEClass = createEClass(OPTION);
-		createEAttribute(optionEClass, OPTION__ID);
+		createEAttribute(optionEClass, OPTION__NAME);
 		createEAttribute(optionEClass, OPTION__TEXT);
-		createEReference(optionEClass, OPTION__QUESTION);
 
 		matrixQuestionEClass = createEClass(MATRIX_QUESTION);
 		createEAttribute(matrixQuestionEClass, MATRIX_QUESTION__COLUMN_NAMES);
@@ -625,6 +628,12 @@ public class QuestionairemodelPackageImpl extends EPackageImpl implements Questi
 
 		questionConditionEClass = createEClass(QUESTION_CONDITION);
 		createEReference(questionConditionEClass, QUESTION_CONDITION__OPTION);
+
+		questionBaseEClass = createEClass(QUESTION_BASE);
+		createEAttribute(questionBaseEClass, QUESTION_BASE__TITLE);
+		createEAttribute(questionBaseEClass, QUESTION_BASE__DESCRIPTION);
+		createEReference(questionBaseEClass, QUESTION_BASE__CONDITIONS);
+		createEAttribute(questionBaseEClass, QUESTION_BASE__MANDATORY);
 	}
 
 	/**
@@ -679,11 +688,7 @@ public class QuestionairemodelPackageImpl extends EPackageImpl implements Questi
 		initEAttribute(getParagraph_Text(), ecorePackage.getEString(), "text", null, 1, 1, Paragraph.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(questionEClass, Question.class, "Question", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getQuestion_Id(), ecorePackage.getEString(), "id", null, 1, 1, Question.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getQuestion_Title(), ecorePackage.getEString(), "title", null, 1, 1, Question.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getQuestion_Description(), ecorePackage.getEString(), "description", null, 0, 1, Question.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getQuestion_Mandatory(), ecorePackage.getEBoolean(), "mandatory", null, 1, 1, Question.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getQuestion_Conditions(), this.getQuestionCondition(), null, "conditions", null, 0, -1, Question.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getQuestion_QuestionBase(), this.getQuestionBase(), null, "questionBase", null, 1, 1, Question.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(textQuestionEClass, TextQuestion.class, "TextQuestion", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getTextQuestion_Multiline(), ecorePackage.getEBoolean(), "multiline", null, 1, 1, TextQuestion.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -694,9 +699,8 @@ public class QuestionairemodelPackageImpl extends EPackageImpl implements Questi
 		initEAttribute(getChoiceQuestion_MaxSelections(), ecorePackage.getEInt(), "maxSelections", null, 0, 1, ChoiceQuestion.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(optionEClass, Option.class, "Option", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getOption_Id(), ecorePackage.getEString(), "id", null, 0, 1, Option.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getOption_Text(), ecorePackage.getEString(), "text", null, 0, 1, Option.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getOption_Question(), this.getChoiceQuestion(), null, "question", null, 1, 1, Option.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getOption_Name(), ecorePackage.getEString(), "name", null, 0, 1, Option.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getOption_Text(), ecorePackage.getEString(), "text", null, 1, 1, Option.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(matrixQuestionEClass, MatrixQuestion.class, "MatrixQuestion", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getMatrixQuestion_ColumnNames(), ecorePackage.getEString(), "columnNames", null, 0, -1, MatrixQuestion.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -712,11 +716,17 @@ public class QuestionairemodelPackageImpl extends EPackageImpl implements Questi
 
 		initEClass(integerQuestionEClass, IntegerQuestion.class, "IntegerQuestion", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getIntegerQuestion_MinValue(), ecorePackage.getEInt(), "minValue", null, 1, 1, IntegerQuestion.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getIntegerQuestion_Step(), ecorePackage.getEInt(), "step", null, 1, 1, IntegerQuestion.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getIntegerQuestion_Step(), ecorePackage.getEInt(), "step", null, 0, 1, IntegerQuestion.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getIntegerQuestion_MaxValue(), ecorePackage.getEInt(), "maxValue", null, 1, 1, IntegerQuestion.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(questionConditionEClass, QuestionCondition.class, "QuestionCondition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getQuestionCondition_Option(), this.getOption(), null, "option", null, 1, -1, QuestionCondition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(questionBaseEClass, QuestionBase.class, "QuestionBase", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getQuestionBase_Title(), ecorePackage.getEString(), "title", null, 1, 1, QuestionBase.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getQuestionBase_Description(), ecorePackage.getEString(), "description", null, 0, 1, QuestionBase.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getQuestionBase_Conditions(), this.getQuestionCondition(), null, "conditions", null, 0, -1, QuestionBase.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getQuestionBase_Mandatory(), ecorePackage.getEBoolean(), "mandatory", null, 1, 1, QuestionBase.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Create resource
 		createResource(eNS_URI);

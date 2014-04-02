@@ -21,6 +21,7 @@ import questionairemodel.IntegerQuestion;
 import questionairemodel.MatrixQuestion;
 import questionairemodel.Option;
 import questionairemodel.Paragraph;
+import questionairemodel.QuestionBase;
 import questionairemodel.QuestionCondition;
 import questionairemodel.Questionaire;
 import questionairemodel.QuestionairemodelPackage;
@@ -82,6 +83,12 @@ public abstract class AbstractQuestionaireSemanticSequencer extends AbstractDele
 					return; 
 				}
 				else break;
+			case QuestionairemodelPackage.QUESTION_BASE:
+				if(context == grammarAccess.getQuestionBaseRule()) {
+					sequence_QuestionBase(context, (QuestionBase) semanticObject); 
+					return; 
+				}
+				else break;
 			case QuestionairemodelPackage.QUESTION_CONDITION:
 				if(context == grammarAccess.getQuestionConditionRule()) {
 					sequence_QuestionCondition(context, (QuestionCondition) semanticObject); 
@@ -108,16 +115,12 @@ public abstract class AbstractQuestionaireSemanticSequencer extends AbstractDele
 	/**
 	 * Constraint:
 	 *     (
-	 *         mandatory?='mandatory' 
-	 *         year?='year' 
-	 *         month?='month' 
-	 *         day?='day' 
-	 *         hour?='hour' 
-	 *         minute?='minute' 
-	 *         id=EString 
-	 *         title=EString 
-	 *         description=EString? 
-	 *         (conditions+=[QuestionCondition|EString] conditions+=[QuestionCondition|EString]*)?
+	 *         questionBase=QuestionBase 
+	 *         year?='year'? 
+	 *         month?='month'? 
+	 *         day?='day'? 
+	 *         hour?='hour'? 
+	 *         minute?='minute'?
 	 *     )
 	 */
 	protected void sequence_CalendarQuestion(EObject context, CalendarQuestion semanticObject) {
@@ -127,17 +130,7 @@ public abstract class AbstractQuestionaireSemanticSequencer extends AbstractDele
 	
 	/**
 	 * Constraint:
-	 *     (
-	 *         mandatory?='mandatory' 
-	 *         id=EString 
-	 *         title=EString 
-	 *         description=EString? 
-	 *         minSelections=EInt? 
-	 *         maxSelections=EInt? 
-	 *         (conditions+=[QuestionCondition|EString] conditions+=[QuestionCondition|EString]*)? 
-	 *         options+=Option 
-	 *         options+=Option*
-	 *     )
+	 *     (questionBase=QuestionBase (minSelections=EInt | (minSelections=EInt maxSelections=EInt)) options+=Option+)
 	 */
 	protected void sequence_ChoiceQuestion(EObject context, ChoiceQuestion semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -155,23 +148,14 @@ public abstract class AbstractQuestionaireSemanticSequencer extends AbstractDele
 		}
 		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
 		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
-		feeder.accept(grammarAccess.getHeadingAccess().getTextEStringParserRuleCall_3_0(), semanticObject.getText());
+		feeder.accept(grammarAccess.getHeadingAccess().getTextEStringParserRuleCall_1_0(), semanticObject.getText());
 		feeder.finish();
 	}
 	
 	
 	/**
 	 * Constraint:
-	 *     (
-	 *         mandatory?='mandatory' 
-	 *         id=EString 
-	 *         title=EString 
-	 *         description=EString? 
-	 *         minValue=EInt 
-	 *         step=EInt 
-	 *         maxValue=EInt 
-	 *         (conditions+=[QuestionCondition|EString] conditions+=[QuestionCondition|EString]*)?
-	 *     )
+	 *     (questionBase=QuestionBase minValue=EInt maxValue=EInt step=EInt?)
 	 */
 	protected void sequence_IntegerQuestion(EObject context, IntegerQuestion semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -180,16 +164,7 @@ public abstract class AbstractQuestionaireSemanticSequencer extends AbstractDele
 	
 	/**
 	 * Constraint:
-	 *     (
-	 *         mandatory?='mandatory' 
-	 *         id=EString 
-	 *         title=EString 
-	 *         description=EString? 
-	 *         (columnNames+=EString columnNames+=EString*)? 
-	 *         (rowNames+=EString rowNames+=EString*)? 
-	 *         maxPerRow=EInt 
-	 *         (conditions+=[QuestionCondition|EString] conditions+=[QuestionCondition|EString]*)?
-	 *     )
+	 *     (questionBase=QuestionBase maxPerRow=EInt (columnNames+=EString columnNames+=EString*)? rowNames+=EString+)
 	 */
 	protected void sequence_MatrixQuestion(EObject context, MatrixQuestion semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -198,7 +173,7 @@ public abstract class AbstractQuestionaireSemanticSequencer extends AbstractDele
 	
 	/**
 	 * Constraint:
-	 *     (id=EString? text=EString? question=[ChoiceQuestion|EString])
+	 *     (text=EString name=EString?)
 	 */
 	protected void sequence_Option(EObject context, Option semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -216,8 +191,17 @@ public abstract class AbstractQuestionaireSemanticSequencer extends AbstractDele
 		}
 		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
 		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
-		feeder.accept(grammarAccess.getParagraphAccess().getTextEStringParserRuleCall_3_0(), semanticObject.getText());
+		feeder.accept(grammarAccess.getParagraphAccess().getTextEStringParserRuleCall_1_0(), semanticObject.getText());
 		feeder.finish();
+	}
+	
+	
+	/**
+	 * Constraint:
+	 *     (title=EString mandatory?='*'? description=EString? conditions+=QuestionCondition*)
+	 */
+	protected void sequence_QuestionBase(EObject context, QuestionBase semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	
@@ -241,16 +225,19 @@ public abstract class AbstractQuestionaireSemanticSequencer extends AbstractDele
 	
 	/**
 	 * Constraint:
-	 *     (
-	 *         mandatory?='mandatory' 
-	 *         multiline?='multiline' 
-	 *         id=EString 
-	 *         title=EString 
-	 *         description=EString? 
-	 *         (conditions+=[QuestionCondition|EString] conditions+=[QuestionCondition|EString]*)?
-	 *     )
+	 *     (questionBase=QuestionBase multiline?='long')
 	 */
 	protected void sequence_TextQuestion(EObject context, TextQuestion semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
+		if(errorAcceptor != null) {
+			if(transientValues.isValueTransient(semanticObject, QuestionairemodelPackage.Literals.QUESTION__QUESTION_BASE) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, QuestionairemodelPackage.Literals.QUESTION__QUESTION_BASE));
+			if(transientValues.isValueTransient(semanticObject, QuestionairemodelPackage.Literals.TEXT_QUESTION__MULTILINE) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, QuestionairemodelPackage.Literals.TEXT_QUESTION__MULTILINE));
+		}
+		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
+		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
+		feeder.accept(grammarAccess.getTextQuestionAccess().getQuestionBaseQuestionBaseParserRuleCall_0_0(), semanticObject.getQuestionBase());
+		feeder.accept(grammarAccess.getTextQuestionAccess().getMultilineLongKeyword_2_0(), semanticObject.isMultiline());
+		feeder.finish();
 	}
 }

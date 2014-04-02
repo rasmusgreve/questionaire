@@ -195,10 +195,8 @@ public class CalendarQuestionItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((CalendarQuestion)object).getId();
-		return label == null || label.length() == 0 ?
-			getString("_UI_CalendarQuestion_type") :
-			getString("_UI_CalendarQuestion_type") + " " + label;
+		CalendarQuestion calendarQuestion = (CalendarQuestion)object;
+		return getString("_UI_CalendarQuestion_type") + " " + calendarQuestion.isYear();
 	}
 
 	/**

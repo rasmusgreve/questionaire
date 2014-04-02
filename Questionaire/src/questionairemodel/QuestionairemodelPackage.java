@@ -224,49 +224,13 @@ public interface QuestionairemodelPackage extends EPackage {
 	int QUESTION = 4;
 
 	/**
-	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * The feature id for the '<em><b>Question Base</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int QUESTION__ID = ELEMENT_FEATURE_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>Title</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int QUESTION__TITLE = ELEMENT_FEATURE_COUNT + 1;
-
-	/**
-	 * The feature id for the '<em><b>Description</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int QUESTION__DESCRIPTION = ELEMENT_FEATURE_COUNT + 2;
-
-	/**
-	 * The feature id for the '<em><b>Mandatory</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int QUESTION__MANDATORY = ELEMENT_FEATURE_COUNT + 3;
-
-	/**
-	 * The feature id for the '<em><b>Conditions</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int QUESTION__CONDITIONS = ELEMENT_FEATURE_COUNT + 4;
+	int QUESTION__QUESTION_BASE = ELEMENT_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>Question</em>' class.
@@ -275,7 +239,7 @@ public interface QuestionairemodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int QUESTION_FEATURE_COUNT = ELEMENT_FEATURE_COUNT + 5;
+	int QUESTION_FEATURE_COUNT = ELEMENT_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of operations of the '<em>Question</em>' class.
@@ -297,49 +261,13 @@ public interface QuestionairemodelPackage extends EPackage {
 	int TEXT_QUESTION = 5;
 
 	/**
-	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * The feature id for the '<em><b>Question Base</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TEXT_QUESTION__ID = QUESTION__ID;
-
-	/**
-	 * The feature id for the '<em><b>Title</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TEXT_QUESTION__TITLE = QUESTION__TITLE;
-
-	/**
-	 * The feature id for the '<em><b>Description</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TEXT_QUESTION__DESCRIPTION = QUESTION__DESCRIPTION;
-
-	/**
-	 * The feature id for the '<em><b>Mandatory</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TEXT_QUESTION__MANDATORY = QUESTION__MANDATORY;
-
-	/**
-	 * The feature id for the '<em><b>Conditions</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TEXT_QUESTION__CONDITIONS = QUESTION__CONDITIONS;
+	int TEXT_QUESTION__QUESTION_BASE = QUESTION__QUESTION_BASE;
 
 	/**
 	 * The feature id for the '<em><b>Multiline</b></em>' attribute.
@@ -379,49 +307,13 @@ public interface QuestionairemodelPackage extends EPackage {
 	int CHOICE_QUESTION = 6;
 
 	/**
-	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * The feature id for the '<em><b>Question Base</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CHOICE_QUESTION__ID = QUESTION__ID;
-
-	/**
-	 * The feature id for the '<em><b>Title</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CHOICE_QUESTION__TITLE = QUESTION__TITLE;
-
-	/**
-	 * The feature id for the '<em><b>Description</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CHOICE_QUESTION__DESCRIPTION = QUESTION__DESCRIPTION;
-
-	/**
-	 * The feature id for the '<em><b>Mandatory</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CHOICE_QUESTION__MANDATORY = QUESTION__MANDATORY;
-
-	/**
-	 * The feature id for the '<em><b>Conditions</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CHOICE_QUESTION__CONDITIONS = QUESTION__CONDITIONS;
+	int CHOICE_QUESTION__QUESTION_BASE = QUESTION__QUESTION_BASE;
 
 	/**
 	 * The feature id for the '<em><b>Options</b></em>' containment reference list.
@@ -479,13 +371,13 @@ public interface QuestionairemodelPackage extends EPackage {
 	int OPTION = 7;
 
 	/**
-	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int OPTION__ID = 0;
+	int OPTION__NAME = 0;
 
 	/**
 	 * The feature id for the '<em><b>Text</b></em>' attribute.
@@ -497,22 +389,13 @@ public interface QuestionairemodelPackage extends EPackage {
 	int OPTION__TEXT = 1;
 
 	/**
-	 * The feature id for the '<em><b>Question</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int OPTION__QUESTION = 2;
-
-	/**
 	 * The number of structural features of the '<em>Option</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int OPTION_FEATURE_COUNT = 3;
+	int OPTION_FEATURE_COUNT = 2;
 
 	/**
 	 * The number of operations of the '<em>Option</em>' class.
@@ -534,49 +417,13 @@ public interface QuestionairemodelPackage extends EPackage {
 	int MATRIX_QUESTION = 8;
 
 	/**
-	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * The feature id for the '<em><b>Question Base</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MATRIX_QUESTION__ID = QUESTION__ID;
-
-	/**
-	 * The feature id for the '<em><b>Title</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MATRIX_QUESTION__TITLE = QUESTION__TITLE;
-
-	/**
-	 * The feature id for the '<em><b>Description</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MATRIX_QUESTION__DESCRIPTION = QUESTION__DESCRIPTION;
-
-	/**
-	 * The feature id for the '<em><b>Mandatory</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MATRIX_QUESTION__MANDATORY = QUESTION__MANDATORY;
-
-	/**
-	 * The feature id for the '<em><b>Conditions</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MATRIX_QUESTION__CONDITIONS = QUESTION__CONDITIONS;
+	int MATRIX_QUESTION__QUESTION_BASE = QUESTION__QUESTION_BASE;
 
 	/**
 	 * The feature id for the '<em><b>Column Names</b></em>' attribute list.
@@ -634,49 +481,13 @@ public interface QuestionairemodelPackage extends EPackage {
 	int CALENDAR_QUESTION = 9;
 
 	/**
-	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * The feature id for the '<em><b>Question Base</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CALENDAR_QUESTION__ID = QUESTION__ID;
-
-	/**
-	 * The feature id for the '<em><b>Title</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CALENDAR_QUESTION__TITLE = QUESTION__TITLE;
-
-	/**
-	 * The feature id for the '<em><b>Description</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CALENDAR_QUESTION__DESCRIPTION = QUESTION__DESCRIPTION;
-
-	/**
-	 * The feature id for the '<em><b>Mandatory</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CALENDAR_QUESTION__MANDATORY = QUESTION__MANDATORY;
-
-	/**
-	 * The feature id for the '<em><b>Conditions</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CALENDAR_QUESTION__CONDITIONS = QUESTION__CONDITIONS;
+	int CALENDAR_QUESTION__QUESTION_BASE = QUESTION__QUESTION_BASE;
 
 	/**
 	 * The feature id for the '<em><b>Year</b></em>' attribute.
@@ -752,49 +563,13 @@ public interface QuestionairemodelPackage extends EPackage {
 	int INTEGER_QUESTION = 10;
 
 	/**
-	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * The feature id for the '<em><b>Question Base</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int INTEGER_QUESTION__ID = QUESTION__ID;
-
-	/**
-	 * The feature id for the '<em><b>Title</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int INTEGER_QUESTION__TITLE = QUESTION__TITLE;
-
-	/**
-	 * The feature id for the '<em><b>Description</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int INTEGER_QUESTION__DESCRIPTION = QUESTION__DESCRIPTION;
-
-	/**
-	 * The feature id for the '<em><b>Mandatory</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int INTEGER_QUESTION__MANDATORY = QUESTION__MANDATORY;
-
-	/**
-	 * The feature id for the '<em><b>Conditions</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int INTEGER_QUESTION__CONDITIONS = QUESTION__CONDITIONS;
+	int INTEGER_QUESTION__QUESTION_BASE = QUESTION__QUESTION_BASE;
 
 	/**
 	 * The feature id for the '<em><b>Min Value</b></em>' attribute.
@@ -877,6 +652,71 @@ public interface QuestionairemodelPackage extends EPackage {
 	 * @ordered
 	 */
 	int QUESTION_CONDITION_OPERATION_COUNT = 0;
+
+
+	/**
+	 * The meta object id for the '{@link questionairemodel.impl.QuestionBaseImpl <em>Question Base</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see questionairemodel.impl.QuestionBaseImpl
+	 * @see questionairemodel.impl.QuestionairemodelPackageImpl#getQuestionBase()
+	 * @generated
+	 */
+	int QUESTION_BASE = 12;
+
+	/**
+	 * The feature id for the '<em><b>Title</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int QUESTION_BASE__TITLE = 0;
+
+	/**
+	 * The feature id for the '<em><b>Description</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int QUESTION_BASE__DESCRIPTION = 1;
+
+	/**
+	 * The feature id for the '<em><b>Conditions</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int QUESTION_BASE__CONDITIONS = 2;
+
+	/**
+	 * The feature id for the '<em><b>Mandatory</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int QUESTION_BASE__MANDATORY = 3;
+
+	/**
+	 * The number of structural features of the '<em>Question Base</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int QUESTION_BASE_FEATURE_COUNT = 4;
+
+	/**
+	 * The number of operations of the '<em>Question Base</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int QUESTION_BASE_OPERATION_COUNT = 0;
 
 
 	/**
@@ -985,59 +825,15 @@ public interface QuestionairemodelPackage extends EPackage {
 	EClass getQuestion();
 
 	/**
-	 * Returns the meta object for the attribute '{@link questionairemodel.Question#getId <em>Id</em>}'.
+	 * Returns the meta object for the containment reference '{@link questionairemodel.Question#getQuestionBase <em>Question Base</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Id</em>'.
-	 * @see questionairemodel.Question#getId()
+	 * @return the meta object for the containment reference '<em>Question Base</em>'.
+	 * @see questionairemodel.Question#getQuestionBase()
 	 * @see #getQuestion()
 	 * @generated
 	 */
-	EAttribute getQuestion_Id();
-
-	/**
-	 * Returns the meta object for the attribute '{@link questionairemodel.Question#getTitle <em>Title</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Title</em>'.
-	 * @see questionairemodel.Question#getTitle()
-	 * @see #getQuestion()
-	 * @generated
-	 */
-	EAttribute getQuestion_Title();
-
-	/**
-	 * Returns the meta object for the attribute '{@link questionairemodel.Question#getDescription <em>Description</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Description</em>'.
-	 * @see questionairemodel.Question#getDescription()
-	 * @see #getQuestion()
-	 * @generated
-	 */
-	EAttribute getQuestion_Description();
-
-	/**
-	 * Returns the meta object for the attribute '{@link questionairemodel.Question#isMandatory <em>Mandatory</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Mandatory</em>'.
-	 * @see questionairemodel.Question#isMandatory()
-	 * @see #getQuestion()
-	 * @generated
-	 */
-	EAttribute getQuestion_Mandatory();
-
-	/**
-	 * Returns the meta object for the reference list '{@link questionairemodel.Question#getConditions <em>Conditions</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Conditions</em>'.
-	 * @see questionairemodel.Question#getConditions()
-	 * @see #getQuestion()
-	 * @generated
-	 */
-	EReference getQuestion_Conditions();
+	EReference getQuestion_QuestionBase();
 
 	/**
 	 * Returns the meta object for class '{@link questionairemodel.TextQuestion <em>Text Question</em>}'.
@@ -1114,15 +910,15 @@ public interface QuestionairemodelPackage extends EPackage {
 	EClass getOption();
 
 	/**
-	 * Returns the meta object for the attribute '{@link questionairemodel.Option#getId <em>Id</em>}'.
+	 * Returns the meta object for the attribute '{@link questionairemodel.Option#getName <em>Name</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Id</em>'.
-	 * @see questionairemodel.Option#getId()
+	 * @return the meta object for the attribute '<em>Name</em>'.
+	 * @see questionairemodel.Option#getName()
 	 * @see #getOption()
 	 * @generated
 	 */
-	EAttribute getOption_Id();
+	EAttribute getOption_Name();
 
 	/**
 	 * Returns the meta object for the attribute '{@link questionairemodel.Option#getText <em>Text</em>}'.
@@ -1134,17 +930,6 @@ public interface QuestionairemodelPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getOption_Text();
-
-	/**
-	 * Returns the meta object for the reference '{@link questionairemodel.Option#getQuestion <em>Question</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Question</em>'.
-	 * @see questionairemodel.Option#getQuestion()
-	 * @see #getOption()
-	 * @generated
-	 */
-	EReference getOption_Question();
 
 	/**
 	 * Returns the meta object for class '{@link questionairemodel.MatrixQuestion <em>Matrix Question</em>}'.
@@ -1319,6 +1104,60 @@ public interface QuestionairemodelPackage extends EPackage {
 	EReference getQuestionCondition_Option();
 
 	/**
+	 * Returns the meta object for class '{@link questionairemodel.QuestionBase <em>Question Base</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Question Base</em>'.
+	 * @see questionairemodel.QuestionBase
+	 * @generated
+	 */
+	EClass getQuestionBase();
+
+	/**
+	 * Returns the meta object for the attribute '{@link questionairemodel.QuestionBase#getTitle <em>Title</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Title</em>'.
+	 * @see questionairemodel.QuestionBase#getTitle()
+	 * @see #getQuestionBase()
+	 * @generated
+	 */
+	EAttribute getQuestionBase_Title();
+
+	/**
+	 * Returns the meta object for the attribute '{@link questionairemodel.QuestionBase#getDescription <em>Description</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Description</em>'.
+	 * @see questionairemodel.QuestionBase#getDescription()
+	 * @see #getQuestionBase()
+	 * @generated
+	 */
+	EAttribute getQuestionBase_Description();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link questionairemodel.QuestionBase#getConditions <em>Conditions</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Conditions</em>'.
+	 * @see questionairemodel.QuestionBase#getConditions()
+	 * @see #getQuestionBase()
+	 * @generated
+	 */
+	EReference getQuestionBase_Conditions();
+
+	/**
+	 * Returns the meta object for the attribute '{@link questionairemodel.QuestionBase#isMandatory <em>Mandatory</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Mandatory</em>'.
+	 * @see questionairemodel.QuestionBase#isMandatory()
+	 * @see #getQuestionBase()
+	 * @generated
+	 */
+	EAttribute getQuestionBase_Mandatory();
+
+	/**
 	 * Returns the factory that creates the instances of the model.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1432,44 +1271,12 @@ public interface QuestionairemodelPackage extends EPackage {
 		EClass QUESTION = eINSTANCE.getQuestion();
 
 		/**
-		 * The meta object literal for the '<em><b>Id</b></em>' attribute feature.
+		 * The meta object literal for the '<em><b>Question Base</b></em>' containment reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute QUESTION__ID = eINSTANCE.getQuestion_Id();
-
-		/**
-		 * The meta object literal for the '<em><b>Title</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute QUESTION__TITLE = eINSTANCE.getQuestion_Title();
-
-		/**
-		 * The meta object literal for the '<em><b>Description</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute QUESTION__DESCRIPTION = eINSTANCE.getQuestion_Description();
-
-		/**
-		 * The meta object literal for the '<em><b>Mandatory</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute QUESTION__MANDATORY = eINSTANCE.getQuestion_Mandatory();
-
-		/**
-		 * The meta object literal for the '<em><b>Conditions</b></em>' reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference QUESTION__CONDITIONS = eINSTANCE.getQuestion_Conditions();
+		EReference QUESTION__QUESTION_BASE = eINSTANCE.getQuestion_QuestionBase();
 
 		/**
 		 * The meta object literal for the '{@link questionairemodel.impl.TextQuestionImpl <em>Text Question</em>}' class.
@@ -1534,12 +1341,12 @@ public interface QuestionairemodelPackage extends EPackage {
 		EClass OPTION = eINSTANCE.getOption();
 
 		/**
-		 * The meta object literal for the '<em><b>Id</b></em>' attribute feature.
+		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute OPTION__ID = eINSTANCE.getOption_Id();
+		EAttribute OPTION__NAME = eINSTANCE.getOption_Name();
 
 		/**
 		 * The meta object literal for the '<em><b>Text</b></em>' attribute feature.
@@ -1548,14 +1355,6 @@ public interface QuestionairemodelPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute OPTION__TEXT = eINSTANCE.getOption_Text();
-
-		/**
-		 * The meta object literal for the '<em><b>Question</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference OPTION__QUESTION = eINSTANCE.getOption_Question();
 
 		/**
 		 * The meta object literal for the '{@link questionairemodel.impl.MatrixQuestionImpl <em>Matrix Question</em>}' class.
@@ -1692,6 +1491,48 @@ public interface QuestionairemodelPackage extends EPackage {
 		 * @generated
 		 */
 		EReference QUESTION_CONDITION__OPTION = eINSTANCE.getQuestionCondition_Option();
+
+		/**
+		 * The meta object literal for the '{@link questionairemodel.impl.QuestionBaseImpl <em>Question Base</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see questionairemodel.impl.QuestionBaseImpl
+		 * @see questionairemodel.impl.QuestionairemodelPackageImpl#getQuestionBase()
+		 * @generated
+		 */
+		EClass QUESTION_BASE = eINSTANCE.getQuestionBase();
+
+		/**
+		 * The meta object literal for the '<em><b>Title</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute QUESTION_BASE__TITLE = eINSTANCE.getQuestionBase_Title();
+
+		/**
+		 * The meta object literal for the '<em><b>Description</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute QUESTION_BASE__DESCRIPTION = eINSTANCE.getQuestionBase_Description();
+
+		/**
+		 * The meta object literal for the '<em><b>Conditions</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference QUESTION_BASE__CONDITIONS = eINSTANCE.getQuestionBase_Conditions();
+
+		/**
+		 * The meta object literal for the '<em><b>Mandatory</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute QUESTION_BASE__MANDATORY = eINSTANCE.getQuestionBase_Mandatory();
 
 	}
 

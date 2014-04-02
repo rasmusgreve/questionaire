@@ -12,9 +12,8 @@ import org.eclipse.emf.ecore.EObject;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link questionairemodel.Option#getId <em>Id</em>}</li>
+ *   <li>{@link questionairemodel.Option#getName <em>Name</em>}</li>
  *   <li>{@link questionairemodel.Option#getText <em>Text</em>}</li>
- *   <li>{@link questionairemodel.Option#getQuestion <em>Question</em>}</li>
  * </ul>
  * </p>
  *
@@ -24,30 +23,30 @@ import org.eclipse.emf.ecore.EObject;
  */
 public interface Option extends EObject {
 	/**
-	 * Returns the value of the '<em><b>Id</b></em>' attribute.
+	 * Returns the value of the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Id</em>' attribute isn't clear,
+	 * If the meaning of the '<em>Name</em>' attribute isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Id</em>' attribute.
-	 * @see #setId(String)
-	 * @see questionairemodel.QuestionairemodelPackage#getOption_Id()
+	 * @return the value of the '<em>Name</em>' attribute.
+	 * @see #setName(String)
+	 * @see questionairemodel.QuestionairemodelPackage#getOption_Name()
 	 * @model
 	 * @generated
 	 */
-	String getId();
+	String getName();
 
 	/**
-	 * Sets the value of the '{@link questionairemodel.Option#getId <em>Id</em>}' attribute.
+	 * Sets the value of the '{@link questionairemodel.Option#getName <em>Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Id</em>' attribute.
-	 * @see #getId()
+	 * @param value the new value of the '<em>Name</em>' attribute.
+	 * @see #getName()
 	 * @generated
 	 */
-	void setId(String value);
+	void setName(String value);
 
 	/**
 	 * Returns the value of the '<em><b>Text</b></em>' attribute.
@@ -60,7 +59,7 @@ public interface Option extends EObject {
 	 * @return the value of the '<em>Text</em>' attribute.
 	 * @see #setText(String)
 	 * @see questionairemodel.QuestionairemodelPackage#getOption_Text()
-	 * @model
+	 * @model required="true"
 	 * @generated
 	 */
 	String getText();
@@ -74,31 +73,5 @@ public interface Option extends EObject {
 	 * @generated
 	 */
 	void setText(String value);
-
-	/**
-	 * Returns the value of the '<em><b>Question</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Question</em>' reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Question</em>' reference.
-	 * @see #setQuestion(ChoiceQuestion)
-	 * @see questionairemodel.QuestionairemodelPackage#getOption_Question()
-	 * @model required="true"
-	 * @generated
-	 */
-	ChoiceQuestion getQuestion();
-
-	/**
-	 * Sets the value of the '{@link questionairemodel.Option#getQuestion <em>Question</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Question</em>' reference.
-	 * @see #getQuestion()
-	 * @generated
-	 */
-	void setQuestion(ChoiceQuestion value);
 
 } // Option

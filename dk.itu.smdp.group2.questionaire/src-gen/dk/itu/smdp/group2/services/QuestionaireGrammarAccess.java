@@ -21,87 +21,62 @@ public class QuestionaireGrammarAccess extends AbstractGrammarElementFinder {
 	public class QuestionaireElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Questionaire");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Keyword cQuestionaireKeyword_0 = (Keyword)cGroup.eContents().get(0);
-		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall cNameEStringParserRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
-		private final Keyword cLeftCurlyBracketKeyword_2 = (Keyword)cGroup.eContents().get(2);
-		private final Keyword cResultEmailKeyword_3 = (Keyword)cGroup.eContents().get(3);
-		private final Assignment cResultEmailAssignment_4 = (Assignment)cGroup.eContents().get(4);
-		private final RuleCall cResultEmailEStringParserRuleCall_4_0 = (RuleCall)cResultEmailAssignment_4.eContents().get(0);
-		private final Group cGroup_5 = (Group)cGroup.eContents().get(5);
-		private final Keyword cElementsKeyword_5_0 = (Keyword)cGroup_5.eContents().get(0);
-		private final Keyword cLeftCurlyBracketKeyword_5_1 = (Keyword)cGroup_5.eContents().get(1);
-		private final Assignment cElementsAssignment_5_2 = (Assignment)cGroup_5.eContents().get(2);
-		private final RuleCall cElementsElementParserRuleCall_5_2_0 = (RuleCall)cElementsAssignment_5_2.eContents().get(0);
-		private final Group cGroup_5_3 = (Group)cGroup_5.eContents().get(3);
-		private final Keyword cCommaKeyword_5_3_0 = (Keyword)cGroup_5_3.eContents().get(0);
-		private final Assignment cElementsAssignment_5_3_1 = (Assignment)cGroup_5_3.eContents().get(1);
-		private final RuleCall cElementsElementParserRuleCall_5_3_1_0 = (RuleCall)cElementsAssignment_5_3_1.eContents().get(0);
-		private final Keyword cRightCurlyBracketKeyword_5_4 = (Keyword)cGroup_5.eContents().get(4);
-		private final Keyword cRightCurlyBracketKeyword_6 = (Keyword)cGroup.eContents().get(6);
+		private final Assignment cNameAssignment_0 = (Assignment)cGroup.eContents().get(0);
+		private final RuleCall cNameEStringParserRuleCall_0_0 = (RuleCall)cNameAssignment_0.eContents().get(0);
+		private final Keyword cEmailKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		private final Assignment cResultEmailAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final RuleCall cResultEmailEStringParserRuleCall_2_0 = (RuleCall)cResultEmailAssignment_2.eContents().get(0);
+		private final Group cGroup_3 = (Group)cGroup.eContents().get(3);
+		private final Assignment cElementsAssignment_3_0 = (Assignment)cGroup_3.eContents().get(0);
+		private final RuleCall cElementsElementParserRuleCall_3_0_0 = (RuleCall)cElementsAssignment_3_0.eContents().get(0);
+		private final Assignment cElementsAssignment_3_1 = (Assignment)cGroup_3.eContents().get(1);
+		private final RuleCall cElementsElementParserRuleCall_3_1_0 = (RuleCall)cElementsAssignment_3_1.eContents().get(0);
 		
 		//Questionaire:
-		//	"Questionaire" name=EString "{" "resultEmail" resultEmail=EString ("elements" "{" elements+=Element (","
-		//	elements+=Element)* "}")? "}";
+		//	name= // Eating Habbits
+		//	EString "email:" resultEmail= // email: ragr@itu.dk
+		//	EString (elements+=Element elements+=Element*)? // Alle questions (minimum 1)
+		//;
 		public ParserRule getRule() { return rule; }
 
-		//"Questionaire" name=EString "{" "resultEmail" resultEmail=EString ("elements" "{" elements+=Element (","
-		//elements+=Element)* "}")? "}"
+		//name= // Eating Habbits
+		//EString "email:" resultEmail= // email: ragr@itu.dk
+		//EString (elements+=Element elements+=Element*)? // Alle questions (minimum 1)
 		public Group getGroup() { return cGroup; }
 
-		//"Questionaire"
-		public Keyword getQuestionaireKeyword_0() { return cQuestionaireKeyword_0; }
-
-		//name=EString
-		public Assignment getNameAssignment_1() { return cNameAssignment_1; }
-
+		//name= // Eating Habbits
 		//EString
-		public RuleCall getNameEStringParserRuleCall_1_0() { return cNameEStringParserRuleCall_1_0; }
+		public Assignment getNameAssignment_0() { return cNameAssignment_0; }
 
-		//"{"
-		public Keyword getLeftCurlyBracketKeyword_2() { return cLeftCurlyBracketKeyword_2; }
-
-		//"resultEmail"
-		public Keyword getResultEmailKeyword_3() { return cResultEmailKeyword_3; }
-
-		//resultEmail=EString
-		public Assignment getResultEmailAssignment_4() { return cResultEmailAssignment_4; }
-
+		//// Eating Habbits
 		//EString
-		public RuleCall getResultEmailEStringParserRuleCall_4_0() { return cResultEmailEStringParserRuleCall_4_0; }
+		public RuleCall getNameEStringParserRuleCall_0_0() { return cNameEStringParserRuleCall_0_0; }
 
-		//("elements" "{" elements+=Element ("," elements+=Element)* "}")?
-		public Group getGroup_5() { return cGroup_5; }
+		//"email:"
+		public Keyword getEmailKeyword_1() { return cEmailKeyword_1; }
 
-		//"elements"
-		public Keyword getElementsKeyword_5_0() { return cElementsKeyword_5_0; }
+		//resultEmail= // email: ragr@itu.dk
+		//EString
+		public Assignment getResultEmailAssignment_2() { return cResultEmailAssignment_2; }
 
-		//"{"
-		public Keyword getLeftCurlyBracketKeyword_5_1() { return cLeftCurlyBracketKeyword_5_1; }
+		//// email: ragr@itu.dk
+		//EString
+		public RuleCall getResultEmailEStringParserRuleCall_2_0() { return cResultEmailEStringParserRuleCall_2_0; }
+
+		//(elements+=Element elements+=Element*)?
+		public Group getGroup_3() { return cGroup_3; }
 
 		//elements+=Element
-		public Assignment getElementsAssignment_5_2() { return cElementsAssignment_5_2; }
+		public Assignment getElementsAssignment_3_0() { return cElementsAssignment_3_0; }
 
 		//Element
-		public RuleCall getElementsElementParserRuleCall_5_2_0() { return cElementsElementParserRuleCall_5_2_0; }
+		public RuleCall getElementsElementParserRuleCall_3_0_0() { return cElementsElementParserRuleCall_3_0_0; }
 
-		//("," elements+=Element)*
-		public Group getGroup_5_3() { return cGroup_5_3; }
-
-		//","
-		public Keyword getCommaKeyword_5_3_0() { return cCommaKeyword_5_3_0; }
-
-		//elements+=Element
-		public Assignment getElementsAssignment_5_3_1() { return cElementsAssignment_5_3_1; }
+		//elements+=Element*
+		public Assignment getElementsAssignment_3_1() { return cElementsAssignment_3_1; }
 
 		//Element
-		public RuleCall getElementsElementParserRuleCall_5_3_1_0() { return cElementsElementParserRuleCall_5_3_1_0; }
-
-		//"}"
-		public Keyword getRightCurlyBracketKeyword_5_4() { return cRightCurlyBracketKeyword_5_4; }
-
-		//"}"
-		public Keyword getRightCurlyBracketKeyword_6() { return cRightCurlyBracketKeyword_6; }
+		public RuleCall getElementsElementParserRuleCall_3_1_0() { return cElementsElementParserRuleCall_3_1_0; }
 	}
 
 	public class ElementElements extends AbstractParserRuleElementFinder {
@@ -167,941 +142,484 @@ public class QuestionaireGrammarAccess extends AbstractGrammarElementFinder {
 	public class HeadingElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Heading");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Keyword cHeadingKeyword_0 = (Keyword)cGroup.eContents().get(0);
-		private final Keyword cLeftCurlyBracketKeyword_1 = (Keyword)cGroup.eContents().get(1);
-		private final Keyword cTextKeyword_2 = (Keyword)cGroup.eContents().get(2);
-		private final Assignment cTextAssignment_3 = (Assignment)cGroup.eContents().get(3);
-		private final RuleCall cTextEStringParserRuleCall_3_0 = (RuleCall)cTextAssignment_3.eContents().get(0);
-		private final Keyword cRightCurlyBracketKeyword_4 = (Keyword)cGroup.eContents().get(4);
+		private final Keyword cNumberSignKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Assignment cTextAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cTextEStringParserRuleCall_1_0 = (RuleCall)cTextAssignment_1.eContents().get(0);
 		
 		//Heading:
-		//	"Heading" "{" "text" text=EString "}";
+		//	"#" text= // #Blablabla heading woo
+		//	EString;
 		public ParserRule getRule() { return rule; }
 
-		//"Heading" "{" "text" text=EString "}"
+		//"#" text= // #Blablabla heading woo
+		//EString
 		public Group getGroup() { return cGroup; }
 
-		//"Heading"
-		public Keyword getHeadingKeyword_0() { return cHeadingKeyword_0; }
+		//"#"
+		public Keyword getNumberSignKeyword_0() { return cNumberSignKeyword_0; }
 
-		//"{"
-		public Keyword getLeftCurlyBracketKeyword_1() { return cLeftCurlyBracketKeyword_1; }
-
-		//"text"
-		public Keyword getTextKeyword_2() { return cTextKeyword_2; }
-
-		//text=EString
-		public Assignment getTextAssignment_3() { return cTextAssignment_3; }
-
+		//text= // #Blablabla heading woo
 		//EString
-		public RuleCall getTextEStringParserRuleCall_3_0() { return cTextEStringParserRuleCall_3_0; }
+		public Assignment getTextAssignment_1() { return cTextAssignment_1; }
 
-		//"}"
-		public Keyword getRightCurlyBracketKeyword_4() { return cRightCurlyBracketKeyword_4; }
+		//// #Blablabla heading woo
+		//EString
+		public RuleCall getTextEStringParserRuleCall_1_0() { return cTextEStringParserRuleCall_1_0; }
 	}
 
 	public class ParagraphElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Paragraph");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Keyword cParagraphKeyword_0 = (Keyword)cGroup.eContents().get(0);
-		private final Keyword cLeftCurlyBracketKeyword_1 = (Keyword)cGroup.eContents().get(1);
-		private final Keyword cTextKeyword_2 = (Keyword)cGroup.eContents().get(2);
-		private final Assignment cTextAssignment_3 = (Assignment)cGroup.eContents().get(3);
-		private final RuleCall cTextEStringParserRuleCall_3_0 = (RuleCall)cTextAssignment_3.eContents().get(0);
-		private final Keyword cRightCurlyBracketKeyword_4 = (Keyword)cGroup.eContents().get(4);
+		private final Keyword cExclamationMarkKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Assignment cTextAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cTextEStringParserRuleCall_1_0 = (RuleCall)cTextAssignment_1.eContents().get(0);
 		
 		//Paragraph:
-		//	"Paragraph" "{" "text" text=EString "}";
+		//	"!" text= // !Tell me your eating habbits
+		//	EString;
 		public ParserRule getRule() { return rule; }
 
-		//"Paragraph" "{" "text" text=EString "}"
+		//"!" text= // !Tell me your eating habbits
+		//EString
 		public Group getGroup() { return cGroup; }
 
-		//"Paragraph"
-		public Keyword getParagraphKeyword_0() { return cParagraphKeyword_0; }
+		//"!"
+		public Keyword getExclamationMarkKeyword_0() { return cExclamationMarkKeyword_0; }
 
-		//"{"
-		public Keyword getLeftCurlyBracketKeyword_1() { return cLeftCurlyBracketKeyword_1; }
+		//text= // !Tell me your eating habbits
+		//EString
+		public Assignment getTextAssignment_1() { return cTextAssignment_1; }
 
-		//"text"
-		public Keyword getTextKeyword_2() { return cTextKeyword_2; }
+		//// !Tell me your eating habbits
+		//EString
+		public RuleCall getTextEStringParserRuleCall_1_0() { return cTextEStringParserRuleCall_1_0; }
+	}
 
-		//text=EString
-		public Assignment getTextAssignment_3() { return cTextAssignment_3; }
+	public class QuestionBaseElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "QuestionBase");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cQuestionMarkKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Assignment cTitleAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cTitleEStringParserRuleCall_1_0 = (RuleCall)cTitleAssignment_1.eContents().get(0);
+		private final Assignment cMandatoryAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final Keyword cMandatoryAsteriskKeyword_2_0 = (Keyword)cMandatoryAssignment_2.eContents().get(0);
+		private final Assignment cDescriptionAssignment_3 = (Assignment)cGroup.eContents().get(3);
+		private final RuleCall cDescriptionEStringParserRuleCall_3_0 = (RuleCall)cDescriptionAssignment_3.eContents().get(0);
+		private final Assignment cConditionsAssignment_4 = (Assignment)cGroup.eContents().get(4);
+		private final RuleCall cConditionsQuestionConditionParserRuleCall_4_0 = (RuleCall)cConditionsAssignment_4.eContents().get(0);
+		
+		//QuestionBase:
+		//	"?" title=EString mandatory?="*"? // ?Hvad er din ynglingsmad (*)
+		//	description=EString? conditions+=QuestionCondition*;
+		public ParserRule getRule() { return rule; }
+
+		//"?" title=EString mandatory?="*"? // ?Hvad er din ynglingsmad (*)
+		//description=EString? conditions+=QuestionCondition*
+		public Group getGroup() { return cGroup; }
+
+		//"?"
+		public Keyword getQuestionMarkKeyword_0() { return cQuestionMarkKeyword_0; }
+
+		//title=EString
+		public Assignment getTitleAssignment_1() { return cTitleAssignment_1; }
 
 		//EString
-		public RuleCall getTextEStringParserRuleCall_3_0() { return cTextEStringParserRuleCall_3_0; }
+		public RuleCall getTitleEStringParserRuleCall_1_0() { return cTitleEStringParserRuleCall_1_0; }
 
-		//"}"
-		public Keyword getRightCurlyBracketKeyword_4() { return cRightCurlyBracketKeyword_4; }
+		//mandatory?="*"?
+		public Assignment getMandatoryAssignment_2() { return cMandatoryAssignment_2; }
+
+		//"*"
+		public Keyword getMandatoryAsteriskKeyword_2_0() { return cMandatoryAsteriskKeyword_2_0; }
+
+		//description=EString?
+		public Assignment getDescriptionAssignment_3() { return cDescriptionAssignment_3; }
+
+		//EString
+		public RuleCall getDescriptionEStringParserRuleCall_3_0() { return cDescriptionEStringParserRuleCall_3_0; }
+
+		//conditions+=QuestionCondition*
+		public Assignment getConditionsAssignment_4() { return cConditionsAssignment_4; }
+
+		//QuestionCondition
+		public RuleCall getConditionsQuestionConditionParserRuleCall_4_0() { return cConditionsQuestionConditionParserRuleCall_4_0; }
 	}
 
 	public class TextQuestionElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "TextQuestion");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Assignment cMandatoryAssignment_0 = (Assignment)cGroup.eContents().get(0);
-		private final Keyword cMandatoryMandatoryKeyword_0_0 = (Keyword)cMandatoryAssignment_0.eContents().get(0);
-		private final Assignment cMultilineAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final Keyword cMultilineMultilineKeyword_1_0 = (Keyword)cMultilineAssignment_1.eContents().get(0);
-		private final Keyword cTextQuestionKeyword_2 = (Keyword)cGroup.eContents().get(2);
-		private final Keyword cLeftCurlyBracketKeyword_3 = (Keyword)cGroup.eContents().get(3);
-		private final Keyword cIdKeyword_4 = (Keyword)cGroup.eContents().get(4);
-		private final Assignment cIdAssignment_5 = (Assignment)cGroup.eContents().get(5);
-		private final RuleCall cIdEStringParserRuleCall_5_0 = (RuleCall)cIdAssignment_5.eContents().get(0);
-		private final Keyword cTitleKeyword_6 = (Keyword)cGroup.eContents().get(6);
-		private final Assignment cTitleAssignment_7 = (Assignment)cGroup.eContents().get(7);
-		private final RuleCall cTitleEStringParserRuleCall_7_0 = (RuleCall)cTitleAssignment_7.eContents().get(0);
-		private final Group cGroup_8 = (Group)cGroup.eContents().get(8);
-		private final Keyword cDescriptionKeyword_8_0 = (Keyword)cGroup_8.eContents().get(0);
-		private final Assignment cDescriptionAssignment_8_1 = (Assignment)cGroup_8.eContents().get(1);
-		private final RuleCall cDescriptionEStringParserRuleCall_8_1_0 = (RuleCall)cDescriptionAssignment_8_1.eContents().get(0);
-		private final Group cGroup_9 = (Group)cGroup.eContents().get(9);
-		private final Keyword cConditionsKeyword_9_0 = (Keyword)cGroup_9.eContents().get(0);
-		private final Keyword cLeftParenthesisKeyword_9_1 = (Keyword)cGroup_9.eContents().get(1);
-		private final Assignment cConditionsAssignment_9_2 = (Assignment)cGroup_9.eContents().get(2);
-		private final CrossReference cConditionsQuestionConditionCrossReference_9_2_0 = (CrossReference)cConditionsAssignment_9_2.eContents().get(0);
-		private final RuleCall cConditionsQuestionConditionEStringParserRuleCall_9_2_0_1 = (RuleCall)cConditionsQuestionConditionCrossReference_9_2_0.eContents().get(1);
-		private final Group cGroup_9_3 = (Group)cGroup_9.eContents().get(3);
-		private final Keyword cCommaKeyword_9_3_0 = (Keyword)cGroup_9_3.eContents().get(0);
-		private final Assignment cConditionsAssignment_9_3_1 = (Assignment)cGroup_9_3.eContents().get(1);
-		private final CrossReference cConditionsQuestionConditionCrossReference_9_3_1_0 = (CrossReference)cConditionsAssignment_9_3_1.eContents().get(0);
-		private final RuleCall cConditionsQuestionConditionEStringParserRuleCall_9_3_1_0_1 = (RuleCall)cConditionsQuestionConditionCrossReference_9_3_1_0.eContents().get(1);
-		private final Keyword cRightParenthesisKeyword_9_4 = (Keyword)cGroup_9.eContents().get(4);
-		private final Keyword cRightCurlyBracketKeyword_10 = (Keyword)cGroup.eContents().get(10);
+		private final Assignment cQuestionBaseAssignment_0 = (Assignment)cGroup.eContents().get(0);
+		private final RuleCall cQuestionBaseQuestionBaseParserRuleCall_0_0 = (RuleCall)cQuestionBaseAssignment_0.eContents().get(0);
+		private final Keyword cTextKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		private final Assignment cMultilineAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final Keyword cMultilineLongKeyword_2_0 = (Keyword)cMultilineAssignment_2.eContents().get(0);
+		private final Keyword cRightSquareBracketKeyword_3 = (Keyword)cGroup.eContents().get(3);
 		
 		//TextQuestion:
-		//	mandatory?="mandatory" multiline?="multiline" "TextQuestion" "{" "id" id=EString "title" title=EString ("description"
-		//	description=EString)? ("conditions" "(" conditions+=[QuestionCondition|EString] (","
-		//	conditions+=[QuestionCondition|EString])* ")")? "}";
+		//	questionBase=QuestionBase "text[" multiline?="long" // text[long]
+		//	"]";
 		public ParserRule getRule() { return rule; }
 
-		//mandatory?="mandatory" multiline?="multiline" "TextQuestion" "{" "id" id=EString "title" title=EString ("description"
-		//description=EString)? ("conditions" "(" conditions+=[QuestionCondition|EString] (","
-		//conditions+=[QuestionCondition|EString])* ")")? "}"
+		//questionBase=QuestionBase "text[" multiline?="long" // text[long]
+		//"]"
 		public Group getGroup() { return cGroup; }
 
-		//mandatory?="mandatory"
-		public Assignment getMandatoryAssignment_0() { return cMandatoryAssignment_0; }
+		//questionBase=QuestionBase
+		public Assignment getQuestionBaseAssignment_0() { return cQuestionBaseAssignment_0; }
 
-		//"mandatory"
-		public Keyword getMandatoryMandatoryKeyword_0_0() { return cMandatoryMandatoryKeyword_0_0; }
+		//QuestionBase
+		public RuleCall getQuestionBaseQuestionBaseParserRuleCall_0_0() { return cQuestionBaseQuestionBaseParserRuleCall_0_0; }
 
-		//multiline?="multiline"
-		public Assignment getMultilineAssignment_1() { return cMultilineAssignment_1; }
+		//"text["
+		public Keyword getTextKeyword_1() { return cTextKeyword_1; }
 
-		//"multiline"
-		public Keyword getMultilineMultilineKeyword_1_0() { return cMultilineMultilineKeyword_1_0; }
+		//multiline?="long"
+		public Assignment getMultilineAssignment_2() { return cMultilineAssignment_2; }
 
-		//"TextQuestion"
-		public Keyword getTextQuestionKeyword_2() { return cTextQuestionKeyword_2; }
+		//"long"
+		public Keyword getMultilineLongKeyword_2_0() { return cMultilineLongKeyword_2_0; }
 
-		//"{"
-		public Keyword getLeftCurlyBracketKeyword_3() { return cLeftCurlyBracketKeyword_3; }
-
-		//"id"
-		public Keyword getIdKeyword_4() { return cIdKeyword_4; }
-
-		//id=EString
-		public Assignment getIdAssignment_5() { return cIdAssignment_5; }
-
-		//EString
-		public RuleCall getIdEStringParserRuleCall_5_0() { return cIdEStringParserRuleCall_5_0; }
-
-		//"title"
-		public Keyword getTitleKeyword_6() { return cTitleKeyword_6; }
-
-		//title=EString
-		public Assignment getTitleAssignment_7() { return cTitleAssignment_7; }
-
-		//EString
-		public RuleCall getTitleEStringParserRuleCall_7_0() { return cTitleEStringParserRuleCall_7_0; }
-
-		//("description" description=EString)?
-		public Group getGroup_8() { return cGroup_8; }
-
-		//"description"
-		public Keyword getDescriptionKeyword_8_0() { return cDescriptionKeyword_8_0; }
-
-		//description=EString
-		public Assignment getDescriptionAssignment_8_1() { return cDescriptionAssignment_8_1; }
-
-		//EString
-		public RuleCall getDescriptionEStringParserRuleCall_8_1_0() { return cDescriptionEStringParserRuleCall_8_1_0; }
-
-		//("conditions" "(" conditions+=[QuestionCondition|EString] ("," conditions+=[QuestionCondition|EString])* ")")?
-		public Group getGroup_9() { return cGroup_9; }
-
-		//"conditions"
-		public Keyword getConditionsKeyword_9_0() { return cConditionsKeyword_9_0; }
-
-		//"("
-		public Keyword getLeftParenthesisKeyword_9_1() { return cLeftParenthesisKeyword_9_1; }
-
-		//conditions+=[QuestionCondition|EString]
-		public Assignment getConditionsAssignment_9_2() { return cConditionsAssignment_9_2; }
-
-		//[QuestionCondition|EString]
-		public CrossReference getConditionsQuestionConditionCrossReference_9_2_0() { return cConditionsQuestionConditionCrossReference_9_2_0; }
-
-		//EString
-		public RuleCall getConditionsQuestionConditionEStringParserRuleCall_9_2_0_1() { return cConditionsQuestionConditionEStringParserRuleCall_9_2_0_1; }
-
-		//("," conditions+=[QuestionCondition|EString])*
-		public Group getGroup_9_3() { return cGroup_9_3; }
-
-		//","
-		public Keyword getCommaKeyword_9_3_0() { return cCommaKeyword_9_3_0; }
-
-		//conditions+=[QuestionCondition|EString]
-		public Assignment getConditionsAssignment_9_3_1() { return cConditionsAssignment_9_3_1; }
-
-		//[QuestionCondition|EString]
-		public CrossReference getConditionsQuestionConditionCrossReference_9_3_1_0() { return cConditionsQuestionConditionCrossReference_9_3_1_0; }
-
-		//EString
-		public RuleCall getConditionsQuestionConditionEStringParserRuleCall_9_3_1_0_1() { return cConditionsQuestionConditionEStringParserRuleCall_9_3_1_0_1; }
-
-		//")"
-		public Keyword getRightParenthesisKeyword_9_4() { return cRightParenthesisKeyword_9_4; }
-
-		//"}"
-		public Keyword getRightCurlyBracketKeyword_10() { return cRightCurlyBracketKeyword_10; }
+		//// text[long]
+		//"]"
+		public Keyword getRightSquareBracketKeyword_3() { return cRightSquareBracketKeyword_3; }
 	}
 
 	public class ChoiceQuestionElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "ChoiceQuestion");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Assignment cMandatoryAssignment_0 = (Assignment)cGroup.eContents().get(0);
-		private final Keyword cMandatoryMandatoryKeyword_0_0 = (Keyword)cMandatoryAssignment_0.eContents().get(0);
-		private final Keyword cChoiceQuestionKeyword_1 = (Keyword)cGroup.eContents().get(1);
-		private final Keyword cLeftCurlyBracketKeyword_2 = (Keyword)cGroup.eContents().get(2);
-		private final Keyword cIdKeyword_3 = (Keyword)cGroup.eContents().get(3);
-		private final Assignment cIdAssignment_4 = (Assignment)cGroup.eContents().get(4);
-		private final RuleCall cIdEStringParserRuleCall_4_0 = (RuleCall)cIdAssignment_4.eContents().get(0);
-		private final Keyword cTitleKeyword_5 = (Keyword)cGroup.eContents().get(5);
-		private final Assignment cTitleAssignment_6 = (Assignment)cGroup.eContents().get(6);
-		private final RuleCall cTitleEStringParserRuleCall_6_0 = (RuleCall)cTitleAssignment_6.eContents().get(0);
-		private final Group cGroup_7 = (Group)cGroup.eContents().get(7);
-		private final Keyword cDescriptionKeyword_7_0 = (Keyword)cGroup_7.eContents().get(0);
-		private final Assignment cDescriptionAssignment_7_1 = (Assignment)cGroup_7.eContents().get(1);
-		private final RuleCall cDescriptionEStringParserRuleCall_7_1_0 = (RuleCall)cDescriptionAssignment_7_1.eContents().get(0);
-		private final Group cGroup_8 = (Group)cGroup.eContents().get(8);
-		private final Keyword cMinSelectionsKeyword_8_0 = (Keyword)cGroup_8.eContents().get(0);
-		private final Assignment cMinSelectionsAssignment_8_1 = (Assignment)cGroup_8.eContents().get(1);
-		private final RuleCall cMinSelectionsEIntParserRuleCall_8_1_0 = (RuleCall)cMinSelectionsAssignment_8_1.eContents().get(0);
-		private final Group cGroup_9 = (Group)cGroup.eContents().get(9);
-		private final Keyword cMaxSelectionsKeyword_9_0 = (Keyword)cGroup_9.eContents().get(0);
-		private final Assignment cMaxSelectionsAssignment_9_1 = (Assignment)cGroup_9.eContents().get(1);
-		private final RuleCall cMaxSelectionsEIntParserRuleCall_9_1_0 = (RuleCall)cMaxSelectionsAssignment_9_1.eContents().get(0);
-		private final Group cGroup_10 = (Group)cGroup.eContents().get(10);
-		private final Keyword cConditionsKeyword_10_0 = (Keyword)cGroup_10.eContents().get(0);
-		private final Keyword cLeftParenthesisKeyword_10_1 = (Keyword)cGroup_10.eContents().get(1);
-		private final Assignment cConditionsAssignment_10_2 = (Assignment)cGroup_10.eContents().get(2);
-		private final CrossReference cConditionsQuestionConditionCrossReference_10_2_0 = (CrossReference)cConditionsAssignment_10_2.eContents().get(0);
-		private final RuleCall cConditionsQuestionConditionEStringParserRuleCall_10_2_0_1 = (RuleCall)cConditionsQuestionConditionCrossReference_10_2_0.eContents().get(1);
-		private final Group cGroup_10_3 = (Group)cGroup_10.eContents().get(3);
-		private final Keyword cCommaKeyword_10_3_0 = (Keyword)cGroup_10_3.eContents().get(0);
-		private final Assignment cConditionsAssignment_10_3_1 = (Assignment)cGroup_10_3.eContents().get(1);
-		private final CrossReference cConditionsQuestionConditionCrossReference_10_3_1_0 = (CrossReference)cConditionsAssignment_10_3_1.eContents().get(0);
-		private final RuleCall cConditionsQuestionConditionEStringParserRuleCall_10_3_1_0_1 = (RuleCall)cConditionsQuestionConditionCrossReference_10_3_1_0.eContents().get(1);
-		private final Keyword cRightParenthesisKeyword_10_4 = (Keyword)cGroup_10.eContents().get(4);
-		private final Keyword cOptionsKeyword_11 = (Keyword)cGroup.eContents().get(11);
-		private final Keyword cLeftCurlyBracketKeyword_12 = (Keyword)cGroup.eContents().get(12);
-		private final Assignment cOptionsAssignment_13 = (Assignment)cGroup.eContents().get(13);
-		private final RuleCall cOptionsOptionParserRuleCall_13_0 = (RuleCall)cOptionsAssignment_13.eContents().get(0);
-		private final Group cGroup_14 = (Group)cGroup.eContents().get(14);
-		private final Keyword cCommaKeyword_14_0 = (Keyword)cGroup_14.eContents().get(0);
-		private final Assignment cOptionsAssignment_14_1 = (Assignment)cGroup_14.eContents().get(1);
-		private final RuleCall cOptionsOptionParserRuleCall_14_1_0 = (RuleCall)cOptionsAssignment_14_1.eContents().get(0);
-		private final Keyword cRightCurlyBracketKeyword_15 = (Keyword)cGroup.eContents().get(15);
-		private final Keyword cRightCurlyBracketKeyword_16 = (Keyword)cGroup.eContents().get(16);
+		private final Assignment cQuestionBaseAssignment_0 = (Assignment)cGroup.eContents().get(0);
+		private final RuleCall cQuestionBaseQuestionBaseParserRuleCall_0_0 = (RuleCall)cQuestionBaseAssignment_0.eContents().get(0);
+		private final Keyword cChoiceKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		private final Alternatives cAlternatives_2 = (Alternatives)cGroup.eContents().get(2);
+		private final Assignment cMinSelectionsAssignment_2_0 = (Assignment)cAlternatives_2.eContents().get(0);
+		private final RuleCall cMinSelectionsEIntParserRuleCall_2_0_0 = (RuleCall)cMinSelectionsAssignment_2_0.eContents().get(0);
+		private final Group cGroup_2_1 = (Group)cAlternatives_2.eContents().get(1);
+		private final Assignment cMinSelectionsAssignment_2_1_0 = (Assignment)cGroup_2_1.eContents().get(0);
+		private final RuleCall cMinSelectionsEIntParserRuleCall_2_1_0_0 = (RuleCall)cMinSelectionsAssignment_2_1_0.eContents().get(0);
+		private final Keyword cToKeyword_2_1_1 = (Keyword)cGroup_2_1.eContents().get(1);
+		private final Assignment cMaxSelectionsAssignment_2_1_2 = (Assignment)cGroup_2_1.eContents().get(2);
+		private final RuleCall cMaxSelectionsEIntParserRuleCall_2_1_2_0 = (RuleCall)cMaxSelectionsAssignment_2_1_2.eContents().get(0);
+		private final Keyword cRightSquareBracketKeyword_3 = (Keyword)cGroup.eContents().get(3);
+		private final Assignment cOptionsAssignment_4 = (Assignment)cGroup.eContents().get(4);
+		private final RuleCall cOptionsOptionParserRuleCall_4_0 = (RuleCall)cOptionsAssignment_4.eContents().get(0);
 		
 		//ChoiceQuestion:
-		//	mandatory?="mandatory" "ChoiceQuestion" "{" "id" id=EString "title" title=EString ("description"
-		//	description=EString)? ("minSelections" minSelections=EInt)? ("maxSelections" maxSelections=EInt)? ("conditions" "("
-		//	conditions+=[QuestionCondition|EString] ("," conditions+=[QuestionCondition|EString])* ")")? "options" "{"
-		//	options+=Option ("," options+=Option)* "}" "}";
+		//	questionBase=QuestionBase "choice[" (minSelections=EInt | minSelections=EInt "to" maxSelections=EInt) "]"
+		//	options+=Option+;
 		public ParserRule getRule() { return rule; }
 
-		//mandatory?="mandatory" "ChoiceQuestion" "{" "id" id=EString "title" title=EString ("description" description=EString)?
-		//("minSelections" minSelections=EInt)? ("maxSelections" maxSelections=EInt)? ("conditions" "("
-		//conditions+=[QuestionCondition|EString] ("," conditions+=[QuestionCondition|EString])* ")")? "options" "{"
-		//options+=Option ("," options+=Option)* "}" "}"
+		//questionBase=QuestionBase "choice[" (minSelections=EInt | minSelections=EInt "to" maxSelections=EInt) "]"
+		//options+=Option+
 		public Group getGroup() { return cGroup; }
 
-		//mandatory?="mandatory"
-		public Assignment getMandatoryAssignment_0() { return cMandatoryAssignment_0; }
+		//questionBase=QuestionBase
+		public Assignment getQuestionBaseAssignment_0() { return cQuestionBaseAssignment_0; }
 
-		//"mandatory"
-		public Keyword getMandatoryMandatoryKeyword_0_0() { return cMandatoryMandatoryKeyword_0_0; }
+		//QuestionBase
+		public RuleCall getQuestionBaseQuestionBaseParserRuleCall_0_0() { return cQuestionBaseQuestionBaseParserRuleCall_0_0; }
 
-		//"ChoiceQuestion"
-		public Keyword getChoiceQuestionKeyword_1() { return cChoiceQuestionKeyword_1; }
+		//"choice["
+		public Keyword getChoiceKeyword_1() { return cChoiceKeyword_1; }
 
-		//"{"
-		public Keyword getLeftCurlyBracketKeyword_2() { return cLeftCurlyBracketKeyword_2; }
-
-		//"id"
-		public Keyword getIdKeyword_3() { return cIdKeyword_3; }
-
-		//id=EString
-		public Assignment getIdAssignment_4() { return cIdAssignment_4; }
-
-		//EString
-		public RuleCall getIdEStringParserRuleCall_4_0() { return cIdEStringParserRuleCall_4_0; }
-
-		//"title"
-		public Keyword getTitleKeyword_5() { return cTitleKeyword_5; }
-
-		//title=EString
-		public Assignment getTitleAssignment_6() { return cTitleAssignment_6; }
-
-		//EString
-		public RuleCall getTitleEStringParserRuleCall_6_0() { return cTitleEStringParserRuleCall_6_0; }
-
-		//("description" description=EString)?
-		public Group getGroup_7() { return cGroup_7; }
-
-		//"description"
-		public Keyword getDescriptionKeyword_7_0() { return cDescriptionKeyword_7_0; }
-
-		//description=EString
-		public Assignment getDescriptionAssignment_7_1() { return cDescriptionAssignment_7_1; }
-
-		//EString
-		public RuleCall getDescriptionEStringParserRuleCall_7_1_0() { return cDescriptionEStringParserRuleCall_7_1_0; }
-
-		//("minSelections" minSelections=EInt)?
-		public Group getGroup_8() { return cGroup_8; }
-
-		//"minSelections"
-		public Keyword getMinSelectionsKeyword_8_0() { return cMinSelectionsKeyword_8_0; }
+		//minSelections=EInt | minSelections=EInt "to" maxSelections=EInt
+		public Alternatives getAlternatives_2() { return cAlternatives_2; }
 
 		//minSelections=EInt
-		public Assignment getMinSelectionsAssignment_8_1() { return cMinSelectionsAssignment_8_1; }
+		public Assignment getMinSelectionsAssignment_2_0() { return cMinSelectionsAssignment_2_0; }
 
 		//EInt
-		public RuleCall getMinSelectionsEIntParserRuleCall_8_1_0() { return cMinSelectionsEIntParserRuleCall_8_1_0; }
+		public RuleCall getMinSelectionsEIntParserRuleCall_2_0_0() { return cMinSelectionsEIntParserRuleCall_2_0_0; }
 
-		//("maxSelections" maxSelections=EInt)?
-		public Group getGroup_9() { return cGroup_9; }
+		//minSelections=EInt "to" maxSelections=EInt
+		public Group getGroup_2_1() { return cGroup_2_1; }
 
-		//"maxSelections"
-		public Keyword getMaxSelectionsKeyword_9_0() { return cMaxSelectionsKeyword_9_0; }
+		//minSelections=EInt
+		public Assignment getMinSelectionsAssignment_2_1_0() { return cMinSelectionsAssignment_2_1_0; }
+
+		//EInt
+		public RuleCall getMinSelectionsEIntParserRuleCall_2_1_0_0() { return cMinSelectionsEIntParserRuleCall_2_1_0_0; }
+
+		//"to"
+		public Keyword getToKeyword_2_1_1() { return cToKeyword_2_1_1; }
 
 		//maxSelections=EInt
-		public Assignment getMaxSelectionsAssignment_9_1() { return cMaxSelectionsAssignment_9_1; }
+		public Assignment getMaxSelectionsAssignment_2_1_2() { return cMaxSelectionsAssignment_2_1_2; }
 
 		//EInt
-		public RuleCall getMaxSelectionsEIntParserRuleCall_9_1_0() { return cMaxSelectionsEIntParserRuleCall_9_1_0; }
+		public RuleCall getMaxSelectionsEIntParserRuleCall_2_1_2_0() { return cMaxSelectionsEIntParserRuleCall_2_1_2_0; }
 
-		//("conditions" "(" conditions+=[QuestionCondition|EString] ("," conditions+=[QuestionCondition|EString])* ")")?
-		public Group getGroup_10() { return cGroup_10; }
+		//"]"
+		public Keyword getRightSquareBracketKeyword_3() { return cRightSquareBracketKeyword_3; }
 
-		//"conditions"
-		public Keyword getConditionsKeyword_10_0() { return cConditionsKeyword_10_0; }
-
-		//"("
-		public Keyword getLeftParenthesisKeyword_10_1() { return cLeftParenthesisKeyword_10_1; }
-
-		//conditions+=[QuestionCondition|EString]
-		public Assignment getConditionsAssignment_10_2() { return cConditionsAssignment_10_2; }
-
-		//[QuestionCondition|EString]
-		public CrossReference getConditionsQuestionConditionCrossReference_10_2_0() { return cConditionsQuestionConditionCrossReference_10_2_0; }
-
-		//EString
-		public RuleCall getConditionsQuestionConditionEStringParserRuleCall_10_2_0_1() { return cConditionsQuestionConditionEStringParserRuleCall_10_2_0_1; }
-
-		//("," conditions+=[QuestionCondition|EString])*
-		public Group getGroup_10_3() { return cGroup_10_3; }
-
-		//","
-		public Keyword getCommaKeyword_10_3_0() { return cCommaKeyword_10_3_0; }
-
-		//conditions+=[QuestionCondition|EString]
-		public Assignment getConditionsAssignment_10_3_1() { return cConditionsAssignment_10_3_1; }
-
-		//[QuestionCondition|EString]
-		public CrossReference getConditionsQuestionConditionCrossReference_10_3_1_0() { return cConditionsQuestionConditionCrossReference_10_3_1_0; }
-
-		//EString
-		public RuleCall getConditionsQuestionConditionEStringParserRuleCall_10_3_1_0_1() { return cConditionsQuestionConditionEStringParserRuleCall_10_3_1_0_1; }
-
-		//")"
-		public Keyword getRightParenthesisKeyword_10_4() { return cRightParenthesisKeyword_10_4; }
-
-		//"options"
-		public Keyword getOptionsKeyword_11() { return cOptionsKeyword_11; }
-
-		//"{"
-		public Keyword getLeftCurlyBracketKeyword_12() { return cLeftCurlyBracketKeyword_12; }
-
-		//options+=Option
-		public Assignment getOptionsAssignment_13() { return cOptionsAssignment_13; }
+		//options+=Option+
+		public Assignment getOptionsAssignment_4() { return cOptionsAssignment_4; }
 
 		//Option
-		public RuleCall getOptionsOptionParserRuleCall_13_0() { return cOptionsOptionParserRuleCall_13_0; }
-
-		//("," options+=Option)*
-		public Group getGroup_14() { return cGroup_14; }
-
-		//","
-		public Keyword getCommaKeyword_14_0() { return cCommaKeyword_14_0; }
-
-		//options+=Option
-		public Assignment getOptionsAssignment_14_1() { return cOptionsAssignment_14_1; }
-
-		//Option
-		public RuleCall getOptionsOptionParserRuleCall_14_1_0() { return cOptionsOptionParserRuleCall_14_1_0; }
-
-		//"}"
-		public Keyword getRightCurlyBracketKeyword_15() { return cRightCurlyBracketKeyword_15; }
-
-		//"}"
-		public Keyword getRightCurlyBracketKeyword_16() { return cRightCurlyBracketKeyword_16; }
+		public RuleCall getOptionsOptionParserRuleCall_4_0() { return cOptionsOptionParserRuleCall_4_0; }
 	}
 
 	public class MatrixQuestionElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "MatrixQuestion");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Assignment cMandatoryAssignment_0 = (Assignment)cGroup.eContents().get(0);
-		private final Keyword cMandatoryMandatoryKeyword_0_0 = (Keyword)cMandatoryAssignment_0.eContents().get(0);
-		private final Keyword cMatrixQuestionKeyword_1 = (Keyword)cGroup.eContents().get(1);
-		private final Keyword cLeftCurlyBracketKeyword_2 = (Keyword)cGroup.eContents().get(2);
-		private final Keyword cIdKeyword_3 = (Keyword)cGroup.eContents().get(3);
-		private final Assignment cIdAssignment_4 = (Assignment)cGroup.eContents().get(4);
-		private final RuleCall cIdEStringParserRuleCall_4_0 = (RuleCall)cIdAssignment_4.eContents().get(0);
-		private final Keyword cTitleKeyword_5 = (Keyword)cGroup.eContents().get(5);
-		private final Assignment cTitleAssignment_6 = (Assignment)cGroup.eContents().get(6);
-		private final RuleCall cTitleEStringParserRuleCall_6_0 = (RuleCall)cTitleAssignment_6.eContents().get(0);
-		private final Group cGroup_7 = (Group)cGroup.eContents().get(7);
-		private final Keyword cDescriptionKeyword_7_0 = (Keyword)cGroup_7.eContents().get(0);
-		private final Assignment cDescriptionAssignment_7_1 = (Assignment)cGroup_7.eContents().get(1);
-		private final RuleCall cDescriptionEStringParserRuleCall_7_1_0 = (RuleCall)cDescriptionAssignment_7_1.eContents().get(0);
-		private final Group cGroup_8 = (Group)cGroup.eContents().get(8);
-		private final Keyword cColumnNamesKeyword_8_0 = (Keyword)cGroup_8.eContents().get(0);
-		private final Keyword cLeftCurlyBracketKeyword_8_1 = (Keyword)cGroup_8.eContents().get(1);
-		private final Assignment cColumnNamesAssignment_8_2 = (Assignment)cGroup_8.eContents().get(2);
-		private final RuleCall cColumnNamesEStringParserRuleCall_8_2_0 = (RuleCall)cColumnNamesAssignment_8_2.eContents().get(0);
-		private final Group cGroup_8_3 = (Group)cGroup_8.eContents().get(3);
-		private final Keyword cCommaKeyword_8_3_0 = (Keyword)cGroup_8_3.eContents().get(0);
-		private final Assignment cColumnNamesAssignment_8_3_1 = (Assignment)cGroup_8_3.eContents().get(1);
-		private final RuleCall cColumnNamesEStringParserRuleCall_8_3_1_0 = (RuleCall)cColumnNamesAssignment_8_3_1.eContents().get(0);
-		private final Keyword cRightCurlyBracketKeyword_8_4 = (Keyword)cGroup_8.eContents().get(4);
-		private final Group cGroup_9 = (Group)cGroup.eContents().get(9);
-		private final Keyword cRowNamesKeyword_9_0 = (Keyword)cGroup_9.eContents().get(0);
-		private final Keyword cLeftCurlyBracketKeyword_9_1 = (Keyword)cGroup_9.eContents().get(1);
-		private final Assignment cRowNamesAssignment_9_2 = (Assignment)cGroup_9.eContents().get(2);
-		private final RuleCall cRowNamesEStringParserRuleCall_9_2_0 = (RuleCall)cRowNamesAssignment_9_2.eContents().get(0);
-		private final Group cGroup_9_3 = (Group)cGroup_9.eContents().get(3);
-		private final Keyword cCommaKeyword_9_3_0 = (Keyword)cGroup_9_3.eContents().get(0);
-		private final Assignment cRowNamesAssignment_9_3_1 = (Assignment)cGroup_9_3.eContents().get(1);
-		private final RuleCall cRowNamesEStringParserRuleCall_9_3_1_0 = (RuleCall)cRowNamesAssignment_9_3_1.eContents().get(0);
-		private final Keyword cRightCurlyBracketKeyword_9_4 = (Keyword)cGroup_9.eContents().get(4);
-		private final Keyword cMaxPerRowKeyword_10 = (Keyword)cGroup.eContents().get(10);
-		private final Assignment cMaxPerRowAssignment_11 = (Assignment)cGroup.eContents().get(11);
-		private final RuleCall cMaxPerRowEIntParserRuleCall_11_0 = (RuleCall)cMaxPerRowAssignment_11.eContents().get(0);
-		private final Group cGroup_12 = (Group)cGroup.eContents().get(12);
-		private final Keyword cConditionsKeyword_12_0 = (Keyword)cGroup_12.eContents().get(0);
-		private final Keyword cLeftParenthesisKeyword_12_1 = (Keyword)cGroup_12.eContents().get(1);
-		private final Assignment cConditionsAssignment_12_2 = (Assignment)cGroup_12.eContents().get(2);
-		private final CrossReference cConditionsQuestionConditionCrossReference_12_2_0 = (CrossReference)cConditionsAssignment_12_2.eContents().get(0);
-		private final RuleCall cConditionsQuestionConditionEStringParserRuleCall_12_2_0_1 = (RuleCall)cConditionsQuestionConditionCrossReference_12_2_0.eContents().get(1);
-		private final Group cGroup_12_3 = (Group)cGroup_12.eContents().get(3);
-		private final Keyword cCommaKeyword_12_3_0 = (Keyword)cGroup_12_3.eContents().get(0);
-		private final Assignment cConditionsAssignment_12_3_1 = (Assignment)cGroup_12_3.eContents().get(1);
-		private final CrossReference cConditionsQuestionConditionCrossReference_12_3_1_0 = (CrossReference)cConditionsAssignment_12_3_1.eContents().get(0);
-		private final RuleCall cConditionsQuestionConditionEStringParserRuleCall_12_3_1_0_1 = (RuleCall)cConditionsQuestionConditionCrossReference_12_3_1_0.eContents().get(1);
-		private final Keyword cRightParenthesisKeyword_12_4 = (Keyword)cGroup_12.eContents().get(4);
-		private final Keyword cRightCurlyBracketKeyword_13 = (Keyword)cGroup.eContents().get(13);
+		private final Assignment cQuestionBaseAssignment_0 = (Assignment)cGroup.eContents().get(0);
+		private final RuleCall cQuestionBaseQuestionBaseParserRuleCall_0_0 = (RuleCall)cQuestionBaseAssignment_0.eContents().get(0);
+		private final Keyword cMatrixKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		private final Assignment cMaxPerRowAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final RuleCall cMaxPerRowEIntParserRuleCall_2_0 = (RuleCall)cMaxPerRowAssignment_2.eContents().get(0);
+		private final Keyword cRightSquareBracketLeftSquareBracketKeyword_3 = (Keyword)cGroup.eContents().get(3);
+		private final Group cGroup_4 = (Group)cGroup.eContents().get(4);
+		private final Assignment cColumnNamesAssignment_4_0 = (Assignment)cGroup_4.eContents().get(0);
+		private final RuleCall cColumnNamesEStringParserRuleCall_4_0_0 = (RuleCall)cColumnNamesAssignment_4_0.eContents().get(0);
+		private final Group cGroup_4_1 = (Group)cGroup_4.eContents().get(1);
+		private final Keyword cCommaKeyword_4_1_0 = (Keyword)cGroup_4_1.eContents().get(0);
+		private final Assignment cColumnNamesAssignment_4_1_1 = (Assignment)cGroup_4_1.eContents().get(1);
+		private final RuleCall cColumnNamesEStringParserRuleCall_4_1_1_0 = (RuleCall)cColumnNamesAssignment_4_1_1.eContents().get(0);
+		private final Keyword cRightSquareBracketKeyword_4_2 = (Keyword)cGroup_4.eContents().get(2);
+		private final Group cGroup_5 = (Group)cGroup.eContents().get(5);
+		private final Keyword cHyphenMinusKeyword_5_0 = (Keyword)cGroup_5.eContents().get(0);
+		private final Assignment cRowNamesAssignment_5_1 = (Assignment)cGroup_5.eContents().get(1);
+		private final RuleCall cRowNamesEStringParserRuleCall_5_1_0 = (RuleCall)cRowNamesAssignment_5_1.eContents().get(0);
 		
 		//MatrixQuestion:
-		//	mandatory?="mandatory" "MatrixQuestion" "{" "id" id=EString "title" title=EString ("description"
-		//	description=EString)? ("columnNames" "{" columnNames+=EString ("," columnNames+=EString)* "}")? ("rowNames" "{"
-		//	rowNames+=EString ("," rowNames+=EString)* "}")? "maxPerRow" maxPerRow=EInt ("conditions" "("
-		//	conditions+=[QuestionCondition|EString] ("," conditions+=[QuestionCondition|EString])* ")")? "}";
+		//	questionBase= // Description
+		//	QuestionBase "matrix[" maxPerRow=EInt "][" (columnNames+=EString ("," columnNames+=EString)* "]")? // matrix[maxPerRow][columnNames+]
+		//	("-" rowNames+=EString)+ // -rownames
+		//;
 		public ParserRule getRule() { return rule; }
 
-		//mandatory?="mandatory" "MatrixQuestion" "{" "id" id=EString "title" title=EString ("description" description=EString)?
-		//("columnNames" "{" columnNames+=EString ("," columnNames+=EString)* "}")? ("rowNames" "{" rowNames+=EString (","
-		//rowNames+=EString)* "}")? "maxPerRow" maxPerRow=EInt ("conditions" "(" conditions+=[QuestionCondition|EString] (","
-		//conditions+=[QuestionCondition|EString])* ")")? "}"
+		//questionBase= // Description
+		//QuestionBase "matrix[" maxPerRow=EInt "][" (columnNames+=EString ("," columnNames+=EString)* "]")? // matrix[maxPerRow][columnNames+]
+		//("-" rowNames+=EString)+ // -rownames
 		public Group getGroup() { return cGroup; }
 
-		//mandatory?="mandatory"
-		public Assignment getMandatoryAssignment_0() { return cMandatoryAssignment_0; }
+		//questionBase= // Description
+		//QuestionBase
+		public Assignment getQuestionBaseAssignment_0() { return cQuestionBaseAssignment_0; }
 
-		//"mandatory"
-		public Keyword getMandatoryMandatoryKeyword_0_0() { return cMandatoryMandatoryKeyword_0_0; }
+		//// Description
+		//QuestionBase
+		public RuleCall getQuestionBaseQuestionBaseParserRuleCall_0_0() { return cQuestionBaseQuestionBaseParserRuleCall_0_0; }
 
-		//"MatrixQuestion"
-		public Keyword getMatrixQuestionKeyword_1() { return cMatrixQuestionKeyword_1; }
-
-		//"{"
-		public Keyword getLeftCurlyBracketKeyword_2() { return cLeftCurlyBracketKeyword_2; }
-
-		//"id"
-		public Keyword getIdKeyword_3() { return cIdKeyword_3; }
-
-		//id=EString
-		public Assignment getIdAssignment_4() { return cIdAssignment_4; }
-
-		//EString
-		public RuleCall getIdEStringParserRuleCall_4_0() { return cIdEStringParserRuleCall_4_0; }
-
-		//"title"
-		public Keyword getTitleKeyword_5() { return cTitleKeyword_5; }
-
-		//title=EString
-		public Assignment getTitleAssignment_6() { return cTitleAssignment_6; }
-
-		//EString
-		public RuleCall getTitleEStringParserRuleCall_6_0() { return cTitleEStringParserRuleCall_6_0; }
-
-		//("description" description=EString)?
-		public Group getGroup_7() { return cGroup_7; }
-
-		//"description"
-		public Keyword getDescriptionKeyword_7_0() { return cDescriptionKeyword_7_0; }
-
-		//description=EString
-		public Assignment getDescriptionAssignment_7_1() { return cDescriptionAssignment_7_1; }
-
-		//EString
-		public RuleCall getDescriptionEStringParserRuleCall_7_1_0() { return cDescriptionEStringParserRuleCall_7_1_0; }
-
-		//("columnNames" "{" columnNames+=EString ("," columnNames+=EString)* "}")?
-		public Group getGroup_8() { return cGroup_8; }
-
-		//"columnNames"
-		public Keyword getColumnNamesKeyword_8_0() { return cColumnNamesKeyword_8_0; }
-
-		//"{"
-		public Keyword getLeftCurlyBracketKeyword_8_1() { return cLeftCurlyBracketKeyword_8_1; }
-
-		//columnNames+=EString
-		public Assignment getColumnNamesAssignment_8_2() { return cColumnNamesAssignment_8_2; }
-
-		//EString
-		public RuleCall getColumnNamesEStringParserRuleCall_8_2_0() { return cColumnNamesEStringParserRuleCall_8_2_0; }
-
-		//("," columnNames+=EString)*
-		public Group getGroup_8_3() { return cGroup_8_3; }
-
-		//","
-		public Keyword getCommaKeyword_8_3_0() { return cCommaKeyword_8_3_0; }
-
-		//columnNames+=EString
-		public Assignment getColumnNamesAssignment_8_3_1() { return cColumnNamesAssignment_8_3_1; }
-
-		//EString
-		public RuleCall getColumnNamesEStringParserRuleCall_8_3_1_0() { return cColumnNamesEStringParserRuleCall_8_3_1_0; }
-
-		//"}"
-		public Keyword getRightCurlyBracketKeyword_8_4() { return cRightCurlyBracketKeyword_8_4; }
-
-		//("rowNames" "{" rowNames+=EString ("," rowNames+=EString)* "}")?
-		public Group getGroup_9() { return cGroup_9; }
-
-		//"rowNames"
-		public Keyword getRowNamesKeyword_9_0() { return cRowNamesKeyword_9_0; }
-
-		//"{"
-		public Keyword getLeftCurlyBracketKeyword_9_1() { return cLeftCurlyBracketKeyword_9_1; }
-
-		//rowNames+=EString
-		public Assignment getRowNamesAssignment_9_2() { return cRowNamesAssignment_9_2; }
-
-		//EString
-		public RuleCall getRowNamesEStringParserRuleCall_9_2_0() { return cRowNamesEStringParserRuleCall_9_2_0; }
-
-		//("," rowNames+=EString)*
-		public Group getGroup_9_3() { return cGroup_9_3; }
-
-		//","
-		public Keyword getCommaKeyword_9_3_0() { return cCommaKeyword_9_3_0; }
-
-		//rowNames+=EString
-		public Assignment getRowNamesAssignment_9_3_1() { return cRowNamesAssignment_9_3_1; }
-
-		//EString
-		public RuleCall getRowNamesEStringParserRuleCall_9_3_1_0() { return cRowNamesEStringParserRuleCall_9_3_1_0; }
-
-		//"}"
-		public Keyword getRightCurlyBracketKeyword_9_4() { return cRightCurlyBracketKeyword_9_4; }
-
-		//"maxPerRow"
-		public Keyword getMaxPerRowKeyword_10() { return cMaxPerRowKeyword_10; }
+		//"matrix["
+		public Keyword getMatrixKeyword_1() { return cMatrixKeyword_1; }
 
 		//maxPerRow=EInt
-		public Assignment getMaxPerRowAssignment_11() { return cMaxPerRowAssignment_11; }
+		public Assignment getMaxPerRowAssignment_2() { return cMaxPerRowAssignment_2; }
 
 		//EInt
-		public RuleCall getMaxPerRowEIntParserRuleCall_11_0() { return cMaxPerRowEIntParserRuleCall_11_0; }
+		public RuleCall getMaxPerRowEIntParserRuleCall_2_0() { return cMaxPerRowEIntParserRuleCall_2_0; }
 
-		//("conditions" "(" conditions+=[QuestionCondition|EString] ("," conditions+=[QuestionCondition|EString])* ")")?
-		public Group getGroup_12() { return cGroup_12; }
+		//"]["
+		public Keyword getRightSquareBracketLeftSquareBracketKeyword_3() { return cRightSquareBracketLeftSquareBracketKeyword_3; }
 
-		//"conditions"
-		public Keyword getConditionsKeyword_12_0() { return cConditionsKeyword_12_0; }
+		//(columnNames+=EString ("," columnNames+=EString)* "]")?
+		public Group getGroup_4() { return cGroup_4; }
 
-		//"("
-		public Keyword getLeftParenthesisKeyword_12_1() { return cLeftParenthesisKeyword_12_1; }
-
-		//conditions+=[QuestionCondition|EString]
-		public Assignment getConditionsAssignment_12_2() { return cConditionsAssignment_12_2; }
-
-		//[QuestionCondition|EString]
-		public CrossReference getConditionsQuestionConditionCrossReference_12_2_0() { return cConditionsQuestionConditionCrossReference_12_2_0; }
+		//columnNames+=EString
+		public Assignment getColumnNamesAssignment_4_0() { return cColumnNamesAssignment_4_0; }
 
 		//EString
-		public RuleCall getConditionsQuestionConditionEStringParserRuleCall_12_2_0_1() { return cConditionsQuestionConditionEStringParserRuleCall_12_2_0_1; }
+		public RuleCall getColumnNamesEStringParserRuleCall_4_0_0() { return cColumnNamesEStringParserRuleCall_4_0_0; }
 
-		//("," conditions+=[QuestionCondition|EString])*
-		public Group getGroup_12_3() { return cGroup_12_3; }
+		//("," columnNames+=EString)*
+		public Group getGroup_4_1() { return cGroup_4_1; }
 
 		//","
-		public Keyword getCommaKeyword_12_3_0() { return cCommaKeyword_12_3_0; }
+		public Keyword getCommaKeyword_4_1_0() { return cCommaKeyword_4_1_0; }
 
-		//conditions+=[QuestionCondition|EString]
-		public Assignment getConditionsAssignment_12_3_1() { return cConditionsAssignment_12_3_1; }
-
-		//[QuestionCondition|EString]
-		public CrossReference getConditionsQuestionConditionCrossReference_12_3_1_0() { return cConditionsQuestionConditionCrossReference_12_3_1_0; }
+		//columnNames+=EString
+		public Assignment getColumnNamesAssignment_4_1_1() { return cColumnNamesAssignment_4_1_1; }
 
 		//EString
-		public RuleCall getConditionsQuestionConditionEStringParserRuleCall_12_3_1_0_1() { return cConditionsQuestionConditionEStringParserRuleCall_12_3_1_0_1; }
+		public RuleCall getColumnNamesEStringParserRuleCall_4_1_1_0() { return cColumnNamesEStringParserRuleCall_4_1_1_0; }
 
-		//")"
-		public Keyword getRightParenthesisKeyword_12_4() { return cRightParenthesisKeyword_12_4; }
+		//"]"
+		public Keyword getRightSquareBracketKeyword_4_2() { return cRightSquareBracketKeyword_4_2; }
 
-		//"}"
-		public Keyword getRightCurlyBracketKeyword_13() { return cRightCurlyBracketKeyword_13; }
+		//("-" rowNames+=EString)+
+		public Group getGroup_5() { return cGroup_5; }
+
+		//"-"
+		public Keyword getHyphenMinusKeyword_5_0() { return cHyphenMinusKeyword_5_0; }
+
+		//rowNames+=EString
+		public Assignment getRowNamesAssignment_5_1() { return cRowNamesAssignment_5_1; }
+
+		//EString
+		public RuleCall getRowNamesEStringParserRuleCall_5_1_0() { return cRowNamesEStringParserRuleCall_5_1_0; }
 	}
 
 	public class CalendarQuestionElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "CalendarQuestion");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Assignment cMandatoryAssignment_0 = (Assignment)cGroup.eContents().get(0);
-		private final Keyword cMandatoryMandatoryKeyword_0_0 = (Keyword)cMandatoryAssignment_0.eContents().get(0);
-		private final Assignment cYearAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final Keyword cYearYearKeyword_1_0 = (Keyword)cYearAssignment_1.eContents().get(0);
-		private final Assignment cMonthAssignment_2 = (Assignment)cGroup.eContents().get(2);
-		private final Keyword cMonthMonthKeyword_2_0 = (Keyword)cMonthAssignment_2.eContents().get(0);
-		private final Assignment cDayAssignment_3 = (Assignment)cGroup.eContents().get(3);
-		private final Keyword cDayDayKeyword_3_0 = (Keyword)cDayAssignment_3.eContents().get(0);
-		private final Assignment cHourAssignment_4 = (Assignment)cGroup.eContents().get(4);
-		private final Keyword cHourHourKeyword_4_0 = (Keyword)cHourAssignment_4.eContents().get(0);
-		private final Assignment cMinuteAssignment_5 = (Assignment)cGroup.eContents().get(5);
-		private final Keyword cMinuteMinuteKeyword_5_0 = (Keyword)cMinuteAssignment_5.eContents().get(0);
-		private final Keyword cCalendarQuestionKeyword_6 = (Keyword)cGroup.eContents().get(6);
-		private final Keyword cLeftCurlyBracketKeyword_7 = (Keyword)cGroup.eContents().get(7);
-		private final Keyword cIdKeyword_8 = (Keyword)cGroup.eContents().get(8);
-		private final Assignment cIdAssignment_9 = (Assignment)cGroup.eContents().get(9);
-		private final RuleCall cIdEStringParserRuleCall_9_0 = (RuleCall)cIdAssignment_9.eContents().get(0);
-		private final Keyword cTitleKeyword_10 = (Keyword)cGroup.eContents().get(10);
-		private final Assignment cTitleAssignment_11 = (Assignment)cGroup.eContents().get(11);
-		private final RuleCall cTitleEStringParserRuleCall_11_0 = (RuleCall)cTitleAssignment_11.eContents().get(0);
-		private final Group cGroup_12 = (Group)cGroup.eContents().get(12);
-		private final Keyword cDescriptionKeyword_12_0 = (Keyword)cGroup_12.eContents().get(0);
-		private final Assignment cDescriptionAssignment_12_1 = (Assignment)cGroup_12.eContents().get(1);
-		private final RuleCall cDescriptionEStringParserRuleCall_12_1_0 = (RuleCall)cDescriptionAssignment_12_1.eContents().get(0);
-		private final Group cGroup_13 = (Group)cGroup.eContents().get(13);
-		private final Keyword cConditionsKeyword_13_0 = (Keyword)cGroup_13.eContents().get(0);
-		private final Keyword cLeftParenthesisKeyword_13_1 = (Keyword)cGroup_13.eContents().get(1);
-		private final Assignment cConditionsAssignment_13_2 = (Assignment)cGroup_13.eContents().get(2);
-		private final CrossReference cConditionsQuestionConditionCrossReference_13_2_0 = (CrossReference)cConditionsAssignment_13_2.eContents().get(0);
-		private final RuleCall cConditionsQuestionConditionEStringParserRuleCall_13_2_0_1 = (RuleCall)cConditionsQuestionConditionCrossReference_13_2_0.eContents().get(1);
-		private final Group cGroup_13_3 = (Group)cGroup_13.eContents().get(3);
-		private final Keyword cCommaKeyword_13_3_0 = (Keyword)cGroup_13_3.eContents().get(0);
-		private final Assignment cConditionsAssignment_13_3_1 = (Assignment)cGroup_13_3.eContents().get(1);
-		private final CrossReference cConditionsQuestionConditionCrossReference_13_3_1_0 = (CrossReference)cConditionsAssignment_13_3_1.eContents().get(0);
-		private final RuleCall cConditionsQuestionConditionEStringParserRuleCall_13_3_1_0_1 = (RuleCall)cConditionsQuestionConditionCrossReference_13_3_1_0.eContents().get(1);
-		private final Keyword cRightParenthesisKeyword_13_4 = (Keyword)cGroup_13.eContents().get(4);
-		private final Keyword cRightCurlyBracketKeyword_14 = (Keyword)cGroup.eContents().get(14);
+		private final Assignment cQuestionBaseAssignment_0 = (Assignment)cGroup.eContents().get(0);
+		private final RuleCall cQuestionBaseQuestionBaseParserRuleCall_0_0 = (RuleCall)cQuestionBaseAssignment_0.eContents().get(0);
+		private final Keyword cCalendarKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		private final Group cGroup_2 = (Group)cGroup.eContents().get(2);
+		private final Assignment cYearAssignment_2_0 = (Assignment)cGroup_2.eContents().get(0);
+		private final Keyword cYearYearKeyword_2_0_0 = (Keyword)cYearAssignment_2_0.eContents().get(0);
+		private final Keyword cCommaKeyword_2_1 = (Keyword)cGroup_2.eContents().get(1);
+		private final Assignment cMonthAssignment_2_2 = (Assignment)cGroup_2.eContents().get(2);
+		private final Keyword cMonthMonthKeyword_2_2_0 = (Keyword)cMonthAssignment_2_2.eContents().get(0);
+		private final Keyword cCommaKeyword_2_3 = (Keyword)cGroup_2.eContents().get(3);
+		private final Assignment cDayAssignment_2_4 = (Assignment)cGroup_2.eContents().get(4);
+		private final Keyword cDayDayKeyword_2_4_0 = (Keyword)cDayAssignment_2_4.eContents().get(0);
+		private final Keyword cCommaKeyword_2_5 = (Keyword)cGroup_2.eContents().get(5);
+		private final Assignment cHourAssignment_2_6 = (Assignment)cGroup_2.eContents().get(6);
+		private final Keyword cHourHourKeyword_2_6_0 = (Keyword)cHourAssignment_2_6.eContents().get(0);
+		private final Keyword cCommaKeyword_2_7 = (Keyword)cGroup_2.eContents().get(7);
+		private final Assignment cMinuteAssignment_2_8 = (Assignment)cGroup_2.eContents().get(8);
+		private final Keyword cMinuteMinuteKeyword_2_8_0 = (Keyword)cMinuteAssignment_2_8.eContents().get(0);
+		private final Keyword cRightSquareBracketKeyword_3 = (Keyword)cGroup.eContents().get(3);
 		
 		//CalendarQuestion:
-		//	mandatory?="mandatory" year?="year" month?="month" day?="day" hour?="hour" minute?="minute" "CalendarQuestion" "{"
-		//	"id" id=EString "title" title=EString ("description" description=EString)? ("conditions" "("
-		//	conditions+=[QuestionCondition|EString] ("," conditions+=[QuestionCondition|EString])* ")")? "}";
+		//	questionBase=QuestionBase //'calendar[' ((year?=	'year'	)? ','?) &  TODO: VIRKER IKKE
+		//	//			((month?=	'month'	)? ','?) & 
+		//	//			((day?=		'day'	)? ','?) & 
+		//	//			((hour?=	'hour'	)? ','?) & 
+		//	//			((minute?=	'minute')? ','?) ']'
+		//	// [year, day,] [month, day, hour] [hour minute] [minute, day, hour,]
+		//	"calendar[" (year?="year"? ","? month?="month"? ","? day?="day"? ","? hour?="hour"? ","? minute?="minute"?) // TODO: Det er nu muligt at lave calendar[]
+		//	"]";
 		public ParserRule getRule() { return rule; }
 
-		//mandatory?="mandatory" year?="year" month?="month" day?="day" hour?="hour" minute?="minute" "CalendarQuestion" "{" "id"
-		//id=EString "title" title=EString ("description" description=EString)? ("conditions" "("
-		//conditions+=[QuestionCondition|EString] ("," conditions+=[QuestionCondition|EString])* ")")? "}"
+		//questionBase=QuestionBase //'calendar[' ((year?=	'year'	)? ','?) &  TODO: VIRKER IKKE
+		////			((month?=	'month'	)? ','?) & 
+		////			((day?=		'day'	)? ','?) & 
+		////			((hour?=	'hour'	)? ','?) & 
+		////			((minute?=	'minute')? ','?) ']'
+		//// [year, day,] [month, day, hour] [hour minute] [minute, day, hour,]
+		//"calendar[" (year?="year"? ","? month?="month"? ","? day?="day"? ","? hour?="hour"? ","? minute?="minute"?) // TODO: Det er nu muligt at lave calendar[]
+		//"]"
 		public Group getGroup() { return cGroup; }
 
-		//mandatory?="mandatory"
-		public Assignment getMandatoryAssignment_0() { return cMandatoryAssignment_0; }
+		//questionBase=QuestionBase
+		public Assignment getQuestionBaseAssignment_0() { return cQuestionBaseAssignment_0; }
 
-		//"mandatory"
-		public Keyword getMandatoryMandatoryKeyword_0_0() { return cMandatoryMandatoryKeyword_0_0; }
+		//QuestionBase
+		public RuleCall getQuestionBaseQuestionBaseParserRuleCall_0_0() { return cQuestionBaseQuestionBaseParserRuleCall_0_0; }
 
-		//year?="year"
-		public Assignment getYearAssignment_1() { return cYearAssignment_1; }
+		////'calendar[' ((year?=	'year'	)? ','?) &  TODO: VIRKER IKKE
+		////			((month?=	'month'	)? ','?) & 
+		////			((day?=		'day'	)? ','?) & 
+		////			((hour?=	'hour'	)? ','?) & 
+		////			((minute?=	'minute')? ','?) ']'
+		//// [year, day,] [month, day, hour] [hour minute] [minute, day, hour,]
+		//"calendar["
+		public Keyword getCalendarKeyword_1() { return cCalendarKeyword_1; }
+
+		//year?="year"? ","? month?="month"? ","? day?="day"? ","? hour?="hour"? ","? minute?="minute"?
+		public Group getGroup_2() { return cGroup_2; }
+
+		//year?="year"?
+		public Assignment getYearAssignment_2_0() { return cYearAssignment_2_0; }
 
 		//"year"
-		public Keyword getYearYearKeyword_1_0() { return cYearYearKeyword_1_0; }
+		public Keyword getYearYearKeyword_2_0_0() { return cYearYearKeyword_2_0_0; }
 
-		//month?="month"
-		public Assignment getMonthAssignment_2() { return cMonthAssignment_2; }
+		//","?
+		public Keyword getCommaKeyword_2_1() { return cCommaKeyword_2_1; }
+
+		//month?="month"?
+		public Assignment getMonthAssignment_2_2() { return cMonthAssignment_2_2; }
 
 		//"month"
-		public Keyword getMonthMonthKeyword_2_0() { return cMonthMonthKeyword_2_0; }
+		public Keyword getMonthMonthKeyword_2_2_0() { return cMonthMonthKeyword_2_2_0; }
 
-		//day?="day"
-		public Assignment getDayAssignment_3() { return cDayAssignment_3; }
+		//","?
+		public Keyword getCommaKeyword_2_3() { return cCommaKeyword_2_3; }
+
+		//day?="day"?
+		public Assignment getDayAssignment_2_4() { return cDayAssignment_2_4; }
 
 		//"day"
-		public Keyword getDayDayKeyword_3_0() { return cDayDayKeyword_3_0; }
+		public Keyword getDayDayKeyword_2_4_0() { return cDayDayKeyword_2_4_0; }
 
-		//hour?="hour"
-		public Assignment getHourAssignment_4() { return cHourAssignment_4; }
+		//","?
+		public Keyword getCommaKeyword_2_5() { return cCommaKeyword_2_5; }
+
+		//hour?="hour"?
+		public Assignment getHourAssignment_2_6() { return cHourAssignment_2_6; }
 
 		//"hour"
-		public Keyword getHourHourKeyword_4_0() { return cHourHourKeyword_4_0; }
+		public Keyword getHourHourKeyword_2_6_0() { return cHourHourKeyword_2_6_0; }
 
-		//minute?="minute"
-		public Assignment getMinuteAssignment_5() { return cMinuteAssignment_5; }
+		//","?
+		public Keyword getCommaKeyword_2_7() { return cCommaKeyword_2_7; }
+
+		//minute?="minute"?
+		public Assignment getMinuteAssignment_2_8() { return cMinuteAssignment_2_8; }
 
 		//"minute"
-		public Keyword getMinuteMinuteKeyword_5_0() { return cMinuteMinuteKeyword_5_0; }
+		public Keyword getMinuteMinuteKeyword_2_8_0() { return cMinuteMinuteKeyword_2_8_0; }
 
-		//"CalendarQuestion"
-		public Keyword getCalendarQuestionKeyword_6() { return cCalendarQuestionKeyword_6; }
-
-		//"{"
-		public Keyword getLeftCurlyBracketKeyword_7() { return cLeftCurlyBracketKeyword_7; }
-
-		//"id"
-		public Keyword getIdKeyword_8() { return cIdKeyword_8; }
-
-		//id=EString
-		public Assignment getIdAssignment_9() { return cIdAssignment_9; }
-
-		//EString
-		public RuleCall getIdEStringParserRuleCall_9_0() { return cIdEStringParserRuleCall_9_0; }
-
-		//"title"
-		public Keyword getTitleKeyword_10() { return cTitleKeyword_10; }
-
-		//title=EString
-		public Assignment getTitleAssignment_11() { return cTitleAssignment_11; }
-
-		//EString
-		public RuleCall getTitleEStringParserRuleCall_11_0() { return cTitleEStringParserRuleCall_11_0; }
-
-		//("description" description=EString)?
-		public Group getGroup_12() { return cGroup_12; }
-
-		//"description"
-		public Keyword getDescriptionKeyword_12_0() { return cDescriptionKeyword_12_0; }
-
-		//description=EString
-		public Assignment getDescriptionAssignment_12_1() { return cDescriptionAssignment_12_1; }
-
-		//EString
-		public RuleCall getDescriptionEStringParserRuleCall_12_1_0() { return cDescriptionEStringParserRuleCall_12_1_0; }
-
-		//("conditions" "(" conditions+=[QuestionCondition|EString] ("," conditions+=[QuestionCondition|EString])* ")")?
-		public Group getGroup_13() { return cGroup_13; }
-
-		//"conditions"
-		public Keyword getConditionsKeyword_13_0() { return cConditionsKeyword_13_0; }
-
-		//"("
-		public Keyword getLeftParenthesisKeyword_13_1() { return cLeftParenthesisKeyword_13_1; }
-
-		//conditions+=[QuestionCondition|EString]
-		public Assignment getConditionsAssignment_13_2() { return cConditionsAssignment_13_2; }
-
-		//[QuestionCondition|EString]
-		public CrossReference getConditionsQuestionConditionCrossReference_13_2_0() { return cConditionsQuestionConditionCrossReference_13_2_0; }
-
-		//EString
-		public RuleCall getConditionsQuestionConditionEStringParserRuleCall_13_2_0_1() { return cConditionsQuestionConditionEStringParserRuleCall_13_2_0_1; }
-
-		//("," conditions+=[QuestionCondition|EString])*
-		public Group getGroup_13_3() { return cGroup_13_3; }
-
-		//","
-		public Keyword getCommaKeyword_13_3_0() { return cCommaKeyword_13_3_0; }
-
-		//conditions+=[QuestionCondition|EString]
-		public Assignment getConditionsAssignment_13_3_1() { return cConditionsAssignment_13_3_1; }
-
-		//[QuestionCondition|EString]
-		public CrossReference getConditionsQuestionConditionCrossReference_13_3_1_0() { return cConditionsQuestionConditionCrossReference_13_3_1_0; }
-
-		//EString
-		public RuleCall getConditionsQuestionConditionEStringParserRuleCall_13_3_1_0_1() { return cConditionsQuestionConditionEStringParserRuleCall_13_3_1_0_1; }
-
-		//")"
-		public Keyword getRightParenthesisKeyword_13_4() { return cRightParenthesisKeyword_13_4; }
-
-		//"}"
-		public Keyword getRightCurlyBracketKeyword_14() { return cRightCurlyBracketKeyword_14; }
+		//// TODO: Det er nu muligt at lave calendar[]
+		//"]"
+		public Keyword getRightSquareBracketKeyword_3() { return cRightSquareBracketKeyword_3; }
 	}
 
 	public class IntegerQuestionElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "IntegerQuestion");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Assignment cMandatoryAssignment_0 = (Assignment)cGroup.eContents().get(0);
-		private final Keyword cMandatoryMandatoryKeyword_0_0 = (Keyword)cMandatoryAssignment_0.eContents().get(0);
-		private final Keyword cIntegerQuestionKeyword_1 = (Keyword)cGroup.eContents().get(1);
-		private final Keyword cLeftCurlyBracketKeyword_2 = (Keyword)cGroup.eContents().get(2);
-		private final Keyword cIdKeyword_3 = (Keyword)cGroup.eContents().get(3);
-		private final Assignment cIdAssignment_4 = (Assignment)cGroup.eContents().get(4);
-		private final RuleCall cIdEStringParserRuleCall_4_0 = (RuleCall)cIdAssignment_4.eContents().get(0);
-		private final Keyword cTitleKeyword_5 = (Keyword)cGroup.eContents().get(5);
-		private final Assignment cTitleAssignment_6 = (Assignment)cGroup.eContents().get(6);
-		private final RuleCall cTitleEStringParserRuleCall_6_0 = (RuleCall)cTitleAssignment_6.eContents().get(0);
-		private final Group cGroup_7 = (Group)cGroup.eContents().get(7);
-		private final Keyword cDescriptionKeyword_7_0 = (Keyword)cGroup_7.eContents().get(0);
-		private final Assignment cDescriptionAssignment_7_1 = (Assignment)cGroup_7.eContents().get(1);
-		private final RuleCall cDescriptionEStringParserRuleCall_7_1_0 = (RuleCall)cDescriptionAssignment_7_1.eContents().get(0);
-		private final Keyword cMinValueKeyword_8 = (Keyword)cGroup.eContents().get(8);
-		private final Assignment cMinValueAssignment_9 = (Assignment)cGroup.eContents().get(9);
-		private final RuleCall cMinValueEIntParserRuleCall_9_0 = (RuleCall)cMinValueAssignment_9.eContents().get(0);
-		private final Keyword cStepKeyword_10 = (Keyword)cGroup.eContents().get(10);
-		private final Assignment cStepAssignment_11 = (Assignment)cGroup.eContents().get(11);
-		private final RuleCall cStepEIntParserRuleCall_11_0 = (RuleCall)cStepAssignment_11.eContents().get(0);
-		private final Keyword cMaxValueKeyword_12 = (Keyword)cGroup.eContents().get(12);
-		private final Assignment cMaxValueAssignment_13 = (Assignment)cGroup.eContents().get(13);
-		private final RuleCall cMaxValueEIntParserRuleCall_13_0 = (RuleCall)cMaxValueAssignment_13.eContents().get(0);
-		private final Group cGroup_14 = (Group)cGroup.eContents().get(14);
-		private final Keyword cConditionsKeyword_14_0 = (Keyword)cGroup_14.eContents().get(0);
-		private final Keyword cLeftParenthesisKeyword_14_1 = (Keyword)cGroup_14.eContents().get(1);
-		private final Assignment cConditionsAssignment_14_2 = (Assignment)cGroup_14.eContents().get(2);
-		private final CrossReference cConditionsQuestionConditionCrossReference_14_2_0 = (CrossReference)cConditionsAssignment_14_2.eContents().get(0);
-		private final RuleCall cConditionsQuestionConditionEStringParserRuleCall_14_2_0_1 = (RuleCall)cConditionsQuestionConditionCrossReference_14_2_0.eContents().get(1);
-		private final Group cGroup_14_3 = (Group)cGroup_14.eContents().get(3);
-		private final Keyword cCommaKeyword_14_3_0 = (Keyword)cGroup_14_3.eContents().get(0);
-		private final Assignment cConditionsAssignment_14_3_1 = (Assignment)cGroup_14_3.eContents().get(1);
-		private final CrossReference cConditionsQuestionConditionCrossReference_14_3_1_0 = (CrossReference)cConditionsAssignment_14_3_1.eContents().get(0);
-		private final RuleCall cConditionsQuestionConditionEStringParserRuleCall_14_3_1_0_1 = (RuleCall)cConditionsQuestionConditionCrossReference_14_3_1_0.eContents().get(1);
-		private final Keyword cRightParenthesisKeyword_14_4 = (Keyword)cGroup_14.eContents().get(4);
-		private final Keyword cRightCurlyBracketKeyword_15 = (Keyword)cGroup.eContents().get(15);
+		private final Assignment cQuestionBaseAssignment_0 = (Assignment)cGroup.eContents().get(0);
+		private final RuleCall cQuestionBaseQuestionBaseParserRuleCall_0_0 = (RuleCall)cQuestionBaseAssignment_0.eContents().get(0);
+		private final Keyword cNumberKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		private final Assignment cMinValueAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final RuleCall cMinValueEIntParserRuleCall_2_0 = (RuleCall)cMinValueAssignment_2.eContents().get(0);
+		private final Keyword cToKeyword_3 = (Keyword)cGroup.eContents().get(3);
+		private final Assignment cMaxValueAssignment_4 = (Assignment)cGroup.eContents().get(4);
+		private final RuleCall cMaxValueEIntParserRuleCall_4_0 = (RuleCall)cMaxValueAssignment_4.eContents().get(0);
+		private final Group cGroup_5 = (Group)cGroup.eContents().get(5);
+		private final Keyword cStepKeyword_5_0 = (Keyword)cGroup_5.eContents().get(0);
+		private final Assignment cStepAssignment_5_1 = (Assignment)cGroup_5.eContents().get(1);
+		private final RuleCall cStepEIntParserRuleCall_5_1_0 = (RuleCall)cStepAssignment_5_1.eContents().get(0);
+		private final Keyword cRightSquareBracketKeyword_6 = (Keyword)cGroup.eContents().get(6);
 		
 		//IntegerQuestion:
-		//	mandatory?="mandatory" "IntegerQuestion" "{" "id" id=EString "title" title=EString ("description"
-		//	description=EString)? "minValue" minValue=EInt "step" step=EInt "maxValue" maxValue=EInt ("conditions" "("
-		//	conditions+=[QuestionCondition|EString] ("," conditions+=[QuestionCondition|EString])* ")")? "}";
+		//	questionBase=QuestionBase "number[" minValue=EInt "to" maxValue=EInt ("step" step=EInt)? "]";
 		public ParserRule getRule() { return rule; }
 
-		//mandatory?="mandatory" "IntegerQuestion" "{" "id" id=EString "title" title=EString ("description" description=EString)?
-		//"minValue" minValue=EInt "step" step=EInt "maxValue" maxValue=EInt ("conditions" "("
-		//conditions+=[QuestionCondition|EString] ("," conditions+=[QuestionCondition|EString])* ")")? "}"
+		//questionBase=QuestionBase "number[" minValue=EInt "to" maxValue=EInt ("step" step=EInt)? "]"
 		public Group getGroup() { return cGroup; }
 
-		//mandatory?="mandatory"
-		public Assignment getMandatoryAssignment_0() { return cMandatoryAssignment_0; }
+		//questionBase=QuestionBase
+		public Assignment getQuestionBaseAssignment_0() { return cQuestionBaseAssignment_0; }
 
-		//"mandatory"
-		public Keyword getMandatoryMandatoryKeyword_0_0() { return cMandatoryMandatoryKeyword_0_0; }
+		//QuestionBase
+		public RuleCall getQuestionBaseQuestionBaseParserRuleCall_0_0() { return cQuestionBaseQuestionBaseParserRuleCall_0_0; }
 
-		//"IntegerQuestion"
-		public Keyword getIntegerQuestionKeyword_1() { return cIntegerQuestionKeyword_1; }
-
-		//"{"
-		public Keyword getLeftCurlyBracketKeyword_2() { return cLeftCurlyBracketKeyword_2; }
-
-		//"id"
-		public Keyword getIdKeyword_3() { return cIdKeyword_3; }
-
-		//id=EString
-		public Assignment getIdAssignment_4() { return cIdAssignment_4; }
-
-		//EString
-		public RuleCall getIdEStringParserRuleCall_4_0() { return cIdEStringParserRuleCall_4_0; }
-
-		//"title"
-		public Keyword getTitleKeyword_5() { return cTitleKeyword_5; }
-
-		//title=EString
-		public Assignment getTitleAssignment_6() { return cTitleAssignment_6; }
-
-		//EString
-		public RuleCall getTitleEStringParserRuleCall_6_0() { return cTitleEStringParserRuleCall_6_0; }
-
-		//("description" description=EString)?
-		public Group getGroup_7() { return cGroup_7; }
-
-		//"description"
-		public Keyword getDescriptionKeyword_7_0() { return cDescriptionKeyword_7_0; }
-
-		//description=EString
-		public Assignment getDescriptionAssignment_7_1() { return cDescriptionAssignment_7_1; }
-
-		//EString
-		public RuleCall getDescriptionEStringParserRuleCall_7_1_0() { return cDescriptionEStringParserRuleCall_7_1_0; }
-
-		//"minValue"
-		public Keyword getMinValueKeyword_8() { return cMinValueKeyword_8; }
+		//"number["
+		public Keyword getNumberKeyword_1() { return cNumberKeyword_1; }
 
 		//minValue=EInt
-		public Assignment getMinValueAssignment_9() { return cMinValueAssignment_9; }
+		public Assignment getMinValueAssignment_2() { return cMinValueAssignment_2; }
 
 		//EInt
-		public RuleCall getMinValueEIntParserRuleCall_9_0() { return cMinValueEIntParserRuleCall_9_0; }
+		public RuleCall getMinValueEIntParserRuleCall_2_0() { return cMinValueEIntParserRuleCall_2_0; }
 
-		//"step"
-		public Keyword getStepKeyword_10() { return cStepKeyword_10; }
-
-		//step=EInt
-		public Assignment getStepAssignment_11() { return cStepAssignment_11; }
-
-		//EInt
-		public RuleCall getStepEIntParserRuleCall_11_0() { return cStepEIntParserRuleCall_11_0; }
-
-		//"maxValue"
-		public Keyword getMaxValueKeyword_12() { return cMaxValueKeyword_12; }
+		//"to"
+		public Keyword getToKeyword_3() { return cToKeyword_3; }
 
 		//maxValue=EInt
-		public Assignment getMaxValueAssignment_13() { return cMaxValueAssignment_13; }
+		public Assignment getMaxValueAssignment_4() { return cMaxValueAssignment_4; }
 
 		//EInt
-		public RuleCall getMaxValueEIntParserRuleCall_13_0() { return cMaxValueEIntParserRuleCall_13_0; }
+		public RuleCall getMaxValueEIntParserRuleCall_4_0() { return cMaxValueEIntParserRuleCall_4_0; }
 
-		//("conditions" "(" conditions+=[QuestionCondition|EString] ("," conditions+=[QuestionCondition|EString])* ")")?
-		public Group getGroup_14() { return cGroup_14; }
+		//("step" step=EInt)?
+		public Group getGroup_5() { return cGroup_5; }
 
-		//"conditions"
-		public Keyword getConditionsKeyword_14_0() { return cConditionsKeyword_14_0; }
+		//"step"
+		public Keyword getStepKeyword_5_0() { return cStepKeyword_5_0; }
 
-		//"("
-		public Keyword getLeftParenthesisKeyword_14_1() { return cLeftParenthesisKeyword_14_1; }
+		//step=EInt
+		public Assignment getStepAssignment_5_1() { return cStepAssignment_5_1; }
 
-		//conditions+=[QuestionCondition|EString]
-		public Assignment getConditionsAssignment_14_2() { return cConditionsAssignment_14_2; }
+		//EInt
+		public RuleCall getStepEIntParserRuleCall_5_1_0() { return cStepEIntParserRuleCall_5_1_0; }
 
-		//[QuestionCondition|EString]
-		public CrossReference getConditionsQuestionConditionCrossReference_14_2_0() { return cConditionsQuestionConditionCrossReference_14_2_0; }
-
-		//EString
-		public RuleCall getConditionsQuestionConditionEStringParserRuleCall_14_2_0_1() { return cConditionsQuestionConditionEStringParserRuleCall_14_2_0_1; }
-
-		//("," conditions+=[QuestionCondition|EString])*
-		public Group getGroup_14_3() { return cGroup_14_3; }
-
-		//","
-		public Keyword getCommaKeyword_14_3_0() { return cCommaKeyword_14_3_0; }
-
-		//conditions+=[QuestionCondition|EString]
-		public Assignment getConditionsAssignment_14_3_1() { return cConditionsAssignment_14_3_1; }
-
-		//[QuestionCondition|EString]
-		public CrossReference getConditionsQuestionConditionCrossReference_14_3_1_0() { return cConditionsQuestionConditionCrossReference_14_3_1_0; }
-
-		//EString
-		public RuleCall getConditionsQuestionConditionEStringParserRuleCall_14_3_1_0_1() { return cConditionsQuestionConditionEStringParserRuleCall_14_3_1_0_1; }
-
-		//")"
-		public Keyword getRightParenthesisKeyword_14_4() { return cRightParenthesisKeyword_14_4; }
-
-		//"}"
-		public Keyword getRightCurlyBracketKeyword_15() { return cRightCurlyBracketKeyword_15; }
+		//"]"
+		public Keyword getRightSquareBracketKeyword_6() { return cRightSquareBracketKeyword_6; }
 	}
 
 	public class EBooleanElements extends AbstractParserRuleElementFinder {
@@ -1127,141 +645,99 @@ public class QuestionaireGrammarAccess extends AbstractGrammarElementFinder {
 	public class QuestionConditionElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "QuestionCondition");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Keyword cQuestionConditionKeyword_0 = (Keyword)cGroup.eContents().get(0);
-		private final Keyword cLeftCurlyBracketKeyword_1 = (Keyword)cGroup.eContents().get(1);
-		private final Keyword cOptionKeyword_2 = (Keyword)cGroup.eContents().get(2);
-		private final Keyword cLeftParenthesisKeyword_3 = (Keyword)cGroup.eContents().get(3);
-		private final Assignment cOptionAssignment_4 = (Assignment)cGroup.eContents().get(4);
-		private final CrossReference cOptionOptionCrossReference_4_0 = (CrossReference)cOptionAssignment_4.eContents().get(0);
-		private final RuleCall cOptionOptionEStringParserRuleCall_4_0_1 = (RuleCall)cOptionOptionCrossReference_4_0.eContents().get(1);
-		private final Group cGroup_5 = (Group)cGroup.eContents().get(5);
-		private final Keyword cCommaKeyword_5_0 = (Keyword)cGroup_5.eContents().get(0);
-		private final Assignment cOptionAssignment_5_1 = (Assignment)cGroup_5.eContents().get(1);
-		private final CrossReference cOptionOptionCrossReference_5_1_0 = (CrossReference)cOptionAssignment_5_1.eContents().get(0);
-		private final RuleCall cOptionOptionEStringParserRuleCall_5_1_0_1 = (RuleCall)cOptionOptionCrossReference_5_1_0.eContents().get(1);
-		private final Keyword cRightParenthesisKeyword_6 = (Keyword)cGroup.eContents().get(6);
-		private final Keyword cRightCurlyBracketKeyword_7 = (Keyword)cGroup.eContents().get(7);
+		private final Keyword cLeftCurlyBracketKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Assignment cOptionAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final CrossReference cOptionOptionCrossReference_1_0 = (CrossReference)cOptionAssignment_1.eContents().get(0);
+		private final RuleCall cOptionOptionEStringParserRuleCall_1_0_1 = (RuleCall)cOptionOptionCrossReference_1_0.eContents().get(1);
+		private final Group cGroup_2 = (Group)cGroup.eContents().get(2);
+		private final Keyword cSolidusKeyword_2_0 = (Keyword)cGroup_2.eContents().get(0);
+		private final Assignment cOptionAssignment_2_1 = (Assignment)cGroup_2.eContents().get(1);
+		private final CrossReference cOptionOptionCrossReference_2_1_0 = (CrossReference)cOptionAssignment_2_1.eContents().get(0);
+		private final RuleCall cOptionOptionEStringParserRuleCall_2_1_0_1 = (RuleCall)cOptionOptionCrossReference_2_1_0.eContents().get(1);
+		private final Keyword cRightCurlyBracketKeyword_3 = (Keyword)cGroup.eContents().get(3);
 		
 		//QuestionCondition:
-		//	"QuestionCondition" "{" "option" "(" option+=[Option|EString] ("," option+=[Option|EString])* ")" "}";
+		//	"{" option+=[Option|EString] ("/" option+=[Option|EString])* // TODO: Why Option|EString? We only want to demand the id 
+		//	"}";
 		public ParserRule getRule() { return rule; }
 
-		//"QuestionCondition" "{" "option" "(" option+=[Option|EString] ("," option+=[Option|EString])* ")" "}"
+		//"{" option+=[Option|EString] ("/" option+=[Option|EString])* // TODO: Why Option|EString? We only want to demand the id 
+		//"}"
 		public Group getGroup() { return cGroup; }
 
-		//"QuestionCondition"
-		public Keyword getQuestionConditionKeyword_0() { return cQuestionConditionKeyword_0; }
-
 		//"{"
-		public Keyword getLeftCurlyBracketKeyword_1() { return cLeftCurlyBracketKeyword_1; }
-
-		//"option"
-		public Keyword getOptionKeyword_2() { return cOptionKeyword_2; }
-
-		//"("
-		public Keyword getLeftParenthesisKeyword_3() { return cLeftParenthesisKeyword_3; }
+		public Keyword getLeftCurlyBracketKeyword_0() { return cLeftCurlyBracketKeyword_0; }
 
 		//option+=[Option|EString]
-		public Assignment getOptionAssignment_4() { return cOptionAssignment_4; }
+		public Assignment getOptionAssignment_1() { return cOptionAssignment_1; }
 
 		//[Option|EString]
-		public CrossReference getOptionOptionCrossReference_4_0() { return cOptionOptionCrossReference_4_0; }
+		public CrossReference getOptionOptionCrossReference_1_0() { return cOptionOptionCrossReference_1_0; }
 
 		//EString
-		public RuleCall getOptionOptionEStringParserRuleCall_4_0_1() { return cOptionOptionEStringParserRuleCall_4_0_1; }
+		public RuleCall getOptionOptionEStringParserRuleCall_1_0_1() { return cOptionOptionEStringParserRuleCall_1_0_1; }
 
-		//("," option+=[Option|EString])*
-		public Group getGroup_5() { return cGroup_5; }
+		//("/" option+=[Option|EString])*
+		public Group getGroup_2() { return cGroup_2; }
 
-		//","
-		public Keyword getCommaKeyword_5_0() { return cCommaKeyword_5_0; }
+		//"/"
+		public Keyword getSolidusKeyword_2_0() { return cSolidusKeyword_2_0; }
 
 		//option+=[Option|EString]
-		public Assignment getOptionAssignment_5_1() { return cOptionAssignment_5_1; }
+		public Assignment getOptionAssignment_2_1() { return cOptionAssignment_2_1; }
 
 		//[Option|EString]
-		public CrossReference getOptionOptionCrossReference_5_1_0() { return cOptionOptionCrossReference_5_1_0; }
+		public CrossReference getOptionOptionCrossReference_2_1_0() { return cOptionOptionCrossReference_2_1_0; }
 
 		//EString
-		public RuleCall getOptionOptionEStringParserRuleCall_5_1_0_1() { return cOptionOptionEStringParserRuleCall_5_1_0_1; }
-
-		//")"
-		public Keyword getRightParenthesisKeyword_6() { return cRightParenthesisKeyword_6; }
+		public RuleCall getOptionOptionEStringParserRuleCall_2_1_0_1() { return cOptionOptionEStringParserRuleCall_2_1_0_1; }
 
 		//"}"
-		public Keyword getRightCurlyBracketKeyword_7() { return cRightCurlyBracketKeyword_7; }
+		public Keyword getRightCurlyBracketKeyword_3() { return cRightCurlyBracketKeyword_3; }
 	}
 
 	public class OptionElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Option");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Keyword cOptionKeyword_0 = (Keyword)cGroup.eContents().get(0);
-		private final Keyword cLeftCurlyBracketKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		private final Keyword cHyphenMinusKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Assignment cTextAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cTextEStringParserRuleCall_1_0 = (RuleCall)cTextAssignment_1.eContents().get(0);
 		private final Group cGroup_2 = (Group)cGroup.eContents().get(2);
-		private final Keyword cIdKeyword_2_0 = (Keyword)cGroup_2.eContents().get(0);
-		private final Assignment cIdAssignment_2_1 = (Assignment)cGroup_2.eContents().get(1);
-		private final RuleCall cIdEStringParserRuleCall_2_1_0 = (RuleCall)cIdAssignment_2_1.eContents().get(0);
-		private final Group cGroup_3 = (Group)cGroup.eContents().get(3);
-		private final Keyword cTextKeyword_3_0 = (Keyword)cGroup_3.eContents().get(0);
-		private final Assignment cTextAssignment_3_1 = (Assignment)cGroup_3.eContents().get(1);
-		private final RuleCall cTextEStringParserRuleCall_3_1_0 = (RuleCall)cTextAssignment_3_1.eContents().get(0);
-		private final Keyword cQuestionKeyword_4 = (Keyword)cGroup.eContents().get(4);
-		private final Assignment cQuestionAssignment_5 = (Assignment)cGroup.eContents().get(5);
-		private final CrossReference cQuestionChoiceQuestionCrossReference_5_0 = (CrossReference)cQuestionAssignment_5.eContents().get(0);
-		private final RuleCall cQuestionChoiceQuestionEStringParserRuleCall_5_0_1 = (RuleCall)cQuestionChoiceQuestionCrossReference_5_0.eContents().get(1);
-		private final Keyword cRightCurlyBracketKeyword_6 = (Keyword)cGroup.eContents().get(6);
+		private final Keyword cLeftCurlyBracketKeyword_2_0 = (Keyword)cGroup_2.eContents().get(0);
+		private final Assignment cNameAssignment_2_1 = (Assignment)cGroup_2.eContents().get(1);
+		private final RuleCall cNameEStringParserRuleCall_2_1_0 = (RuleCall)cNameAssignment_2_1.eContents().get(0);
+		private final Keyword cRightCurlyBracketKeyword_2_2 = (Keyword)cGroup_2.eContents().get(2);
 		
 		//Option:
-		//	"Option" "{" ("id" id=EString)? ("text" text=EString)? "question" question=[ChoiceQuestion|EString] "}";
+		//	"-" text=EString ("{" name=EString "}")?;
 		public ParserRule getRule() { return rule; }
 
-		//"Option" "{" ("id" id=EString)? ("text" text=EString)? "question" question=[ChoiceQuestion|EString] "}"
+		//"-" text=EString ("{" name=EString "}")?
 		public Group getGroup() { return cGroup; }
 
-		//"Option"
-		public Keyword getOptionKeyword_0() { return cOptionKeyword_0; }
-
-		//"{"
-		public Keyword getLeftCurlyBracketKeyword_1() { return cLeftCurlyBracketKeyword_1; }
-
-		//("id" id=EString)?
-		public Group getGroup_2() { return cGroup_2; }
-
-		//"id"
-		public Keyword getIdKeyword_2_0() { return cIdKeyword_2_0; }
-
-		//id=EString
-		public Assignment getIdAssignment_2_1() { return cIdAssignment_2_1; }
-
-		//EString
-		public RuleCall getIdEStringParserRuleCall_2_1_0() { return cIdEStringParserRuleCall_2_1_0; }
-
-		//("text" text=EString)?
-		public Group getGroup_3() { return cGroup_3; }
-
-		//"text"
-		public Keyword getTextKeyword_3_0() { return cTextKeyword_3_0; }
+		//"-"
+		public Keyword getHyphenMinusKeyword_0() { return cHyphenMinusKeyword_0; }
 
 		//text=EString
-		public Assignment getTextAssignment_3_1() { return cTextAssignment_3_1; }
+		public Assignment getTextAssignment_1() { return cTextAssignment_1; }
 
 		//EString
-		public RuleCall getTextEStringParserRuleCall_3_1_0() { return cTextEStringParserRuleCall_3_1_0; }
+		public RuleCall getTextEStringParserRuleCall_1_0() { return cTextEStringParserRuleCall_1_0; }
 
-		//"question"
-		public Keyword getQuestionKeyword_4() { return cQuestionKeyword_4; }
+		//("{" name=EString "}")?
+		public Group getGroup_2() { return cGroup_2; }
 
-		//question=[ChoiceQuestion|EString]
-		public Assignment getQuestionAssignment_5() { return cQuestionAssignment_5; }
+		//"{"
+		public Keyword getLeftCurlyBracketKeyword_2_0() { return cLeftCurlyBracketKeyword_2_0; }
 
-		//[ChoiceQuestion|EString]
-		public CrossReference getQuestionChoiceQuestionCrossReference_5_0() { return cQuestionChoiceQuestionCrossReference_5_0; }
+		//name=EString
+		public Assignment getNameAssignment_2_1() { return cNameAssignment_2_1; }
 
 		//EString
-		public RuleCall getQuestionChoiceQuestionEStringParserRuleCall_5_0_1() { return cQuestionChoiceQuestionEStringParserRuleCall_5_0_1; }
+		public RuleCall getNameEStringParserRuleCall_2_1_0() { return cNameEStringParserRuleCall_2_1_0; }
 
 		//"}"
-		public Keyword getRightCurlyBracketKeyword_6() { return cRightCurlyBracketKeyword_6; }
+		public Keyword getRightCurlyBracketKeyword_2_2() { return cRightCurlyBracketKeyword_2_2; }
 	}
 
 	public class EIntElements extends AbstractParserRuleElementFinder {
@@ -1290,6 +766,7 @@ public class QuestionaireGrammarAccess extends AbstractGrammarElementFinder {
 	private EStringElements pEString;
 	private HeadingElements pHeading;
 	private ParagraphElements pParagraph;
+	private QuestionBaseElements pQuestionBase;
 	private TextQuestionElements pTextQuestion;
 	private ChoiceQuestionElements pChoiceQuestion;
 	private MatrixQuestionElements pMatrixQuestion;
@@ -1339,8 +816,10 @@ public class QuestionaireGrammarAccess extends AbstractGrammarElementFinder {
 
 	
 	//Questionaire:
-	//	"Questionaire" name=EString "{" "resultEmail" resultEmail=EString ("elements" "{" elements+=Element (","
-	//	elements+=Element)* "}")? "}";
+	//	name= // Eating Habbits
+	//	EString "email:" resultEmail= // email: ragr@itu.dk
+	//	EString (elements+=Element elements+=Element*)? // Alle questions (minimum 1)
+	//;
 	public QuestionaireElements getQuestionaireAccess() {
 		return (pQuestionaire != null) ? pQuestionaire : (pQuestionaire = new QuestionaireElements());
 	}
@@ -1370,7 +849,8 @@ public class QuestionaireGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//Heading:
-	//	"Heading" "{" "text" text=EString "}";
+	//	"#" text= // #Blablabla heading woo
+	//	EString;
 	public HeadingElements getHeadingAccess() {
 		return (pHeading != null) ? pHeading : (pHeading = new HeadingElements());
 	}
@@ -1380,7 +860,8 @@ public class QuestionaireGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//Paragraph:
-	//	"Paragraph" "{" "text" text=EString "}";
+	//	"!" text= // !Tell me your eating habbits
+	//	EString;
 	public ParagraphElements getParagraphAccess() {
 		return (pParagraph != null) ? pParagraph : (pParagraph = new ParagraphElements());
 	}
@@ -1389,10 +870,20 @@ public class QuestionaireGrammarAccess extends AbstractGrammarElementFinder {
 		return getParagraphAccess().getRule();
 	}
 
+	//QuestionBase:
+	//	"?" title=EString mandatory?="*"? // ?Hvad er din ynglingsmad (*)
+	//	description=EString? conditions+=QuestionCondition*;
+	public QuestionBaseElements getQuestionBaseAccess() {
+		return (pQuestionBase != null) ? pQuestionBase : (pQuestionBase = new QuestionBaseElements());
+	}
+	
+	public ParserRule getQuestionBaseRule() {
+		return getQuestionBaseAccess().getRule();
+	}
+
 	//TextQuestion:
-	//	mandatory?="mandatory" multiline?="multiline" "TextQuestion" "{" "id" id=EString "title" title=EString ("description"
-	//	description=EString)? ("conditions" "(" conditions+=[QuestionCondition|EString] (","
-	//	conditions+=[QuestionCondition|EString])* ")")? "}";
+	//	questionBase=QuestionBase "text[" multiline?="long" // text[long]
+	//	"]";
 	public TextQuestionElements getTextQuestionAccess() {
 		return (pTextQuestion != null) ? pTextQuestion : (pTextQuestion = new TextQuestionElements());
 	}
@@ -1402,10 +893,8 @@ public class QuestionaireGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//ChoiceQuestion:
-	//	mandatory?="mandatory" "ChoiceQuestion" "{" "id" id=EString "title" title=EString ("description"
-	//	description=EString)? ("minSelections" minSelections=EInt)? ("maxSelections" maxSelections=EInt)? ("conditions" "("
-	//	conditions+=[QuestionCondition|EString] ("," conditions+=[QuestionCondition|EString])* ")")? "options" "{"
-	//	options+=Option ("," options+=Option)* "}" "}";
+	//	questionBase=QuestionBase "choice[" (minSelections=EInt | minSelections=EInt "to" maxSelections=EInt) "]"
+	//	options+=Option+;
 	public ChoiceQuestionElements getChoiceQuestionAccess() {
 		return (pChoiceQuestion != null) ? pChoiceQuestion : (pChoiceQuestion = new ChoiceQuestionElements());
 	}
@@ -1415,10 +904,10 @@ public class QuestionaireGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//MatrixQuestion:
-	//	mandatory?="mandatory" "MatrixQuestion" "{" "id" id=EString "title" title=EString ("description"
-	//	description=EString)? ("columnNames" "{" columnNames+=EString ("," columnNames+=EString)* "}")? ("rowNames" "{"
-	//	rowNames+=EString ("," rowNames+=EString)* "}")? "maxPerRow" maxPerRow=EInt ("conditions" "("
-	//	conditions+=[QuestionCondition|EString] ("," conditions+=[QuestionCondition|EString])* ")")? "}";
+	//	questionBase= // Description
+	//	QuestionBase "matrix[" maxPerRow=EInt "][" (columnNames+=EString ("," columnNames+=EString)* "]")? // matrix[maxPerRow][columnNames+]
+	//	("-" rowNames+=EString)+ // -rownames
+	//;
 	public MatrixQuestionElements getMatrixQuestionAccess() {
 		return (pMatrixQuestion != null) ? pMatrixQuestion : (pMatrixQuestion = new MatrixQuestionElements());
 	}
@@ -1428,9 +917,14 @@ public class QuestionaireGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//CalendarQuestion:
-	//	mandatory?="mandatory" year?="year" month?="month" day?="day" hour?="hour" minute?="minute" "CalendarQuestion" "{"
-	//	"id" id=EString "title" title=EString ("description" description=EString)? ("conditions" "("
-	//	conditions+=[QuestionCondition|EString] ("," conditions+=[QuestionCondition|EString])* ")")? "}";
+	//	questionBase=QuestionBase //'calendar[' ((year?=	'year'	)? ','?) &  TODO: VIRKER IKKE
+	//	//			((month?=	'month'	)? ','?) & 
+	//	//			((day?=		'day'	)? ','?) & 
+	//	//			((hour?=	'hour'	)? ','?) & 
+	//	//			((minute?=	'minute')? ','?) ']'
+	//	// [year, day,] [month, day, hour] [hour minute] [minute, day, hour,]
+	//	"calendar[" (year?="year"? ","? month?="month"? ","? day?="day"? ","? hour?="hour"? ","? minute?="minute"?) // TODO: Det er nu muligt at lave calendar[]
+	//	"]";
 	public CalendarQuestionElements getCalendarQuestionAccess() {
 		return (pCalendarQuestion != null) ? pCalendarQuestion : (pCalendarQuestion = new CalendarQuestionElements());
 	}
@@ -1440,9 +934,7 @@ public class QuestionaireGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//IntegerQuestion:
-	//	mandatory?="mandatory" "IntegerQuestion" "{" "id" id=EString "title" title=EString ("description"
-	//	description=EString)? "minValue" minValue=EInt "step" step=EInt "maxValue" maxValue=EInt ("conditions" "("
-	//	conditions+=[QuestionCondition|EString] ("," conditions+=[QuestionCondition|EString])* ")")? "}";
+	//	questionBase=QuestionBase "number[" minValue=EInt "to" maxValue=EInt ("step" step=EInt)? "]";
 	public IntegerQuestionElements getIntegerQuestionAccess() {
 		return (pIntegerQuestion != null) ? pIntegerQuestion : (pIntegerQuestion = new IntegerQuestionElements());
 	}
@@ -1462,7 +954,8 @@ public class QuestionaireGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//QuestionCondition:
-	//	"QuestionCondition" "{" "option" "(" option+=[Option|EString] ("," option+=[Option|EString])* ")" "}";
+	//	"{" option+=[Option|EString] ("/" option+=[Option|EString])* // TODO: Why Option|EString? We only want to demand the id 
+	//	"}";
 	public QuestionConditionElements getQuestionConditionAccess() {
 		return (pQuestionCondition != null) ? pQuestionCondition : (pQuestionCondition = new QuestionConditionElements());
 	}
@@ -1472,7 +965,7 @@ public class QuestionaireGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//Option:
-	//	"Option" "{" ("id" id=EString)? ("text" text=EString)? "question" question=[ChoiceQuestion|EString] "}";
+	//	"-" text=EString ("{" name=EString "}")?;
 	public OptionElements getOptionAccess() {
 		return (pOption != null) ? pOption : (pOption = new OptionElements());
 	}

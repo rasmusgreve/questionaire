@@ -66,6 +66,7 @@ public class QuestionairemodelFactoryImpl extends EFactoryImpl implements Questi
 			case QuestionairemodelPackage.CALENDAR_QUESTION: return createCalendarQuestion();
 			case QuestionairemodelPackage.INTEGER_QUESTION: return createIntegerQuestion();
 			case QuestionairemodelPackage.QUESTION_CONDITION: return createQuestionCondition();
+			case QuestionairemodelPackage.QUESTION_BASE: return createQuestionBase();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -169,6 +170,16 @@ public class QuestionairemodelFactoryImpl extends EFactoryImpl implements Questi
 	public QuestionCondition createQuestionCondition() {
 		QuestionConditionImpl questionCondition = new QuestionConditionImpl();
 		return questionCondition;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public QuestionBase createQuestionBase() {
+		QuestionBaseImpl questionBase = new QuestionBaseImpl();
+		return questionBase;
 	}
 
 	/**

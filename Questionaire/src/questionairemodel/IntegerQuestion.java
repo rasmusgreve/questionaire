@@ -59,7 +59,7 @@ public interface IntegerQuestion extends Question {
 	 * @return the value of the '<em>Step</em>' attribute.
 	 * @see #setStep(int)
 	 * @see questionairemodel.QuestionairemodelPackage#getIntegerQuestion_Step()
-	 * @model required="true"
+	 * @model
 	 * @generated
 	 */
 	int getStep();

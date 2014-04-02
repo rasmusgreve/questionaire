@@ -159,10 +159,8 @@ public class ChoiceQuestionItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((ChoiceQuestion)object).getId();
-		return label == null || label.length() == 0 ?
-			getString("_UI_ChoiceQuestion_type") :
-			getString("_UI_ChoiceQuestion_type") + " " + label;
+		ChoiceQuestion choiceQuestion = (ChoiceQuestion)object;
+		return getString("_UI_ChoiceQuestion_type") + " " + choiceQuestion.getMinSelections();
 	}
 
 	/**

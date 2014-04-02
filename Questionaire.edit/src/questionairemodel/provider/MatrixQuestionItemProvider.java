@@ -149,10 +149,8 @@ public class MatrixQuestionItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((MatrixQuestion)object).getId();
-		return label == null || label.length() == 0 ?
-			getString("_UI_MatrixQuestion_type") :
-			getString("_UI_MatrixQuestion_type") + " " + label;
+		MatrixQuestion matrixQuestion = (MatrixQuestion)object;
+		return getString("_UI_MatrixQuestion_type") + " " + matrixQuestion.getMaxPerRow();
 	}
 
 	/**

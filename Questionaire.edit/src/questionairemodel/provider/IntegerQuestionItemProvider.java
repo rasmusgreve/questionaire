@@ -149,10 +149,8 @@ public class IntegerQuestionItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((IntegerQuestion)object).getId();
-		return label == null || label.length() == 0 ?
-			getString("_UI_IntegerQuestion_type") :
-			getString("_UI_IntegerQuestion_type") + " " + label;
+		IntegerQuestion integerQuestion = (IntegerQuestion)object;
+		return getString("_UI_IntegerQuestion_type") + " " + integerQuestion.getMinValue();
 	}
 
 	/**

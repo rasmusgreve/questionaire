@@ -302,6 +302,29 @@ public class QuestionairemodelItemProviderAdapterFactory extends Questionairemod
 	}
 
 	/**
+	 * This keeps track of the one adapter used for all {@link questionairemodel.QuestionBase} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected QuestionBaseItemProvider questionBaseItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link questionairemodel.QuestionBase}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createQuestionBaseAdapter() {
+		if (questionBaseItemProvider == null) {
+			questionBaseItemProvider = new QuestionBaseItemProvider(this);
+		}
+
+		return questionBaseItemProvider;
+	}
+
+	/**
 	 * This returns the root adapter factory that contains this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -410,6 +433,7 @@ public class QuestionairemodelItemProviderAdapterFactory extends Questionairemod
 		if (calendarQuestionItemProvider != null) calendarQuestionItemProvider.dispose();
 		if (integerQuestionItemProvider != null) integerQuestionItemProvider.dispose();
 		if (questionConditionItemProvider != null) questionConditionItemProvider.dispose();
+		if (questionBaseItemProvider != null) questionBaseItemProvider.dispose();
 	}
 
 }

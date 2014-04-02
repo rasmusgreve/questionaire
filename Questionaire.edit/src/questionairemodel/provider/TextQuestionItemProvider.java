@@ -103,10 +103,8 @@ public class TextQuestionItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((TextQuestion)object).getId();
-		return label == null || label.length() == 0 ?
-			getString("_UI_TextQuestion_type") :
-			getString("_UI_TextQuestion_type") + " " + label;
+		TextQuestion textQuestion = (TextQuestion)object;
+		return getString("_UI_TextQuestion_type") + " " + textQuestion.isMultiline();
 	}
 
 	/**

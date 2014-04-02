@@ -60,27 +60,26 @@ public class OptionItemProvider
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
-			addIdPropertyDescriptor(object);
+			addNamePropertyDescriptor(object);
 			addTextPropertyDescriptor(object);
-			addQuestionPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
 
 	/**
-	 * This adds a property descriptor for the Id feature.
+	 * This adds a property descriptor for the Name feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addIdPropertyDescriptor(Object object) {
+	protected void addNamePropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_Option_id_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Option_id_feature", "_UI_Option_type"),
-				 QuestionairemodelPackage.Literals.OPTION__ID,
+				 getString("_UI_Option_name_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Option_name_feature", "_UI_Option_type"),
+				 QuestionairemodelPackage.Literals.OPTION__NAME,
 				 true,
 				 false,
 				 false,
@@ -112,28 +111,6 @@ public class OptionItemProvider
 	}
 
 	/**
-	 * This adds a property descriptor for the Question feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addQuestionPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_Option_question_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Option_question_feature", "_UI_Option_type"),
-				 QuestionairemodelPackage.Literals.OPTION__QUESTION,
-				 true,
-				 false,
-				 true,
-				 null,
-				 null,
-				 null));
-	}
-
-	/**
 	 * This returns Option.gif.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -152,7 +129,7 @@ public class OptionItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((Option)object).getId();
+		String label = ((Option)object).getName();
 		return label == null || label.length() == 0 ?
 			getString("_UI_Option_type") :
 			getString("_UI_Option_type") + " " + label;
@@ -170,7 +147,7 @@ public class OptionItemProvider
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(Option.class)) {
-			case QuestionairemodelPackage.OPTION__ID:
+			case QuestionairemodelPackage.OPTION__NAME:
 			case QuestionairemodelPackage.OPTION__TEXT:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;

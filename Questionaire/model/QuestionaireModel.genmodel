@@ -19,11 +19,7 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QuestionaireModel.ecore#//Paragraph/text"/>
     </genClasses>
     <genClasses image="false" ecoreClass="QuestionaireModel.ecore#//Question">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QuestionaireModel.ecore#//Question/id"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QuestionaireModel.ecore#//Question/title"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QuestionaireModel.ecore#//Question/description"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QuestionaireModel.ecore#//Question/mandatory"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QuestionaireModel.ecore#//Question/conditions"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QuestionaireModel.ecore#//Question/questionBase"/>
     </genClasses>
     <genClasses ecoreClass="QuestionaireModel.ecore#//TextQuestion">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QuestionaireModel.ecore#//TextQuestion/multiline"/>
@@ -36,7 +32,6 @@
     <genClasses ecoreClass="QuestionaireModel.ecore#//Option">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QuestionaireModel.ecore#//Option/id"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QuestionaireModel.ecore#//Option/text"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QuestionaireModel.ecore#//Option/question"/>
     </genClasses>
     <genClasses ecoreClass="QuestionaireModel.ecore#//MatrixQuestion">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QuestionaireModel.ecore#//MatrixQuestion/columnNames"/>
@@ -57,6 +52,12 @@
     </genClasses>
     <genClasses ecoreClass="QuestionaireModel.ecore#//QuestionCondition">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QuestionaireModel.ecore#//QuestionCondition/option"/>
+    </genClasses>
+    <genClasses ecoreClass="QuestionaireModel.ecore#//QuestionBase">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QuestionaireModel.ecore#//QuestionBase/title"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QuestionaireModel.ecore#//QuestionBase/description"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QuestionaireModel.ecore#//QuestionBase/conditions"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QuestionaireModel.ecore#//QuestionBase/mandatory"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

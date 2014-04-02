@@ -112,6 +112,15 @@ public interface QuestionairemodelFactory extends EFactory {
 	QuestionCondition createQuestionCondition();
 
 	/**
+	 * Returns a new object of class '<em>Question Base</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Question Base</em>'.
+	 * @generated
+	 */
+	QuestionBase createQuestionBase();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

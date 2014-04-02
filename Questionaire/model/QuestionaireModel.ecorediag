@@ -143,10 +143,6 @@
   <children xmi:type="notation:Node" xmi:id="_tmuRkLqAEeO2GZlz7dvSwg" type="1001">
     <children xmi:type="notation:Node" xmi:id="_tmu4oLqAEeO2GZlz7dvSwg" type="4001"/>
     <children xmi:type="notation:Node" xmi:id="_tmu4obqAEeO2GZlz7dvSwg" type="5001">
-      <children xmi:type="notation:Node" xmi:id="_tmu4qbqAEeO2GZlz7dvSwg" type="2001">
-        <element xmi:type="ecore:EAttribute" href="QuestionaireModel.ecore#//Option/name"/>
-        <layoutConstraint xmi:type="notation:Location" xmi:id="_tmu4qrqAEeO2GZlz7dvSwg"/>
-      </children>
       <children xmi:type="notation:Node" xmi:id="_tmvfsLqAEeO2GZlz7dvSwg" type="2001">
         <element xmi:type="ecore:EAttribute" href="QuestionaireModel.ecore#//Option/text"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_tmvfsbqAEeO2GZlz7dvSwg"/>

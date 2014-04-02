@@ -251,16 +251,18 @@ public class QuestionaireGrammarAccess extends AbstractGrammarElementFinder {
 		private final Assignment cQuestionBaseAssignment_0 = (Assignment)cGroup.eContents().get(0);
 		private final RuleCall cQuestionBaseQuestionBaseParserRuleCall_0_0 = (RuleCall)cQuestionBaseAssignment_0.eContents().get(0);
 		private final Keyword cTextKeyword_1 = (Keyword)cGroup.eContents().get(1);
-		private final Assignment cMultilineAssignment_2 = (Assignment)cGroup.eContents().get(2);
-		private final Keyword cMultilineLongKeyword_2_0 = (Keyword)cMultilineAssignment_2.eContents().get(0);
+		private final Alternatives cAlternatives_2 = (Alternatives)cGroup.eContents().get(2);
+		private final Assignment cMultilineAssignment_2_0 = (Assignment)cAlternatives_2.eContents().get(0);
+		private final Keyword cMultilineLongKeyword_2_0_0 = (Keyword)cMultilineAssignment_2_0.eContents().get(0);
+		private final Keyword cShortKeyword_2_1 = (Keyword)cAlternatives_2.eContents().get(1);
 		private final Keyword cRightSquareBracketKeyword_3 = (Keyword)cGroup.eContents().get(3);
 		
 		//TextQuestion:
-		//	questionBase=QuestionBase "text[" multiline?="long" // text[long]
+		//	questionBase=QuestionBase "text[" (multiline?="long" | "short") // text[long] eller text[short]
 		//	"]";
 		public ParserRule getRule() { return rule; }
 
-		//questionBase=QuestionBase "text[" multiline?="long" // text[long]
+		//questionBase=QuestionBase "text[" (multiline?="long" | "short") // text[long] eller text[short]
 		//"]"
 		public Group getGroup() { return cGroup; }
 
@@ -273,13 +275,19 @@ public class QuestionaireGrammarAccess extends AbstractGrammarElementFinder {
 		//"text["
 		public Keyword getTextKeyword_1() { return cTextKeyword_1; }
 
+		//multiline?="long" | "short"
+		public Alternatives getAlternatives_2() { return cAlternatives_2; }
+
 		//multiline?="long"
-		public Assignment getMultilineAssignment_2() { return cMultilineAssignment_2; }
+		public Assignment getMultilineAssignment_2_0() { return cMultilineAssignment_2_0; }
 
 		//"long"
-		public Keyword getMultilineLongKeyword_2_0() { return cMultilineLongKeyword_2_0; }
+		public Keyword getMultilineLongKeyword_2_0_0() { return cMultilineLongKeyword_2_0_0; }
 
-		//// text[long]
+		//"short"
+		public Keyword getShortKeyword_2_1() { return cShortKeyword_2_1; }
+
+		//// text[long] eller text[short]
 		//"]"
 		public Keyword getRightSquareBracketKeyword_3() { return cRightSquareBracketKeyword_3; }
 	}
@@ -473,23 +481,13 @@ public class QuestionaireGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cRightSquareBracketKeyword_3 = (Keyword)cGroup.eContents().get(3);
 		
 		//CalendarQuestion:
-		//	questionBase=QuestionBase //'calendar[' ((year?=	'year'	)? ','?) &  TODO: VIRKER IKKE
-		//	//			((month?=	'month'	)? ','?) & 
-		//	//			((day?=		'day'	)? ','?) & 
-		//	//			((hour?=	'hour'	)? ','?) & 
-		//	//			((minute?=	'minute')? ','?) ']'
-		//	// [year, day,] [month, day, hour] [hour minute] [minute, day, hour,]
-		//	"calendar[" (year?="year"? ","? month?="month"? ","? day?="day"? ","? hour?="hour"? ","? minute?="minute"?) // TODO: Det er nu muligt at lave calendar[]
+		//	questionBase=QuestionBase "calendar[" (year?="year"? ","? month?="month"? ","? day?="day"? ","? hour?="hour"? ","?
+		//	minute?="minute"?) // TODO: Det er nu muligt at lave calendar[]
 		//	"]";
 		public ParserRule getRule() { return rule; }
 
-		//questionBase=QuestionBase //'calendar[' ((year?=	'year'	)? ','?) &  TODO: VIRKER IKKE
-		////			((month?=	'month'	)? ','?) & 
-		////			((day?=		'day'	)? ','?) & 
-		////			((hour?=	'hour'	)? ','?) & 
-		////			((minute?=	'minute')? ','?) ']'
-		//// [year, day,] [month, day, hour] [hour minute] [minute, day, hour,]
-		//"calendar[" (year?="year"? ","? month?="month"? ","? day?="day"? ","? hour?="hour"? ","? minute?="minute"?) // TODO: Det er nu muligt at lave calendar[]
+		//questionBase=QuestionBase "calendar[" (year?="year"? ","? month?="month"? ","? day?="day"? ","? hour?="hour"? ","?
+		//minute?="minute"?) // TODO: Det er nu muligt at lave calendar[]
 		//"]"
 		public Group getGroup() { return cGroup; }
 
@@ -499,12 +497,6 @@ public class QuestionaireGrammarAccess extends AbstractGrammarElementFinder {
 		//QuestionBase
 		public RuleCall getQuestionBaseQuestionBaseParserRuleCall_0_0() { return cQuestionBaseQuestionBaseParserRuleCall_0_0; }
 
-		////'calendar[' ((year?=	'year'	)? ','?) &  TODO: VIRKER IKKE
-		////			((month?=	'month'	)? ','?) & 
-		////			((day?=		'day'	)? ','?) & 
-		////			((hour?=	'hour'	)? ','?) & 
-		////			((minute?=	'minute')? ','?) ']'
-		//// [year, day,] [month, day, hour] [hour minute] [minute, day, hour,]
 		//"calendar["
 		public Keyword getCalendarKeyword_1() { return cCalendarKeyword_1; }
 
@@ -657,12 +649,10 @@ public class QuestionaireGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cRightCurlyBracketKeyword_3 = (Keyword)cGroup.eContents().get(3);
 		
 		//QuestionCondition:
-		//	"{" option+=[Option|EString] ("/" option+=[Option|EString])* // TODO: Why Option|EString? We only want to demand the id 
-		//	"}";
+		//	"{" option+=[Option|EString] ("/" option+=[Option|EString])* "}";
 		public ParserRule getRule() { return rule; }
 
-		//"{" option+=[Option|EString] ("/" option+=[Option|EString])* // TODO: Why Option|EString? We only want to demand the id 
-		//"}"
+		//"{" option+=[Option|EString] ("/" option+=[Option|EString])* "}"
 		public Group getGroup() { return cGroup; }
 
 		//"{"
@@ -882,7 +872,7 @@ public class QuestionaireGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//TextQuestion:
-	//	questionBase=QuestionBase "text[" multiline?="long" // text[long]
+	//	questionBase=QuestionBase "text[" (multiline?="long" | "short") // text[long] eller text[short]
 	//	"]";
 	public TextQuestionElements getTextQuestionAccess() {
 		return (pTextQuestion != null) ? pTextQuestion : (pTextQuestion = new TextQuestionElements());
@@ -917,13 +907,8 @@ public class QuestionaireGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//CalendarQuestion:
-	//	questionBase=QuestionBase //'calendar[' ((year?=	'year'	)? ','?) &  TODO: VIRKER IKKE
-	//	//			((month?=	'month'	)? ','?) & 
-	//	//			((day?=		'day'	)? ','?) & 
-	//	//			((hour?=	'hour'	)? ','?) & 
-	//	//			((minute?=	'minute')? ','?) ']'
-	//	// [year, day,] [month, day, hour] [hour minute] [minute, day, hour,]
-	//	"calendar[" (year?="year"? ","? month?="month"? ","? day?="day"? ","? hour?="hour"? ","? minute?="minute"?) // TODO: Det er nu muligt at lave calendar[]
+	//	questionBase=QuestionBase "calendar[" (year?="year"? ","? month?="month"? ","? day?="day"? ","? hour?="hour"? ","?
+	//	minute?="minute"?) // TODO: Det er nu muligt at lave calendar[]
 	//	"]";
 	public CalendarQuestionElements getCalendarQuestionAccess() {
 		return (pCalendarQuestion != null) ? pCalendarQuestion : (pCalendarQuestion = new CalendarQuestionElements());
@@ -954,8 +939,7 @@ public class QuestionaireGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//QuestionCondition:
-	//	"{" option+=[Option|EString] ("/" option+=[Option|EString])* // TODO: Why Option|EString? We only want to demand the id 
-	//	"}";
+	//	"{" option+=[Option|EString] ("/" option+=[Option|EString])* "}";
 	public QuestionConditionElements getQuestionConditionAccess() {
 		return (pQuestionCondition != null) ? pQuestionCondition : (pQuestionCondition = new QuestionConditionElements());
 	}

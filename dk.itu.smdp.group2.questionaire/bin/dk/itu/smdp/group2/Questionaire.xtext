@@ -33,7 +33,7 @@ QuestionBase:
 
 TextQuestion returns TextQuestion:
 	questionBase=QuestionBase
-	'text[' multiline?='long' ']'						// text[long]
+	'text[' ((multiline?='long')|'short') ']'						// text[long] eller text[short]
 	;
 
 ChoiceQuestion returns ChoiceQuestion:
@@ -49,20 +49,14 @@ MatrixQuestion returns MatrixQuestion:
 	;
 
 CalendarQuestion returns CalendarQuestion:
-	questionBase=QuestionBase			
-	//'calendar[' ((year?=	'year'	)? ','?) &  TODO: VIRKER IKKE
-	//			((month?=	'month'	)? ','?) & 
-	//			((day?=		'day'	)? ','?) & 
-	//			((hour?=	'hour'	)? ','?) & 
-	//			((minute?=	'minute')? ','?) ']'
-	// [year, day,] [month, day, hour] [hour minute] [minute, day, hour,]
+	questionBase=QuestionBase
 	'calendar[' (
 					(year?='year')? ','? 
 					(month?='month')? ','? 
 					(day?='day')? ','? 
 					(hour?='hour')? ','? 
 					(minute?='minute')?
-				) ']' // TODO: Det er nu muligt at lave calendar[]
+				) ']' 							// TODO: Det er nu muligt at lave calendar[]
 	;
 
 IntegerQuestion returns IntegerQuestion:
@@ -75,7 +69,7 @@ EBoolean returns ecore::EBoolean:
 
 QuestionCondition returns QuestionCondition:
 	'{'
-		option+=[Option|EString] ( "/" option+=[Option|EString])* // TODO: Why Option|EString? We only want to demand the id 
+		option+=[Option|EString] ( "/" option+=[Option|EString])*
 	'}';
 
 Option returns Option:

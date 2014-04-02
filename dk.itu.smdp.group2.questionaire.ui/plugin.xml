@@ -1,0 +1,396 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+
+<plugin>
+
+    <extension
+            point="org.eclipse.ui.editors">
+        <editor
+            class="dk.itu.smdp.group2.ui.QuestionaireExecutableExtensionFactory:org.eclipse.xtext.ui.editor.XtextEditor"
+            contributorClass="org.eclipse.ui.editors.text.TextEditorActionContributor"
+            default="true"
+            extensions="qst"
+            id="dk.itu.smdp.group2.Questionaire"
+            name="Questionaire Editor">
+        </editor>
+    </extension>
+    <extension
+        point="org.eclipse.ui.handlers">
+        <handler
+            class="dk.itu.smdp.group2.ui.QuestionaireExecutableExtensionFactory:org.eclipse.xtext.ui.editor.hyperlinking.OpenDeclarationHandler"
+            commandId="org.eclipse.xtext.ui.editor.hyperlinking.OpenDeclaration">
+            <activeWhen>
+                <reference
+                    definitionId="dk.itu.smdp.group2.Questionaire.Editor.opened">
+                </reference>
+            </activeWhen>
+        </handler>
+        <handler
+            class="dk.itu.smdp.group2.ui.QuestionaireExecutableExtensionFactory:org.eclipse.xtext.ui.editor.handler.ValidateActionHandler"
+            commandId="dk.itu.smdp.group2.Questionaire.validate">
+         <activeWhen>
+            <reference
+                    definitionId="dk.itu.smdp.group2.Questionaire.Editor.opened">
+            </reference>
+         </activeWhen>
+      	</handler>
+      	<!-- copy qualified name -->
+        <handler
+            class="dk.itu.smdp.group2.ui.QuestionaireExecutableExtensionFactory:org.eclipse.xtext.ui.editor.copyqualifiedname.EditorCopyQualifiedNameHandler"
+            commandId="org.eclipse.xtext.ui.editor.copyqualifiedname.EditorCopyQualifiedName">
+            <activeWhen>
+				<reference definitionId="dk.itu.smdp.group2.Questionaire.Editor.opened" />
+            </activeWhen>
+        </handler>
+        <handler
+            class="dk.itu.smdp.group2.ui.QuestionaireExecutableExtensionFactory:org.eclipse.xtext.ui.editor.copyqualifiedname.OutlineCopyQualifiedNameHandler"
+            commandId="org.eclipse.xtext.ui.editor.copyqualifiedname.OutlineCopyQualifiedName">
+            <activeWhen>
+            	<and>
+            		<reference definitionId="dk.itu.smdp.group2.Questionaire.XtextEditor.opened" />
+	                <iterate>
+						<adapt type="org.eclipse.xtext.ui.editor.outline.IOutlineNode" />
+					</iterate>
+				</and>
+            </activeWhen>
+        </handler>
+    </extension>
+    <extension point="org.eclipse.core.expressions.definitions">
+        <definition id="dk.itu.smdp.group2.Questionaire.Editor.opened">
+            <and>
+                <reference definitionId="isActiveEditorAnInstanceOfXtextEditor"/>
+                <with variable="activeEditor">
+                    <test property="org.eclipse.xtext.ui.editor.XtextEditor.languageName" 
+                        value="dk.itu.smdp.group2.Questionaire" 
+                        forcePluginActivation="true"/>
+                </with>        
+            </and>
+        </definition>
+        <definition id="dk.itu.smdp.group2.Questionaire.XtextEditor.opened">
+            <and>
+                <reference definitionId="isXtextEditorActive"/>
+                <with variable="activeEditor">
+                    <test property="org.eclipse.xtext.ui.editor.XtextEditor.languageName" 
+                        value="dk.itu.smdp.group2.Questionaire" 
+                        forcePluginActivation="true"/>
+                </with>        
+            </and>
+        </definition>
+    </extension>
+    <extension
+            point="org.eclipse.ui.preferencePages">
+        <page
+            class="dk.itu.smdp.group2.ui.QuestionaireExecutableExtensionFactory:org.eclipse.xtext.ui.editor.preferences.LanguageRootPreferencePage"
+            id="dk.itu.smdp.group2.Questionaire"
+            name="Questionaire">
+            <keywordReference id="dk.itu.smdp.group2.ui.keyword_Questionaire"/>
+        </page>
+        <page
+            category="dk.itu.smdp.group2.Questionaire"
+            class="dk.itu.smdp.group2.ui.QuestionaireExecutableExtensionFactory:org.eclipse.xtext.ui.editor.syntaxcoloring.SyntaxColoringPreferencePage"
+            id="dk.itu.smdp.group2.Questionaire.coloring"
+            name="Syntax Coloring">
+            <keywordReference id="dk.itu.smdp.group2.ui.keyword_Questionaire"/>
+        </page>
+        <page
+            category="dk.itu.smdp.group2.Questionaire"
+            class="dk.itu.smdp.group2.ui.QuestionaireExecutableExtensionFactory:org.eclipse.xtext.ui.editor.templates.XtextTemplatePreferencePage"
+            id="dk.itu.smdp.group2.Questionaire.templates"
+            name="Templates">
+            <keywordReference id="dk.itu.smdp.group2.ui.keyword_Questionaire"/>
+        </page>
+    </extension>
+    <extension
+            point="org.eclipse.ui.propertyPages">
+        <page
+            class="dk.itu.smdp.group2.ui.QuestionaireExecutableExtensionFactory:org.eclipse.xtext.ui.editor.preferences.LanguageRootPreferencePage"
+            id="dk.itu.smdp.group2.Questionaire"
+            name="Questionaire">
+            <keywordReference id="dk.itu.smdp.group2.ui.keyword_Questionaire"/>
+            <enabledWhen>
+	            <adapt type="org.eclipse.core.resources.IProject"/>
+			</enabledWhen>
+	        <filter name="projectNature" value="org.eclipse.xtext.ui.shared.xtextNature"/>
+        </page>
+    </extension>
+    <extension
+        point="org.eclipse.ui.keywords">
+        <keyword
+            id="dk.itu.smdp.group2.ui.keyword_Questionaire"
+            label="Questionaire"/>
+    </extension>
+    <extension
+         point="org.eclipse.ui.commands">
+      <command
+            description="Trigger expensive validation"
+            id="dk.itu.smdp.group2.Questionaire.validate"
+            name="Validate">
+      </command>
+      <!-- copy qualified name -->
+      <command
+            id="org.eclipse.xtext.ui.editor.copyqualifiedname.EditorCopyQualifiedName"
+            categoryId="org.eclipse.ui.category.edit"
+            description="Copy the qualified name for the selected element"
+            name="Copy Qualified Name">
+      </command>
+      <command
+            id="org.eclipse.xtext.ui.editor.copyqualifiedname.OutlineCopyQualifiedName"
+            categoryId="org.eclipse.ui.category.edit"
+            description="Copy the qualified name for the selected element"
+            name="Copy Qualified Name">
+      </command>
+    </extension>
+    <extension point="org.eclipse.ui.menus">
+        <menuContribution
+            locationURI="popup:#TextEditorContext?after=group.edit">
+             <command
+                 commandId="dk.itu.smdp.group2.Questionaire.validate"
+                 style="push"
+                 tooltip="Trigger expensive validation">
+            <visibleWhen checkEnabled="false">
+                <reference
+                    definitionId="dk.itu.smdp.group2.Questionaire.Editor.opened">
+                </reference>
+            </visibleWhen>
+         </command>  
+         </menuContribution>
+         <!-- copy qualified name -->
+         <menuContribution locationURI="popup:#TextEditorContext?after=copy">
+         	<command commandId="org.eclipse.xtext.ui.editor.copyqualifiedname.EditorCopyQualifiedName" 
+         		style="push" tooltip="Copy Qualified Name">
+            	<visibleWhen checkEnabled="false">
+                	<reference definitionId="dk.itu.smdp.group2.Questionaire.Editor.opened" />
+            	</visibleWhen>
+         	</command>  
+         </menuContribution>
+         <menuContribution locationURI="menu:edit?after=copy">
+         	<command commandId="org.eclipse.xtext.ui.editor.copyqualifiedname.EditorCopyQualifiedName"
+            	style="push" tooltip="Copy Qualified Name">
+            	<visibleWhen checkEnabled="false">
+                	<reference definitionId="dk.itu.smdp.group2.Questionaire.Editor.opened" />
+            	</visibleWhen>
+         	</command>  
+         </menuContribution>
+         <menuContribution locationURI="popup:org.eclipse.xtext.ui.outline?after=additions">
+			<command commandId="org.eclipse.xtext.ui.editor.copyqualifiedname.OutlineCopyQualifiedName" 
+				style="push" tooltip="Copy Qualified Name">
+         		<visibleWhen checkEnabled="false">
+	            	<and>
+	            		<reference definitionId="dk.itu.smdp.group2.Questionaire.XtextEditor.opened" />
+						<iterate>
+							<adapt type="org.eclipse.xtext.ui.editor.outline.IOutlineNode" />
+						</iterate>
+					</and>
+				</visibleWhen>
+			</command>
+         </menuContribution>
+    </extension>
+    <extension point="org.eclipse.ui.menus">
+		<menuContribution locationURI="popup:#TextEditorContext?endof=group.find">
+			<command commandId="org.eclipse.xtext.ui.editor.FindReferences">
+				<visibleWhen checkEnabled="false">
+                	<reference definitionId="dk.itu.smdp.group2.Questionaire.Editor.opened">
+                	</reference>
+            	</visibleWhen>
+			</command>
+		</menuContribution>
+	</extension>
+	<extension point="org.eclipse.ui.handlers">
+	    <handler
+            class="dk.itu.smdp.group2.ui.QuestionaireExecutableExtensionFactory:org.eclipse.xtext.ui.editor.findrefs.FindReferencesHandler"
+            commandId="org.eclipse.xtext.ui.editor.FindReferences">
+            <activeWhen>
+                <reference
+                    definitionId="dk.itu.smdp.group2.Questionaire.Editor.opened">
+                </reference>
+            </activeWhen>
+        </handler>
+    </extension>   
+
+<!-- adding resource factories -->
+
+	<extension
+		point="org.eclipse.emf.ecore.extension_parser">
+		<parser
+			class="dk.itu.smdp.group2.ui.QuestionaireExecutableExtensionFactory:org.eclipse.xtext.resource.IResourceFactory"
+			type="qst">
+		</parser>
+	</extension>
+	<extension point="org.eclipse.xtext.extension_resourceServiceProvider">
+        <resourceServiceProvider
+            class="dk.itu.smdp.group2.ui.QuestionaireExecutableExtensionFactory:org.eclipse.xtext.ui.resource.IResourceUIServiceProvider"
+            uriExtension="qst">
+        </resourceServiceProvider>
+    </extension>
+
+
+	<!-- marker definitions for dk.itu.smdp.group2.Questionaire -->
+	<extension
+	        id="questionaire.check.fast"
+	        name="Questionaire Problem"
+	        point="org.eclipse.core.resources.markers">
+	    <super type="org.eclipse.xtext.ui.check.fast"/>
+	    <persistent value="true"/>
+	</extension>
+	<extension
+	        id="questionaire.check.normal"
+	        name="Questionaire Problem"
+	        point="org.eclipse.core.resources.markers">
+	    <super type="org.eclipse.xtext.ui.check.normal"/>
+	    <persistent value="true"/>
+	</extension>
+	<extension
+	        id="questionaire.check.expensive"
+	        name="Questionaire Problem"
+	        point="org.eclipse.core.resources.markers">
+	    <super type="org.eclipse.xtext.ui.check.expensive"/>
+	    <persistent value="true"/>
+	</extension>
+
+   <extension
+         point="org.eclipse.xtext.builder.participant">
+      <participant
+            class="dk.itu.smdp.group2.ui.QuestionaireExecutableExtensionFactory:org.eclipse.xtext.builder.IXtextBuilderParticipant">
+      </participant>
+   </extension>
+   <extension
+            point="org.eclipse.ui.preferencePages">
+        <page
+            category="dk.itu.smdp.group2.Questionaire"
+            class="dk.itu.smdp.group2.ui.QuestionaireExecutableExtensionFactory:org.eclipse.xtext.builder.preferences.BuilderPreferencePage"
+            id="dk.itu.smdp.group2.Questionaire.compiler.preferencePage"
+            name="Compiler">
+            <keywordReference id="dk.itu.smdp.group2.ui.keyword_Questionaire"/>
+        </page>
+    </extension>
+    <extension
+            point="org.eclipse.ui.propertyPages">
+        <page
+            category="dk.itu.smdp.group2.Questionaire"
+            class="dk.itu.smdp.group2.ui.QuestionaireExecutableExtensionFactory:org.eclipse.xtext.builder.preferences.BuilderPreferencePage"
+            id="dk.itu.smdp.group2.Questionaire.compiler.propertyPage"
+            name="Compiler">
+            <keywordReference id="dk.itu.smdp.group2.ui.keyword_Questionaire"/>
+            <enabledWhen>
+	            <adapt type="org.eclipse.core.resources.IProject"/>
+			</enabledWhen>
+	        <filter name="projectNature" value="org.eclipse.xtext.ui.shared.xtextNature"/>
+        </page>
+    </extension>
+
+	<!-- Quick Outline -->
+	<extension
+		point="org.eclipse.ui.handlers">
+		<handler 
+			class="dk.itu.smdp.group2.ui.QuestionaireExecutableExtensionFactory:org.eclipse.xtext.ui.editor.outline.quickoutline.ShowQuickOutlineActionHandler"
+			commandId="org.eclipse.xtext.ui.editor.outline.QuickOutline">
+			<activeWhen>
+				<reference
+					definitionId="dk.itu.smdp.group2.Questionaire.Editor.opened">
+				</reference>
+			</activeWhen>
+		</handler>
+	</extension>
+	<extension
+		point="org.eclipse.ui.commands">
+		<command
+			description="Open the quick outline."
+			id="org.eclipse.xtext.ui.editor.outline.QuickOutline"
+			name="Quick Outline">
+		</command>
+	</extension>
+	<extension point="org.eclipse.ui.menus">
+		<menuContribution
+			locationURI="popup:#TextEditorContext?after=group.open">
+			<command commandId="org.eclipse.xtext.ui.editor.outline.QuickOutline"
+				style="push"
+				tooltip="Open Quick Outline">
+				<visibleWhen checkEnabled="false">
+					<reference definitionId="dk.itu.smdp.group2.Questionaire.Editor.opened"/>
+				</visibleWhen>
+			</command>
+		</menuContribution>
+	</extension>
+    <!-- quickfix marker resolution generator for dk.itu.smdp.group2.Questionaire -->
+    <extension
+            point="org.eclipse.ui.ide.markerResolution">
+        <markerResolutionGenerator
+            class="dk.itu.smdp.group2.ui.QuestionaireExecutableExtensionFactory:org.eclipse.xtext.ui.editor.quickfix.MarkerResolutionGenerator"
+            markerType="dk.itu.smdp.group2.ui.questionaire.check.fast">
+            <attribute
+                name="FIXABLE_KEY"
+                value="true">
+            </attribute>
+        </markerResolutionGenerator>
+        <markerResolutionGenerator
+            class="dk.itu.smdp.group2.ui.QuestionaireExecutableExtensionFactory:org.eclipse.xtext.ui.editor.quickfix.MarkerResolutionGenerator"
+            markerType="dk.itu.smdp.group2.ui.questionaire.check.normal">
+            <attribute
+                name="FIXABLE_KEY"
+                value="true">
+            </attribute>
+        </markerResolutionGenerator>
+        <markerResolutionGenerator
+            class="dk.itu.smdp.group2.ui.QuestionaireExecutableExtensionFactory:org.eclipse.xtext.ui.editor.quickfix.MarkerResolutionGenerator"
+            markerType="dk.itu.smdp.group2.ui.questionaire.check.expensive">
+            <attribute
+                name="FIXABLE_KEY"
+                value="true">
+            </attribute>
+        </markerResolutionGenerator>
+    </extension>
+   	<!-- Rename Refactoring -->
+	<extension point="org.eclipse.ui.handlers">
+		<handler 
+			class="dk.itu.smdp.group2.ui.QuestionaireExecutableExtensionFactory:org.eclipse.xtext.ui.refactoring.ui.DefaultRenameElementHandler"
+			commandId="org.eclipse.xtext.ui.refactoring.RenameElement">
+			<activeWhen>
+				<reference
+					definitionId="dk.itu.smdp.group2.Questionaire.Editor.opened">
+				</reference>
+			</activeWhen>
+		</handler>
+	</extension>
+    <extension point="org.eclipse.ui.menus">
+         <menuContribution
+            locationURI="popup:#TextEditorContext?after=group.edit">
+         <command commandId="org.eclipse.xtext.ui.refactoring.RenameElement"
+               style="push">
+            <visibleWhen checkEnabled="false">
+               <reference
+                     definitionId="dk.itu.smdp.group2.Questionaire.Editor.opened">
+               </reference>
+            </visibleWhen>
+         </command>
+      </menuContribution>
+   </extension>
+   <extension point="org.eclipse.ui.preferencePages">
+	    <page
+	        category="dk.itu.smdp.group2.Questionaire"
+	        class="dk.itu.smdp.group2.ui.QuestionaireExecutableExtensionFactory:org.eclipse.xtext.ui.refactoring.ui.RefactoringPreferencePage"
+	        id="dk.itu.smdp.group2.Questionaire.refactoring"
+	        name="Refactoring">
+	        <keywordReference id="dk.itu.smdp.group2.ui.keyword_Questionaire"/>
+	    </page>
+	</extension>
+
+  <extension point="org.eclipse.compare.contentViewers">
+    <viewer id="dk.itu.smdp.group2.Questionaire.compare.contentViewers"
+            class="dk.itu.smdp.group2.ui.QuestionaireExecutableExtensionFactory:org.eclipse.xtext.ui.compare.InjectableViewerCreator"
+            extensions="qst">
+    </viewer>
+  </extension>
+  <extension point="org.eclipse.compare.contentMergeViewers">
+    <viewer id="dk.itu.smdp.group2.Questionaire.compare.contentMergeViewers"
+            class="dk.itu.smdp.group2.ui.QuestionaireExecutableExtensionFactory:org.eclipse.xtext.ui.compare.InjectableViewerCreator"
+            extensions="qst" label="Questionaire Compare">
+     </viewer>
+  </extension>
+  <extension point="org.eclipse.ui.editors.documentProviders">
+    <provider id="dk.itu.smdp.group2.Questionaire.editors.documentProviders"
+            class="dk.itu.smdp.group2.ui.QuestionaireExecutableExtensionFactory:org.eclipse.xtext.ui.editor.model.XtextDocumentProvider"
+            extensions="qst">
+    </provider>
+  </extension>
+
+</plugin>

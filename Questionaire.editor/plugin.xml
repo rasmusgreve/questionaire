@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+
+<!--
+-->
+
+<plugin>
+
+   <extension point="org.eclipse.ui.newWizards">
+      <!-- @generated QuestionaireModel -->
+      <category
+            id="org.eclipse.emf.ecore.Wizard.category.ID"
+            name="%_UI_Wizard_category"/>
+      <wizard
+            id="questionairemodel.presentation.QuestionairemodelModelWizardID"
+            name="%_UI_QuestionairemodelModelWizard_label"
+            class="questionairemodel.presentation.QuestionairemodelModelWizard"
+            category="org.eclipse.emf.ecore.Wizard.category.ID"
+            icon="icons/full/obj16/QuestionairemodelModelFile.gif">
+         <description>%_UI_QuestionairemodelModelWizard_description</description>
+         <selection class="org.eclipse.core.resources.IResource"/>
+      </wizard>
+   </extension>
+
+   <extension point="org.eclipse.ui.editors">
+      <!-- @generated QuestionaireModel -->
+      <editor
+            id="questionairemodel.presentation.QuestionairemodelEditorID"
+            name="%_UI_QuestionairemodelEditor_label"
+            icon="icons/full/obj16/QuestionairemodelModelFile.gif"
+            extensions="questionairemodel"
+            class="questionairemodel.presentation.QuestionairemodelEditor"
+            contributorClass="questionairemodel.presentation.QuestionairemodelActionBarContributor">
+      </editor>
+   </extension>
+
+</plugin>

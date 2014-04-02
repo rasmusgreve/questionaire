@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+
+<!--
+-->
+
+<plugin>
+
+   <extension point="org.eclipse.emf.edit.itemProviderAdapterFactories">
+      <!-- @generated QuestionaireModel -->
+      <factory
+            uri="platform:/resource/Questionaire/model/QuestionaireModel.ecore"
+            class="questionairemodel.provider.QuestionairemodelItemProviderAdapterFactory"
+            supportedTypes=
+              "org.eclipse.emf.edit.provider.IEditingDomainItemProvider
+               org.eclipse.emf.edit.provider.IStructuredItemContentProvider
+               org.eclipse.emf.edit.provider.ITreeItemContentProvider
+               org.eclipse.emf.edit.provider.IItemLabelProvider
+               org.eclipse.emf.edit.provider.IItemPropertySource"/>
+   </extension>
+
+</plugin>

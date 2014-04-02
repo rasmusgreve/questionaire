@@ -225,19 +225,9 @@ public abstract class AbstractQuestionaireSemanticSequencer extends AbstractDele
 	
 	/**
 	 * Constraint:
-	 *     (questionBase=QuestionBase multiline?='long')
+	 *     (questionBase=QuestionBase multiline?='long'?)
 	 */
 	protected void sequence_TextQuestion(EObject context, TextQuestion semanticObject) {
-		if(errorAcceptor != null) {
-			if(transientValues.isValueTransient(semanticObject, QuestionairemodelPackage.Literals.QUESTION__QUESTION_BASE) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, QuestionairemodelPackage.Literals.QUESTION__QUESTION_BASE));
-			if(transientValues.isValueTransient(semanticObject, QuestionairemodelPackage.Literals.TEXT_QUESTION__MULTILINE) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, QuestionairemodelPackage.Literals.TEXT_QUESTION__MULTILINE));
-		}
-		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
-		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
-		feeder.accept(grammarAccess.getTextQuestionAccess().getQuestionBaseQuestionBaseParserRuleCall_0_0(), semanticObject.getQuestionBase());
-		feeder.accept(grammarAccess.getTextQuestionAccess().getMultilineLongKeyword_2_0(), semanticObject.isMultiline());
-		feeder.finish();
+		genericSequencer.createSequence(context, semanticObject);
 	}
 }

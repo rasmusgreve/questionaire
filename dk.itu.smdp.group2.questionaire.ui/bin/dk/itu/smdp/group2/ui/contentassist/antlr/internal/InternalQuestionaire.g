@@ -525,6 +525,30 @@ finally {
 	restoreStackSize(stackSize);
 }
 
+rule__TextQuestion__Alternatives_2
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+(
+{ before(grammarAccess.getTextQuestionAccess().getMultilineAssignment_2_0()); }
+(rule__TextQuestion__MultilineAssignment_2_0)
+{ after(grammarAccess.getTextQuestionAccess().getMultilineAssignment_2_0()); }
+)
+
+    |(
+{ before(grammarAccess.getTextQuestionAccess().getShortKeyword_2_1()); }
+
+	'short' 
+
+{ after(grammarAccess.getTextQuestionAccess().getShortKeyword_2_1()); }
+)
+
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
 rule__ChoiceQuestion__Alternatives_2
     @init {
 		int stackSize = keepStackSize();
@@ -1096,9 +1120,9 @@ rule__TextQuestion__Group__2__Impl
     }
 :
 (
-{ before(grammarAccess.getTextQuestionAccess().getMultilineAssignment_2()); }
-(rule__TextQuestion__MultilineAssignment_2)
-{ after(grammarAccess.getTextQuestionAccess().getMultilineAssignment_2()); }
+{ before(grammarAccess.getTextQuestionAccess().getAlternatives_2()); }
+(rule__TextQuestion__Alternatives_2)
+{ after(grammarAccess.getTextQuestionAccess().getAlternatives_2()); }
 )
 
 ;
@@ -3135,22 +3159,22 @@ finally {
 	restoreStackSize(stackSize);
 }
 
-rule__TextQuestion__MultilineAssignment_2
+rule__TextQuestion__MultilineAssignment_2_0
     @init {
 		int stackSize = keepStackSize();
     }
 :
 (
-{ before(grammarAccess.getTextQuestionAccess().getMultilineLongKeyword_2_0()); }
+{ before(grammarAccess.getTextQuestionAccess().getMultilineLongKeyword_2_0_0()); }
 (
-{ before(grammarAccess.getTextQuestionAccess().getMultilineLongKeyword_2_0()); }
+{ before(grammarAccess.getTextQuestionAccess().getMultilineLongKeyword_2_0_0()); }
 
 	'long' 
 
-{ after(grammarAccess.getTextQuestionAccess().getMultilineLongKeyword_2_0()); }
+{ after(grammarAccess.getTextQuestionAccess().getMultilineLongKeyword_2_0_0()); }
 )
 
-{ after(grammarAccess.getTextQuestionAccess().getMultilineLongKeyword_2_0()); }
+{ after(grammarAccess.getTextQuestionAccess().getMultilineLongKeyword_2_0_0()); }
 )
 
 ;

@@ -39,6 +39,7 @@ public class QuestionaireParser extends AbstractContentAssistParser {
 				{
 					put(grammarAccess.getElementAccess().getAlternatives(), "rule__Element__Alternatives");
 					put(grammarAccess.getEStringAccess().getAlternatives(), "rule__EString__Alternatives");
+					put(grammarAccess.getTextQuestionAccess().getAlternatives_2(), "rule__TextQuestion__Alternatives_2");
 					put(grammarAccess.getChoiceQuestionAccess().getAlternatives_2(), "rule__ChoiceQuestion__Alternatives_2");
 					put(grammarAccess.getEBooleanAccess().getAlternatives(), "rule__EBoolean__Alternatives");
 					put(grammarAccess.getQuestionaireAccess().getGroup(), "rule__Questionaire__Group__0");
@@ -73,7 +74,7 @@ public class QuestionaireParser extends AbstractContentAssistParser {
 					put(grammarAccess.getQuestionBaseAccess().getDescriptionAssignment_3(), "rule__QuestionBase__DescriptionAssignment_3");
 					put(grammarAccess.getQuestionBaseAccess().getConditionsAssignment_4(), "rule__QuestionBase__ConditionsAssignment_4");
 					put(grammarAccess.getTextQuestionAccess().getQuestionBaseAssignment_0(), "rule__TextQuestion__QuestionBaseAssignment_0");
-					put(grammarAccess.getTextQuestionAccess().getMultilineAssignment_2(), "rule__TextQuestion__MultilineAssignment_2");
+					put(grammarAccess.getTextQuestionAccess().getMultilineAssignment_2_0(), "rule__TextQuestion__MultilineAssignment_2_0");
 					put(grammarAccess.getChoiceQuestionAccess().getQuestionBaseAssignment_0(), "rule__ChoiceQuestion__QuestionBaseAssignment_0");
 					put(grammarAccess.getChoiceQuestionAccess().getMinSelectionsAssignment_2_0(), "rule__ChoiceQuestion__MinSelectionsAssignment_2_0");
 					put(grammarAccess.getChoiceQuestionAccess().getMinSelectionsAssignment_2_1_0(), "rule__ChoiceQuestion__MinSelectionsAssignment_2_1_0");

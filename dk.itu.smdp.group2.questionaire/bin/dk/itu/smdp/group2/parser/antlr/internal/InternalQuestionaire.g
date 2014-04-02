@@ -502,11 +502,11 @@ ruleTextQuestion returns [EObject current=null]
     {
     	newLeafNode(otherlv_1, grammarAccess.getTextQuestionAccess().getTextKeyword_1());
     }
-(
+((
 (
 		lv_multiline_2_0=	'long' 
     {
-        newLeafNode(lv_multiline_2_0, grammarAccess.getTextQuestionAccess().getMultilineLongKeyword_2_0());
+        newLeafNode(lv_multiline_2_0, grammarAccess.getTextQuestionAccess().getMultilineLongKeyword_2_0_0());
     }
  
 	    {
@@ -517,9 +517,14 @@ ruleTextQuestion returns [EObject current=null]
 	    }
 
 )
-)	otherlv_3=']' 
+)
+    |	otherlv_3='short' 
     {
-    	newLeafNode(otherlv_3, grammarAccess.getTextQuestionAccess().getRightSquareBracketKeyword_3());
+    	newLeafNode(otherlv_3, grammarAccess.getTextQuestionAccess().getShortKeyword_2_1());
+    }
+)	otherlv_4=']' 
+    {
+    	newLeafNode(otherlv_4, grammarAccess.getTextQuestionAccess().getRightSquareBracketKeyword_3());
     }
 )
 ;

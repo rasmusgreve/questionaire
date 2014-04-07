@@ -21,8 +21,10 @@ QuestionBase:
 
 TextQuestion:
 	questionBase=QuestionBase
-	'text[' multiline?='long' ']'						
+	'text[' (lines=EInt) ']'						
 	;
+
+terminal SHORT_LONG returns ecore::EInt: 'short' | 'long';
 
 ChoiceQuestion:
 	questionBase=QuestionBase

@@ -4,17 +4,24 @@ import org.eclipse.xtext.ui.editor.quickfix.Fix
 import org.eclipse.xtext.ui.editor.quickfix.IssueResolutionAcceptor
 import org.eclipse.xtext.validation.Issue
 import dk.itu.smdp.group2.validation.QuestionaireValidator
+import org.eclipse.xtext.ui.editor.model.edit.IModificationContext
+import org.eclipse.emf.ecore.EObject
+import org.eclipse.xtext.ui.editor.quickfix.DefaultQuickfixProvider;
+//import dk.itu.smdp.group2.Questionaire.IntegerQuestion;
+import questionairemodel.IntegerQuestion;
+import questionairemodel.TextQuestion
+import questionairemodel.Option
 
 /**
  * Custom quickfixes.
  *
  * see http://www.eclipse.org/Xtext/documentation.html#quickfixes
  */
-class QuestionaireQuickfixProvider extends org.eclipse.xtext.ui.editor.quickfix.DefaultQuickfixProvider {
+class QuestionaireQuickfixProvider extends DefaultQuickfixProvider {
 
-	@Fix(QuestionaireValidator::INTEGERQUESTION_STEP)
+	@Fix(QuestionaireValidator.INTEGERQUESTION_STEP)
 	def removeStep(Issue issue, IssueResolutionAcceptor acceptor) {
-		acceptor.accept(issue, 'Remove step', 'Remove the step setting.', 'pencil.png') [
+		acceptor.accept(issue, 'Remove the step setting', 'Remove the step setting from the document', null) [
 			context |
 			val xtextDocument = context.xtextDocument
 			val bad_sub_str = "step " + issue.data;
@@ -23,16 +30,112 @@ class QuestionaireQuickfixProvider extends org.eclipse.xtext.ui.editor.quickfix.
 			xtextDocument.replace(issue.offset, issue.length, right_str);
 		]
 	}
+	
+	@Fix(QuestionaireValidator.INTEGERQUESTION_MINMAX)
+	def reduceMin(Issue issue, IssueResolutionAcceptor acceptor) {
+		if (!issue.data.get(0).equals("1")) //If min can be reduced
+		{
+			acceptor.accept(issue, "Reduce the minimum value", "Reduce the minimum value to be below the maximum value", null, 
+				[EObject elem, IModificationContext context|
+					val iq = (elem as IntegerQuestion);
+					iq.minValue = iq.maxValue-1;		
+			]);
+		}	
+	}
+	
+	@Fix(QuestionaireValidator.INTEGERQUESTION_MINMAX)
+	def increaseMax(Issue issue, IssueResolutionAcceptor acceptor) {
+		acceptor.accept(issue, "Increase the maximum value", "Increase the maximum value to be above the minimum", null, 
+				[EObject elem, IModificationContext context|
+					val iq = (elem as IntegerQuestion);
+					iq.maxValue = iq.minValue+1;		
+			]);
+	}
+	
+	@Fix(QuestionaireValidator.INTEGERQUESTION_STEP)
+	def adjustStep(Issue issue, IssueResolutionAcceptor acceptor) {
+		acceptor.accept(issue, "Change step to nearest good value", "Change the step value to the closest value that allows selection of both the minimum and maximum value", null, 
+			[EObject elem, IModificationContext context|
+				val iq = (elem as IntegerQuestion);
+				var continue = true;
+				for (i : 1 ..< (iq.maxValue-iq.minValue)+iq.step) {
+					if (continue)
+					{
+					    if (validStep(iq.minValue, iq.maxValue, iq.step+i))
+						{
+							(elem as IntegerQuestion).setStep(iq.step+i);
+							continue=false;		
+						}
+						if (continue && validStep(iq.minValue, iq.maxValue, iq.step-i))
+						{
+							(elem as IntegerQuestion).setStep(iq.step-i);
+							continue=false;
+						}
+					}
+				}			
+		]);
+	}
 
+	@Fix(QuestionaireValidator.INTEGERQUESTION_STEP)
+	def adjustMaxForStep(Issue issue, IssueResolutionAcceptor acceptor) {
+		acceptor.accept(issue, "Increase maximum to match step", "Change the max value such that the chosen step value fits", null, 
+			[EObject elem, IModificationContext context|
+				val iq = (elem as IntegerQuestion);
+				val incr = iq.step - ((iq.maxValue - iq.minValue) % iq.step); //Step shouldn't be 0 here
+				iq.maxValue = iq.maxValue+incr;
+		]);
+	}
+	
+	@Fix(QuestionaireValidator.TEXTQUESTION_SHORTLONG)
+	def insertDefaultLength(Issue issue, IssueResolutionAcceptor acceptor) {
+		acceptor.accept(issue, "Set length to 1", "Set the length of the text question answer 1 meaning one line of text", null, 
+			[EObject elem, IModificationContext context|
+				val tq = (elem as TextQuestion);
+				tq.lines = 1;
+		]);
+	}
+	
+	@Fix(QuestionaireValidator.TEXTQUESTION_SHORTLONG)
+	def insertDefaultLongLength(Issue issue, IssueResolutionAcceptor acceptor) {
+		acceptor.accept(issue, "Set length to 5", "Set the length of the text question answer 5 meaning five lines of text", null, 
+			[EObject elem, IModificationContext context|
+				val tq = (elem as TextQuestion);
+				tq.lines = 5;
+		]);
+	}
+	
+	@Fix(QuestionaireValidator.OPTION_NAME_UNIQUE)
+	def makeOptionNameUnique(Issue issue, IssueResolutionAcceptor acceptor) {
+		acceptor.accept(issue, "Make the name of this option unique", "Make the name of this option unique by appending a number", null, 
+			[EObject elem, IModificationContext context|
+				val op = (elem as Option);
+				var id = 1;
+				while (issue.data.contains(nameId(op.name,id)))
+				{
+					id = id + 1;
+				}
+				op.setName(nameId(op.name,id));
+		]);
+	}
+	
+	def nameId(String name, int id)
+	{
+		if (name.startsWith("\"")){
+			name.substring(0,name.length-1) + id + "\"";
+		}
+		else
+		{
+			name + id;
+		}
+	}
+	
 
+	def validStep(int min, int max, int step)
+	{
+		if (step < 1) 
+			false
+		else
+			((max - min) % step == 0)
+	}
 
-//	@Fix(MyDslValidator::INVALID_NAME)
-//	def capitalizeName(Issue issue, IssueResolutionAcceptor acceptor) {
-//		acceptor.accept(issue, 'Capitalize name', 'Capitalize the name.', 'upcase.png') [
-//			context |
-//			val xtextDocument = context.xtextDocument
-//			val firstLetter = xtextDocument.get(issue.offset, 1)
-//			xtextDocument.replace(issue.offset, 1, firstLetter.toUpperCase)
-//		]
-//	}
 }

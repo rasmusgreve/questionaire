@@ -21,13 +21,18 @@ import questionairemodel.TextQuestion
 class QuestionaireValidator extends AbstractQuestionaireValidator {
 
 	public static val String INTEGERQUESTION_STEP = "integerQuestionStep";
+	public static val String INTEGERQUESTION_MINMAX = "integerQuestionMinMax";
+	public static val String TEXTQUESTION_SHORTLONG = "textQuestionShortLong";
+	public static val String OPTION_NAME_UNIQUE = "optionName";
 
 	@Check
 	def checkTextQuestionLength(TextQuestion it) {
 		if (lines <= 0)
 		{
 			error('Must specify a positive number of lines.', 
-				QuestionairemodelPackage.Literals.TEXT_QUESTION__LINES
+				QuestionairemodelPackage.Literals.TEXT_QUESTION__LINES,
+				TEXTQUESTION_SHORTLONG,
+				Integer.toString(lines)
 			);
 		}
 	}
@@ -38,8 +43,8 @@ class QuestionaireValidator extends AbstractQuestionaireValidator {
 		{
 			error('Maximum value must be higher than minimum value', 
 				QuestionairemodelPackage.Literals.INTEGER_QUESTION__MAX_VALUE,
-				INTEGERQUESTION_STEP,
-				Integer.toString(step)
+				INTEGERQUESTION_MINMAX,
+				Integer.toString(minValue)
 			);
 		}
 	}
@@ -51,7 +56,9 @@ class QuestionaireValidator extends AbstractQuestionaireValidator {
 		if ((maxValue - minValue) % step != 0)
 		{
 			warning("The selected step value doesn't allow the maximum value to be selected", 
-				QuestionairemodelPackage.Literals.INTEGER_QUESTION__STEP
+				QuestionairemodelPackage.Literals.INTEGER_QUESTION__STEP,
+				INTEGERQUESTION_STEP,
+				Integer.toString(step)
 			);
 		}
 	}
@@ -85,7 +92,9 @@ class QuestionaireValidator extends AbstractQuestionaireValidator {
 				{
 					error("Names must be unique! \"" + option.name + "\" is defined elsewhere",
 						option, 
-						QuestionairemodelPackage.Literals.OPTION__NAME
+						QuestionairemodelPackage.Literals.OPTION__NAME,
+						OPTION_NAME_UNIQUE,
+						ids
 					);
 				}
 			]

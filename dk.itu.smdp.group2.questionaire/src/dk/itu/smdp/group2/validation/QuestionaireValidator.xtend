@@ -10,6 +10,8 @@ import java.util.ArrayList
 import questionairemodel.impl.ChoiceQuestionImpl
 import java.util.HashSet
 import questionairemodel.Question
+import questionairemodel.impl.TextQuestionImpl
+import questionairemodel.TextQuestion
 
 /**
  * Custom validation rules. 
@@ -19,6 +21,16 @@ import questionairemodel.Question
 class QuestionaireValidator extends AbstractQuestionaireValidator {
 
 	public static val String INTEGERQUESTION_STEP = "integerQuestionStep";
+
+	@Check
+	def checkTextQuestionLength(TextQuestion it) {
+		if (lines <= 0)
+		{
+			error('Must specify a positive number of lines.', 
+				QuestionairemodelPackage.Literals.TEXT_QUESTION__LINES
+			);
+		}
+	}
 
 	@Check
 	def checkIntegerQuestionRange(IntegerQuestion it) {

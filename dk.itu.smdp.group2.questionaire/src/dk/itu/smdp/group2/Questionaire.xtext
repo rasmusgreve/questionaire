@@ -21,7 +21,7 @@ QuestionBase:
 
 TextQuestion:
 	questionBase=QuestionBase
-	'text[' (lines=EInt) ']'						
+	'text[' (lines=EInt | lines=SHORT_LONG) ']'						
 	;
 
 terminal SHORT_LONG returns ecore::EInt: 'short' | 'long';

@@ -18,7 +18,7 @@ import questionairemodel.TextQuestion;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link questionairemodel.impl.TextQuestionImpl#isMultiline <em>Multiline</em>}</li>
+ *   <li>{@link questionairemodel.impl.TextQuestionImpl#getLines <em>Lines</em>}</li>
  * </ul>
  * </p>
  *
@@ -26,24 +26,24 @@ import questionairemodel.TextQuestion;
  */
 public class TextQuestionImpl extends QuestionImpl implements TextQuestion {
 	/**
-	 * The default value of the '{@link #isMultiline() <em>Multiline</em>}' attribute.
+	 * The default value of the '{@link #getLines() <em>Lines</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #isMultiline()
+	 * @see #getLines()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final boolean MULTILINE_EDEFAULT = false;
+	protected static final int LINES_EDEFAULT = 0;
 
 	/**
-	 * The cached value of the '{@link #isMultiline() <em>Multiline</em>}' attribute.
+	 * The cached value of the '{@link #getLines() <em>Lines</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #isMultiline()
+	 * @see #getLines()
 	 * @generated
 	 * @ordered
 	 */
-	protected boolean multiline = MULTILINE_EDEFAULT;
+	protected int lines = LINES_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -69,8 +69,8 @@ public class TextQuestionImpl extends QuestionImpl implements TextQuestion {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean isMultiline() {
-		return multiline;
+	public int getLines() {
+		return lines;
 	}
 
 	/**
@@ -78,11 +78,11 @@ public class TextQuestionImpl extends QuestionImpl implements TextQuestion {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setMultiline(boolean newMultiline) {
-		boolean oldMultiline = multiline;
-		multiline = newMultiline;
+	public void setLines(int newLines) {
+		int oldLines = lines;
+		lines = newLines;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QuestionairemodelPackage.TEXT_QUESTION__MULTILINE, oldMultiline, multiline));
+			eNotify(new ENotificationImpl(this, Notification.SET, QuestionairemodelPackage.TEXT_QUESTION__LINES, oldLines, lines));
 	}
 
 	/**
@@ -93,8 +93,8 @@ public class TextQuestionImpl extends QuestionImpl implements TextQuestion {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case QuestionairemodelPackage.TEXT_QUESTION__MULTILINE:
-				return isMultiline();
+			case QuestionairemodelPackage.TEXT_QUESTION__LINES:
+				return getLines();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -107,8 +107,8 @@ public class TextQuestionImpl extends QuestionImpl implements TextQuestion {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case QuestionairemodelPackage.TEXT_QUESTION__MULTILINE:
-				setMultiline((Boolean)newValue);
+			case QuestionairemodelPackage.TEXT_QUESTION__LINES:
+				setLines((Integer)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -122,8 +122,8 @@ public class TextQuestionImpl extends QuestionImpl implements TextQuestion {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case QuestionairemodelPackage.TEXT_QUESTION__MULTILINE:
-				setMultiline(MULTILINE_EDEFAULT);
+			case QuestionairemodelPackage.TEXT_QUESTION__LINES:
+				setLines(LINES_EDEFAULT);
 				return;
 		}
 		super.eUnset(featureID);
@@ -137,8 +137,8 @@ public class TextQuestionImpl extends QuestionImpl implements TextQuestion {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case QuestionairemodelPackage.TEXT_QUESTION__MULTILINE:
-				return multiline != MULTILINE_EDEFAULT;
+			case QuestionairemodelPackage.TEXT_QUESTION__LINES:
+				return lines != LINES_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -153,8 +153,8 @@ public class TextQuestionImpl extends QuestionImpl implements TextQuestion {
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (multiline: ");
-		result.append(multiline);
+		result.append(" (lines: ");
+		result.append(lines);
 		result.append(')');
 		return result.toString();
 	}

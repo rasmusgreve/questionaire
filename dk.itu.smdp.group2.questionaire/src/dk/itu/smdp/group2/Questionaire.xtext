@@ -26,6 +26,7 @@ TextQuestion:
 
 terminal SHORT_LONG returns ecore::EInt: 'short' | 'long';
 
+
 ChoiceQuestion:
 	questionBase=QuestionBase
 	'choice[' (minSelections=EInt | (minSelections=EInt 'to' maxSelections=EInt)) ']'
@@ -41,11 +42,11 @@ MatrixQuestion:
 
 CalendarQuestion:
 	questionBase=QuestionBase
-	'calendar[' (	(year?='year')? ','? 
-					(month?='month')? ','? 
-					(day?='day')? ','? 
-					(hour?='hour')? ','? 
-					(minute?='minute')?
+	'calendar[' (	(year?='year' ','?)? 
+					(month?='month' ','?)? 
+					(day?='day' ','?)? 
+					(hour?='hour' ','?)?
+					(minute?='minute' ','?)?
 				) ']'
 	;
 

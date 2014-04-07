@@ -6,6 +6,10 @@ import questionairemodel.QuestionairemodelPackage
 import questionairemodel.Questionaire
 import questionairemodel.MatrixQuestion
 import questionairemodel.ChoiceQuestion
+import java.util.ArrayList
+import questionairemodel.impl.ChoiceQuestionImpl
+import java.util.HashSet
+import questionairemodel.Question
 
 /**
  * Custom validation rules. 
@@ -54,13 +58,55 @@ class QuestionaireValidator extends AbstractQuestionaireValidator {
 	@Check
 	def optionIdUnqiue(Questionaire it)
 	{
-		//TODO
+		//Find all ids
+		val ids = new ArrayList<String>();
+		elements.filter(ChoiceQuestionImpl).forEach[
+			options.filter[name != null].forEach[
+				ids.add(name);
+			]
+		]
+		//Check for unique names
+		elements.filter(ChoiceQuestionImpl).forEach[elem|
+			elem.options.forEach[option|
+				val unique = ids.filter[it==option.name].length < 2;
+				if (!unique)
+				{
+					error("Names must be unique! \"" + option.name + "\" is defined elsewhere",
+						option, 
+						QuestionairemodelPackage.Literals.OPTION__NAME
+					);
+				}
+			]
+		]
+		
 	}
 	
 	@Check
 	def conditionalAfterCondition(Questionaire it)
 	{
-		//TODO
+		//Fold an environment of defined ids over all questions
+		elements.filter(elem| elem instanceof Question).fold(new HashSet<String>)[env,elem|
+			
+			//Check conditions
+			val base = (elem as Question).questionBase;
+			if (!base.conditions.forall[option.forall[env.contains(name)]])
+			{
+				error("The constraint refer to an invalid option",
+					(elem as Question).questionBase, 
+					QuestionairemodelPackage.Literals.QUESTION_BASE__CONDITIONS
+				);				
+			}			
+			
+			//Add options w/ names to env if choice question
+			if (elem instanceof ChoiceQuestion)
+			{
+				val elem_cq = elem as ChoiceQuestion;
+				elem_cq.options.filter[name != null].forEach[
+					env.add(name)
+				]
+			}			
+			env
+		]
 	}
 	
 	@Check 

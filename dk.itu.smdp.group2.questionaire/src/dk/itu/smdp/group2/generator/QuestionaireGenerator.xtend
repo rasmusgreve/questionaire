@@ -3,10 +3,12 @@
  */
 package dk.itu.smdp.group2.generator
 
+import java.io.File
+import org.eclipse.core.resources.ResourcesPlugin
 import org.eclipse.emf.ecore.resource.Resource
-import org.eclipse.xtext.generator.IGenerator
 import org.eclipse.xtext.generator.IFileSystemAccess
-import questionairemodel.*
+import org.eclipse.xtext.generator.IGenerator
+import questionairemodel.Questionaire
 
 /**
  * Generates code from your model files on save.
@@ -14,6 +16,8 @@ import questionairemodel.*
  * see http://www.eclipse.org/Xtext/documentation.html#TutorialCodeGeneration
  */
 class QuestionaireGenerator implements IGenerator {
+
+	String latex_cmd = "/usr/local/texlive/2012/bin/universal-darwin/pdflatex" //How to do this??
 
 	override void doGenerate(Resource resource, IFileSystemAccess fsa) {
 		resource.allContents.toIterable.filter(typeof(Questionaire)).forEach [ Questionaire it |
@@ -24,8 +28,13 @@ class QuestionaireGenerator implements IGenerator {
 			
 			
 			// generate Latex
-			fsa.generateFile("latex/" + ".tex", LatexGenerator.compileToLatex(it))
+			fsa.generateFile("latex/" + fname +".tex", LatexGenerator.compileToLatex(it))
 			//TODO: other Latex stuff?
+			val projectName = resource.URI.segment(1)
+			val project = ResourcesPlugin.workspace.root.getProject(projectName)
+			var path = new File(project.location + "/src-gen/latex/")
+			var cmd = #[latex_cmd, fname + ".tex"]
+			Runtime.runtime.exec(cmd, null, path)
 		]
 	}
 }

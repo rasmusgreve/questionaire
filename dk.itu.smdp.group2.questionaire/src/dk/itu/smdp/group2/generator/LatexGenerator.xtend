@@ -155,7 +155,7 @@ class LatexGenerator {
 	}
 	def static compileIntegerQuestion(IntegerQuestion it)  {
 		'''
-		integeranswer{«minValue»}{«maxValue»}{«step»}
+		\integeranswer{«minValue»}{«maxValue»}{«step»}
 		'''
 	}
 	def static compileCalendarQuestion(CalendarQuestion it)  {

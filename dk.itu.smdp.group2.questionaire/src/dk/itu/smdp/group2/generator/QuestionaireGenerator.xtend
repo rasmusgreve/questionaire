@@ -9,6 +9,12 @@ import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.xtext.generator.IFileSystemAccess
 import org.eclipse.xtext.generator.IGenerator
 import questionairemodel.Questionaire
+import questionairemodel.Question
+import questionairemodel.Option
+import questionairemodel.Paragraph
+import questionairemodel.Heading
+import questionairemodel.ChoiceQuestion
+import questionairemodel.Element
 
 /**
  * Generates code from your model files on save.
@@ -22,6 +28,9 @@ class QuestionaireGenerator implements IGenerator {
 	override void doGenerate(Resource resource, IFileSystemAccess fsa) {
 		resource.allContents.toIterable.filter(typeof(Questionaire)).forEach [ Questionaire it |
 			val fname = it.name.toFirstUpper
+			
+			elements.forEach[removeQuotes]
+			
 			// generate Android implementation
 			fsa.generateFile("android/" + fname + ".java", AndroidGenerator.compileToAndroid(it))
 			//TODO: other Android stuff?
@@ -37,4 +46,25 @@ class QuestionaireGenerator implements IGenerator {
 			Runtime.runtime.exec(cmd, null, path)
 		]
 	}
+	
+	def static removeQuotes(Element it){
+		if(it instanceof Heading){
+			text = text.replaceAll("^\"(.*)\"$", "$1")
+		}
+		if(it instanceof Paragraph){
+			text = text.replaceAll("^\"(.*)\"$", "$1")
+		}
+		if(it instanceof Question){
+			questionBase.title = questionBase.title.replaceAll("^\"(.*)\"$", "$1")
+			if(questionBase.description != null) questionBase.description = questionBase.description.replaceAll("^\"(.*)\"$", "$1")
+			if(it instanceof ChoiceQuestion) options.forEach[removeQuotes]
+		}
+		
+	}
+	
+	def static removeQuotes(Option it){
+		if(name!=null) name = name.replaceAll("^\"(.*)\"$", "$1")
+		text = text.replaceAll("^\"(.*)\"$", "$1")
+	}
 }
+

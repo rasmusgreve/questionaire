@@ -18,136 +18,96 @@ class LatexGenerator {
 	
 	def static staticStartCode(){
 		'''
-		\documentclass[a4paper,10pt,BCOR10mm,oneside,headsepline]{scrartcl}
+		\documentclass[12pt,fleqn]{scrreprt}
 		\usepackage[ngerman]{babel}
-		\usepackage[utf8]{inputenc}
-		\usepackage{wasysym}% provides \ocircle and \Box
-		\usepackage{enumitem}% easy control of topsep and leftmargin for lists
-		\usepackage{color}% used for background color
-		\usepackage{forloop}% used for \Qrating and \Qlines
-		\usepackage{ifthen}% used for \Qitem and \QItem
-		\usepackage{typearea}
-		\areaset{17cm}{26cm}
-		\setlength{\topmargin}{-1cm}
-		\usepackage{scrpage2}
-		\pagestyle{scrheadings}
-		\ihead{Example questionnaire created with \LaTeX}
-		\ohead{\pagemark}
-		\chead{}
-		\cfoot{}
+		\usepackage[top=2.5cm,bottom=2.5cm,left=2cm,right=2cm]{geometry}
+		\usepackage[latin1]{inputenc}
+		\RequirePackage{amssymb,latexsym,amsmath}
+		\RequirePackage{stmaryrd}
+		\RequirePackage{paralist}
+		\RequirePackage{longtable}
+		\RequirePackage{framed}
+		\RequirePackage{color}
+		\RequirePackage{array,booktabs,calc} 
+		\RequirePackage{forloop}
 		
-		%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-		%% Beginning of questionnaire command definitions %%
-		%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-		%%
-		%% 2010, 2012 by Sven Hartenstein
-		%% mail@svenhartenstein.de
-		%% http://www.svenhartenstein.de
-		%%
-		%% Please be warned that this is NOT a full-featured framework for
-		%% creating (all sorts of) questionnaires. Rather, it is a small
-		%% collection of LaTeX commands that I found useful when creating a
-		%% questionnaire. Feel free to copy and adjust any parts you like.
-		%% Most probably, you will want to change the commands, so that they
-		%% fit your taste.
-		%%
-		%% Also note that I am not a LaTeX expert! Things can very likely be
-		%% done much more elegant than I was able to. If you have suggestions
-		%% about what can be improved please send me an email. I intend to
-		%% add good tipps to my website and to name contributers of course.
-		%%
-		%% 10/2012: Thanks to karathan for the suggestion to put \noindent
-		%% before \rule!
+		\definecolor{shadecolor}{rgb}{0.95,0.95,0.95}
+		\definecolor{framecolor}{rgb}{0,0,0}
+		\setlength{\fboxrule}{0.3mm}
 		
-		%% \Qq = Questionaire question. Oh, this is just too simple. It helps
-		%% making it easy to globally change the appearance of questions.
-		\newcommand{\Qq}[1]{\subsection*{#1}}
+		\parindent0cm 
+		\pagestyle{empty}
 		
-		%% \QO = Circle or box to be ticked. Used both by direct call and by
-		%% \Qrating and \Qlist.
-		\newcommand{\QO}{$\Box$}% or: $\ocircle$
 		
-		\newcommand{\Qnum}[2]{\textit{You must choose between #1 and #2 options.}}
 		
-		%% \Qrating = Automatically create a rating scale with NUM steps, like
-		%% this: 0--0--0--0--0.
-		\newcounter{qr}
-		\newcommand{\Qrating}[1]{\QO\forloop{qr}{1}{\value{qr} < #1}{---\QO}}
+		\newcommand{\bbox}{\framebox[0.6cm]{\rule{0cm}{0.6cm}}}
 		
-		%% \Qline = Again, this is very simple. It helps setting the line
-		%% thickness globally. Used both by direct call and by \Qlines.
-		\newcommand{\Qline}[1]{\noindent\rule{#1}{0.6pt}}
 		
-		%% \Qlines = Insert NUM lines with width=\linewith. You can change the
-		%% \vskip value to adjust the spacing.
-		\newcounter{ql}
-		\newcommand{\Qlines}[1]{\forloop{ql}{0}{\value{ql}<#1}{\vskip1em\Qline{\linewidth}}}
+		%Heading
+		\newcommand{\heading}[1]{{\huge #1}}
 		
-		%% \Qlist = This is an environment very similar to itemize but with
-		%% \QO in front of each list item. Useful for classical multiple
-		%% choice. Change leftmargin and topsep accourding to your taste.
-		\newenvironment{Qlist}{%
-		\renewcommand{\labelitemi}{\QO}
-		\begin{itemize}[leftmargin=1.5em,topsep=1em]
-		}{%
-		\end{itemize}
+		%Paragraph
+		\renewenvironment{paragraph}{%
+		\def\FrameCommand{\fcolorbox{framecolor}{shadecolor}}%
+		\MakeFramed {\FrameRestore}}%
+		{\endMakeFramed}
+		
+		
+		%Question
+		\renewcommand*\thechapter{\bf{\arabic{chapter}.}}
+		\catcode `@11
+		\def\question{\@startsection {chapter}{1}{\z@}{-3.5ex plus
+		-1ex minus  -.2ex}{1.5ex plus .2ex}{}}
+		
+		
+		%Text question
+		\newcounter{openC}
+		\newcommand{\textanswer}[1]{\begin{addmargin}{1.5cm}
+		\vspace{0.4cm}
+		\forloop{openC}{0}{\value{openC}<#1}{
+		\raisebox{-4.5mm}{\parbox{13cm}{\hrule\strut}}\vspace{0.4cm}
+		
 		}
+		\end{addmargin}}
 		
-		%% \Qtab = A "tabulator simulation". The first argument is the
-		%% distance from the left margin. The second argument is content which
-		%% is indented within the current row.
-		\newlength{\qt}
-		\newcommand{\Qtab}[2]{
-		\setlength{\qt}{\linewidth}
-		\addtolength{\qt}{-#1}
-		\hfill\parbox[t]{\qt}{\raggedright #2}
-		}
+		%Integer question
+		\newcounter{integerC}
+		\newcommand{\integeranswer}[3]{\begin{center}
+		\begin{tabular}{*{#2}{c}}
+		\hfill\forloop[#3]{integerC}{#1}{\value{integerC} < #2}{$\Box$ & }$\Box$\\
+		\hfill\forloop[#3]{integerC}{#1}{\value{integerC} < #2}{\arabic{integerC} & }#2
+		\end{tabular}
+		\end{center}}
 		
-		%% \Qitem = Item with automatic numbering. The first optional argument
-		%% can be used to create sub-items like 2a, 2b, 2c, ... The item
-		%% number is increased if the first argument is omitted or equals 'a'.
-		%% You will have to adjust this if you prefer a different numbering
-		%% scheme. Adjust topsep and leftmargin as needed.
-		\newcounter{itemnummer}
-		\newcommand{\Qitem}[2][]{% #1 optional, #2 notwendig
-		\ifthenelse{\equal{#1}{}}{\stepcounter{itemnummer}}{}
-		\ifthenelse{\equal{#1}{a}}{\stepcounter{itemnummer}}{}
-		\begin{enumerate}[topsep=2pt,leftmargin=2.8em]
-		\item[\textbf{\arabic{itemnummer}#1.}] #2
-		\end{enumerate}
-		}
+		%Calendar question
+		\def\year{$\stackrel{\bbox\ \bbox\ \bbox\ \bbox}{\mbox{ \footnotesize Year }}\hspace{.8cm}$}
+		\def\month{$\stackrel{\bbox\ \bbox}{\mbox{\footnotesize Month}}\hspace{.8cm}$}
+		\def\day{$\stackrel{\bbox\ \bbox}{\mbox{\footnotesize Day}}\hspace{.8cm}$}
+		\def\hour{$\stackrel{\bbox\ \bbox}{\mbox{\footnotesize Hour}}\hspace{.8cm}$}
+		\def\minute{$\stackrel{\bbox\ \bbox}{\mbox{\footnotesize Minute}}\hspace{.8cm}$}
 		
-		%% \QItem = Like \Qitem but with alternating background color. This
-		%% might be error prone as I hard-coded some lengths (-5.25pt and
-		%% -3pt)! I do not yet understand why I need them.
-		\definecolor{bgodd}{rgb}{0.8,0.8,0.8}
-		\definecolor{bgeven}{rgb}{0.9,0.9,0.9}
-		\newcounter{itemoddeven}
-		\newlength{\gb}
-		\newcommand{\QItem}[2][]{% #1 optional, #2 notwendig
-		\setlength{\gb}{\linewidth}
-		\addtolength{\gb}{-5.25pt}
-		\ifthenelse{\equal{\value{itemoddeven}}{0}}{%
-		\noindent\colorbox{bgeven}{\hskip-3pt\begin{minipage}{\gb}\Qitem[#1]{#2}\end{minipage}}%
-		\stepcounter{itemoddeven}%
-		}{%
-		\noindent\colorbox{bgodd}{\hskip-3pt\begin{minipage}{\gb}\Qitem[#1]{#2}\end{minipage}}%
-		\setcounter{itemoddeven}{0}%
-		}
-		}
+		%Choice question
+		\newenvironment{choiceoptions}{\vspace{0.25cm}\begin{addmargin}[2cm]{6cm}\begin{compactitem}[]}{\end{compactitem}\end{addmargin}}
+		\newcommand{\option}[1]{\item #1\dotfill$\square$}  
+		\newcommand{\choicenumber}[2]{\textit{You must choose between #1 and #2 options.}}
 		
-		%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-		%% End of questionnaire command definitions %%
-		%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+		
+		%Matrix question (not done)
+		\newcommand{\matrixfive}[6]{\vspace{0.5cm}\begin{tabular}{p{4.7cm}p{1.8cm}p{1.8cm}p{1.8cm}p{1.8cm}p{1.8cm}p{0.000001cm}}
+		&\centering #1&\centering #2&\centering #3&\centering #4&\centering #5&\\#6\end{tabular}\vspace{0.5cm}}
+		\newcommand{\matrixlinefive}[1]{#1\vspace{0.2cm}& \centering$\Box$ & \centering$\Box$ & \centering$\Box$ & \centering$\Box$&\centering$\Box$&\\}
 		
 		\begin{document}
+
 		'''
 	}
 	
 	def static staticEndCode() {
 		'''
 		
-		\center{\emph{Thank you for filling out our questionaire.}}
+		\begin{paragraph}
+		Thank you for filling out our questionaire.
+		\end{paragraph}
 		\end{document}
 		'''
 	}
@@ -160,12 +120,14 @@ class LatexGenerator {
 	
 	def static compileHeading(Heading it)  {
 		'''
-		\section*{«text»}
+		\heading{«text»}
 		'''
 	}
 	def static compileParagraph(Paragraph it)  {
 		'''
-		«text»\\
+		\begin{paragraph}
+		«text»
+		\end{paragraph}
 		'''
 	}
 
@@ -181,46 +143,46 @@ class LatexGenerator {
 		«IF (it instanceof ChoiceQuestion)»«compileChoiceQuestion»«ENDIF»
 		'''
 	}
+	def static compileQuestionBase(QuestionBase it)  {
+		'''
+		\question{«title»«IF mandatory» *«ENDIF»«IF description != null»\\«description»«ENDIF»}
+		'''
+	}
 	def static compileTextQuestion(TextQuestion it)  {
 		'''
-		\Qlines{«lines»}
+		\textanswer{«lines»}
 		'''
 	}
 	def static compileIntegerQuestion(IntegerQuestion it)  {
-		var ArrayList<Integer> numbers = new ArrayList<Integer>() 
-		var int i = minValue
-		while(i < maxValue){
-			numbers.add(i)
-			i = i + step
-		}
 		'''
-		\emph{Put an X on the chosen number.}
-		«FOR n : numbers»
-		(«n»)---
-		«ENDFOR»
-		(«maxValue»)
+		integeranswer{«minValue»}{«maxValue»}{«step»}
 		'''
 	}
 	def static compileCalendarQuestion(CalendarQuestion it)  {
-		
+		'''
+		«IF year»\year«ENDIF»
+		«IF month»\month«ENDIF»
+		«IF day»\day«ENDIF»
+		«IF hour»\hour«ENDIF»
+		«IF minute»\minute«ENDIF»
+		'''
 	}
+	
 	def static compileMatrixQuestion(MatrixQuestion it)  {
-		
+		'''
+		\begin{paragraph}
+		Matrix questions not implemented yet...
+		\end{paragraph}
+		'''
 	}
 	def static compileChoiceQuestion(ChoiceQuestion it)  {
 		'''
-		\Qnum{«minSelections»}{«maxSelections»}
-		\begin{Qlist}
+		\choicenumber{«minSelections»}{«maxSelections»}
+		\begin{choiceoptions}
 		«FOR option : options»
-			\item «option.text»
+			\option{«option.text»}
 		«ENDFOR»
-		\end{Qlist}
-		'''
-	}
-	def static compileQuestionBase(QuestionBase it)  {
-		'''
-		\Qq{«title»«IF mandatory» *«ENDIF»}
-		«IF description != null»«description»«ENDIF»\\
+		\end{choiceoptions}
 		'''
 	}
 	def static compileQuestionCondition(QuestionCondition it)  {

@@ -15,6 +15,8 @@ import questionairemodel.Paragraph
 import questionairemodel.Heading
 import questionairemodel.ChoiceQuestion
 import questionairemodel.Element
+import questionairemodel.MatrixQuestion
+import java.util.List
 
 /**
  * Generates code from your model files on save.
@@ -24,6 +26,8 @@ import questionairemodel.Element
 class QuestionaireGenerator implements IGenerator {
 
 	String latex_cmd = "/usr/local/texlive/2012/bin/universal-darwin/pdflatex" //How to do this??
+	
+	static val repReg = #["^\"(.*)\"$", "$1"]
 
 	override void doGenerate(Resource resource, IFileSystemAccess fsa) {
 		resource.allContents.toIterable.filter(typeof(Questionaire)).forEach [ Questionaire it |
@@ -49,22 +53,29 @@ class QuestionaireGenerator implements IGenerator {
 	
 	def static removeQuotes(Element it){
 		if(it instanceof Heading){
-			text = text.replaceAll("^\"(.*)\"$", "$1")
+			text = text.replaceAll(repReg.get(0), repReg.get(1))
 		}
 		if(it instanceof Paragraph){
-			text = text.replaceAll("^\"(.*)\"$", "$1")
+			text = text.replaceAll(repReg.get(0), repReg.get(1))
 		}
 		if(it instanceof Question){
-			questionBase.title = questionBase.title.replaceAll("^\"(.*)\"$", "$1")
-			if(questionBase.description != null) questionBase.description = questionBase.description.replaceAll("^\"(.*)\"$", "$1")
+			questionBase.title = questionBase.title.replaceAll(repReg.get(0), repReg.get(1))
+			if(questionBase.description != null) questionBase.description = questionBase.description.replaceAll(repReg.get(0), repReg.get(1))
 			if(it instanceof ChoiceQuestion) options.forEach[removeQuotes]
+			if(it instanceof MatrixQuestion) {removeQuotes(rowNames);removeQuotes(columnNames)}
 		}
 		
 	}
 	
+	def static removeQuotes(List<String> list) {
+		var List<String> oldNames = list.immutableCopy
+		list.clear
+		oldNames.forEach[list.add(it.replaceAll(repReg.get(0), repReg.get(1)))]
+	}
+	
 	def static removeQuotes(Option it){
-		if(name!=null) name = name.replaceAll("^\"(.*)\"$", "$1")
-		text = text.replaceAll("^\"(.*)\"$", "$1")
+		if(name!=null) name = name.replaceAll(repReg.get(0), repReg.get(1))
+		text = text.replaceAll(repReg.get(0), repReg.get(1))
 	}
 }
 

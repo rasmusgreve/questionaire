@@ -18,6 +18,16 @@ class LatexGenerator {
 	
 	def static staticStartCode(){
 		'''
+		%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+		%                                                  %
+		%            Based on LaTeX styles by              %
+		%        Miriam Dieter & Anja Zwingenberger        %
+		%          University of Duisburg-Essen            %
+		%                                                  %
+		% Available at http://www.qdds.de/index.php?id=129 %
+		%                                                  %
+		%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+		
 		\documentclass[12pt,fleqn]{scrreprt}
 		\usepackage[ngerman]{babel}
 		\usepackage[top=2.5cm,bottom=2.5cm,left=2cm,right=2cm]{geometry}
@@ -93,9 +103,9 @@ class LatexGenerator {
 		
 		
 		%Matrix question (not done)
-		\newcommand{\matrixfive}[6]{\vspace{0.5cm}\begin{tabular}{p{4.7cm}p{1.8cm}p{1.8cm}p{1.8cm}p{1.8cm}p{1.8cm}p{0.000001cm}}
-		&\centering #1&\centering #2&\centering #3&\centering #4&\centering #5&\\#6\end{tabular}\vspace{0.5cm}}
-		\newcommand{\matrixlinefive}[1]{#1\vspace{0.2cm}& \centering$\Box$ & \centering$\Box$ & \centering$\Box$ & \centering$\Box$&\centering$\Box$&\\}
+		\newcounter{lineC}
+		\newcommand{\matrixline}[2]{#2\vspace{0.2cm}& \forloop{lineC}{0}{\value{lineC}<#1}{\centering$\Box$ & }\\}
+		
 		
 		\begin{document}
 
@@ -170,9 +180,14 @@ class LatexGenerator {
 	
 	def static compileMatrixQuestion(MatrixQuestion it)  {
 		'''
-		\begin{paragraph}
-		Matrix questions not implemented yet...
-		\end{paragraph}
+		\vspace{0.5cm}
+		\begin{tabular}{p{4.7cm}*{«columnNames.length»}{p{«Math.round(1000.0/columnNames.length)/100.0»cm}}p{0.000001cm}}
+		&«FOR c : columnNames»\centering «c»&«ENDFOR»\\
+		«FOR row : rowNames»
+		\matrixline{«columnNames.length»}{«row»}
+		«ENDFOR»
+		\end{tabular}
+		\vspace{0.5cm}
 		'''
 	}
 	def static compileChoiceQuestion(ChoiceQuestion it)  {

@@ -75,6 +75,17 @@ class QuestionaireValidator extends AbstractQuestionaireValidator {
 	}
 	
 	@Check
+	def choiceSelectionRangeValue(ChoiceQuestion it)
+	{
+		if (minSelections >= maxSelections && maxSelections != 0)
+		{
+			error("Max selections must be >= min selections", 
+				QuestionairemodelPackage.Literals.CHOICE_QUESTION__MAX_SELECTIONS
+			);
+		}
+	}
+	
+	@Check
 	def optionIdUnqiue(Questionaire it)
 	{
 		//Find all ids

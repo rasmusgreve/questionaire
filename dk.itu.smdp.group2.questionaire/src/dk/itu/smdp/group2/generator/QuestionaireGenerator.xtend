@@ -31,9 +31,13 @@ class QuestionaireGenerator implements IGenerator {
 
 	override void doGenerate(Resource resource, IFileSystemAccess fsa) {
 		resource.allContents.toIterable.filter(typeof(Questionaire)).forEach [ Questionaire it |
-			val fname = it.name.toFirstUpper
 			
+			//Remove quotes
+			name = name.replaceAll(repReg.get(0), repReg.get(1))
+			resultEmail = resultEmail.replaceAll(repReg.get(0), repReg.get(1))
 			elements.forEach[removeQuotes]
+			
+			val fname = it.name.toFirstUpper
 			
 			// generate Android implementation
 			fsa.generateFile("android/" + fname + ".java", AndroidGenerator.compileToAndroid(it))
@@ -47,7 +51,10 @@ class QuestionaireGenerator implements IGenerator {
 			val project = ResourcesPlugin.workspace.root.getProject(projectName)
 			var path = new File(project.location + "/src-gen/latex/")
 			var cmd = #[latex_cmd, fname + ".tex"]
-			Runtime.runtime.exec(cmd, null, path)
+			try{
+				Runtime.runtime.exec(cmd, null, path)
+			}
+			catch(Exception e){}
 		]
 	}
 	
@@ -65,7 +72,7 @@ class QuestionaireGenerator implements IGenerator {
 			if(it instanceof MatrixQuestion) {removeQuotes((it as MatrixQuestion).rowNames);removeQuotes((it as MatrixQuestion).columnNames)}
 		}
 		
-	}
+	}	
 	
 	def static removeQuotes(List<String> list) {
 		var List<String> oldNames = list.immutableCopy

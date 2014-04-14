@@ -7,7 +7,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
-import android.widget.ScrollView;
 
 public class QuestionsFragment extends Fragment {
 	
@@ -27,7 +26,7 @@ public class QuestionsFragment extends Fragment {
 		cq.AddOption("food2","I like food");
 		...
 		
-		qn.CreateAllViews(ll);
+		qn.generateAllViews(ll);
 		
 		*/
 	}

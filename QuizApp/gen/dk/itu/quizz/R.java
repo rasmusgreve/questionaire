@@ -25,10 +25,16 @@ public final class R {
         public static final int radio1=0x7f070003;
         public static final int radio2=0x7f070004;
         public static final int radioGroup1=0x7f070001;
-        public static final int textView1=0x7f070000;
+        public static final int svChoiceOptions=0x7f07000a;
+        public static final int svsLinearLayout=0x7f07000b;
+        public static final int tvChoiceDesc=0x7f070009;
+        public static final int tvChoiceTitle=0x7f070008;
+        public static final int tvTitle=0x7f070000;
     }
     public static final class layout {
         public static final int activity_main=0x7f030000;
+        public static final int question_choice=0x7f030001;
+        public static final int questions_fragment=0x7f030002;
     }
     public static final class string {
         public static final int app_name=0x7f040000;

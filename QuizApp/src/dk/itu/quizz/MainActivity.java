@@ -193,7 +193,7 @@ public class MainActivity extends Activity {
     	radioButton1 = (RadioButton) findViewById(R.id.radio0);
     	radioButton2 = (RadioButton) findViewById(R.id.radio1);
     	radioButton3 = (RadioButton) findViewById(R.id.radio2);
-    	textView = (TextView) findViewById(R.id.textView1);
+    	textView = (TextView) findViewById(R.id.tvTitle);
     }
     /**
      * These are static defined for Google SMTP. If you want to use another

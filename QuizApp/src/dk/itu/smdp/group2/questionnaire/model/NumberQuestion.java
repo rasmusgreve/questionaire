@@ -53,4 +53,10 @@ public class NumberQuestion extends Question {
 	{
 		return "";
 	}
+
+	@Override
+	public boolean isAnswered() {
+		// TODO Auto-generated method stub
+		return false;
+	}
 }

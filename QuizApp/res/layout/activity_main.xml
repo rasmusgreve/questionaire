@@ -5,66 +5,10 @@
     android:orientation="vertical"
     tools:context=".MainActivity" >
 
-    <TextView
-        android:id="@+id/tvTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-       />
-	 <RadioGroup
-        android:id="@+id/radioGroup1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="49dp">
-
-        <RadioButton
-            android:id="@+id/radio0"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:checked="true"
-            android:text="RadioButton" />
-
-        <RadioButton
-            android:id="@+id/radio1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="RadioButton" />
-
-        <RadioButton
-            android:id="@+id/radio2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="RadioButton" />
-    </RadioGroup>
-    <LinearLayout 
-	    android:layout_width="match_parent"
-    	android:layout_height="wrap_content"
-    	android:orientation="horizontal">
-
-    <Button
-        android:id="@+id/button1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-       android:layout_marginBottom="19dp"
-        android:layout_marginLeft="26dp"
-        android:text="Next" />
-	
-    <Button
-        android:id="@+id/button2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginRight="63dp"
-        android:text="Previous" />
-    </LinearLayout>
-	<LinearLayout 
-	    android:layout_width="wrap_content"
-	    android:layout_height="wrap_content"
-    	android:orientation="vertical">
-    <Button
-        android:id="@+id/button3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Send results" />
-	</LinearLayout>
+    <fragment android:name="dk.itu.smdp.group2.questionnaire.QuestionsFragment"
+           android:id="@+id/list"
+           android:layout_width="match_parent"
+           android:layout_height="match_parent" />
  
 </LinearLayout>
 

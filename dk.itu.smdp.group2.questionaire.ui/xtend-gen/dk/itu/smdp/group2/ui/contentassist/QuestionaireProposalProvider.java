@@ -3,9 +3,11 @@
  */
 package dk.itu.smdp.group2.ui.contentassist;
 
+import dk.itu.smdp.group2.ui.contentassist.AbstractQuestionaireProposalProvider;
+
 /**
  * see http://www.eclipse.org/Xtext/documentation.html#contentAssist on how to customize content assistant
  */
 @SuppressWarnings("all")
-public class QuestionaireProposalProvider /* implements AbstractQuestionaireProposalProvider  */{
+public class QuestionaireProposalProvider extends AbstractQuestionaireProposalProvider {
 }

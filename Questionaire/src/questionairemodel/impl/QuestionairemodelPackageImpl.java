@@ -716,7 +716,7 @@ public class QuestionairemodelPackageImpl extends EPackageImpl implements Questi
 
 		initEClass(integerQuestionEClass, IntegerQuestion.class, "IntegerQuestion", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getIntegerQuestion_MinValue(), ecorePackage.getEInt(), "minValue", null, 1, 1, IntegerQuestion.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getIntegerQuestion_Step(), ecorePackage.getEInt(), "step", null, 0, 1, IntegerQuestion.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getIntegerQuestion_Step(), ecorePackage.getEInt(), "step", "1", 0, 1, IntegerQuestion.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getIntegerQuestion_MaxValue(), ecorePackage.getEInt(), "maxValue", null, 1, 1, IntegerQuestion.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(questionConditionEClass, QuestionCondition.class, "QuestionCondition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);

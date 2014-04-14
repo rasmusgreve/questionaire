@@ -55,7 +55,7 @@ class QuestionaireValidator extends AbstractQuestionaireValidator {
 		if (step < 1) return; //Don't validate invalid steps (causes exceptions if zero)
 		if ((maxValue - minValue) % step != 0)
 		{
-			warning("The selected step value doesn't allow the maximum value to be selected", 
+			warning("The selected step value doesn't match the maximum value", 
 				QuestionairemodelPackage.Literals.INTEGER_QUESTION__STEP,
 				INTEGERQUESTION_STEP,
 				Integer.toString(step)
@@ -66,7 +66,7 @@ class QuestionaireValidator extends AbstractQuestionaireValidator {
 	@Check
 	def integerStepValid(IntegerQuestion it)
 	{
-		if (step < 0) //0 is default (to be interpreted as 1)
+		if (step < 1)
 		{
 			error("Step must be >= 1", 
 				QuestionairemodelPackage.Literals.INTEGER_QUESTION__STEP

@@ -55,7 +55,7 @@ public class IntegerQuestionImpl extends QuestionImpl implements IntegerQuestion
 	 * @generated
 	 * @ordered
 	 */
-	protected static final int STEP_EDEFAULT = 0;
+	protected static final int STEP_EDEFAULT = 1;
 
 	/**
 	 * The cached value of the '{@link #getStep() <em>Step</em>}' attribute.

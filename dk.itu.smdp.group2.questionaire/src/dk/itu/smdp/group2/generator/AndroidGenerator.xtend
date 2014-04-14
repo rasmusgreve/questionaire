@@ -41,7 +41,7 @@ class AndroidGenerator {
 				return v;
 			}
 		
-			private void init(LinearLayout ll) {
+			private Questionnaire init() {
 				Questionnaire questionnaire = new Questionnaire(this.getActivity(), "«name»", "«resultEmail»");
 				
 				TextQuestion text;
@@ -55,7 +55,7 @@ class AndroidGenerator {
 				
 				«ENDFOR»
 				
-				questionnaire.generateAllViews(ll);
+				return questionnaire;
 			}
 		}
 		'''

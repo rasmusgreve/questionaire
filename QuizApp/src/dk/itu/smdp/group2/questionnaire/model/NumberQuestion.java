@@ -1,4 +1,4 @@
-package dk.itu.quizz.model;
+package dk.itu.smdp.group2.questionnaire.model;
 
 import java.util.HashMap;
 

@@ -50,6 +50,7 @@ public interface IntegerQuestion extends Question {
 
 	/**
 	 * Returns the value of the '<em><b>Step</b></em>' attribute.
+	 * The default value is <code>"1"</code>.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Step</em>' attribute isn't clear,
@@ -59,7 +60,7 @@ public interface IntegerQuestion extends Question {
 	 * @return the value of the '<em>Step</em>' attribute.
 	 * @see #setStep(int)
 	 * @see questionairemodel.QuestionairemodelPackage#getIntegerQuestion_Step()
-	 * @model
+	 * @model default="1"
 	 * @generated
 	 */
 	int getStep();

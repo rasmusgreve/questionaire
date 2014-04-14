@@ -146,11 +146,11 @@ class LatexGenerator {
 		'''
 		%%«it.class.name»
 		«questionBase.compileQuestionBase»
-		«IF (it instanceof TextQuestion)»«compileTextQuestion»«ENDIF»
-		«IF (it instanceof IntegerQuestion)»«compileIntegerQuestion»«ENDIF»
-		«IF (it instanceof CalendarQuestion)»«compileCalendarQuestion»«ENDIF»
-		«IF (it instanceof MatrixQuestion)»«compileMatrixQuestion»«ENDIF»
-		«IF (it instanceof ChoiceQuestion)»«compileChoiceQuestion»«ENDIF»
+		«IF (it instanceof TextQuestion)»«compileTextQuestion(it as TextQuestion)»«ENDIF»
+		«IF (it instanceof IntegerQuestion)»«compileIntegerQuestion(it as IntegerQuestion)»«ENDIF»
+		«IF (it instanceof CalendarQuestion)»«compileCalendarQuestion(it as CalendarQuestion)»«ENDIF»
+		«IF (it instanceof MatrixQuestion)»«compileMatrixQuestion(it as MatrixQuestion)»«ENDIF»
+		«IF (it instanceof ChoiceQuestion)»«compileChoiceQuestion(it as ChoiceQuestion)»«ENDIF»
 		'''
 	}
 	def static compileQuestionBase(QuestionBase it)  {
@@ -215,9 +215,9 @@ class LatexGenerator {
 		«// TODO: Output it.name and it.email
 		»
 		«FOR element : elements»
-			«IF (element instanceof Heading)»«element.compileHeading»«ENDIF»
-			«IF (element instanceof Paragraph)»«element.compileParagraph»«ENDIF»
-			«IF (element instanceof Question)»«element.compileQuestion»«ENDIF»
+			«IF (element instanceof Heading)»«compileHeading(element as Heading)»«ENDIF»
+			«IF (element instanceof Paragraph)»«compileParagraph(element as Paragraph)»«ENDIF»
+			«IF (element instanceof Question)»«compileQuestion(element as Question)»«ENDIF»
 		«ENDFOR»
 		«staticEndCode»
 		'''

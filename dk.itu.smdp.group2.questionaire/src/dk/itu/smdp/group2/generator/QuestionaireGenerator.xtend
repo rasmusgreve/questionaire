@@ -53,16 +53,16 @@ class QuestionaireGenerator implements IGenerator {
 	
 	def static removeQuotes(Element it){
 		if(it instanceof Heading){
-			text = text.replaceAll(repReg.get(0), repReg.get(1))
+			(it as Heading).text = (it as Heading).text.replaceAll(repReg.get(0), repReg.get(1))
 		}
 		if(it instanceof Paragraph){
-			text = text.replaceAll(repReg.get(0), repReg.get(1))
+			(it as Paragraph).text = (it as Paragraph).text.replaceAll(repReg.get(0), repReg.get(1))
 		}
 		if(it instanceof Question){
-			questionBase.title = questionBase.title.replaceAll(repReg.get(0), repReg.get(1))
-			if(questionBase.description != null) questionBase.description = questionBase.description.replaceAll(repReg.get(0), repReg.get(1))
-			if(it instanceof ChoiceQuestion) options.forEach[removeQuotes]
-			if(it instanceof MatrixQuestion) {removeQuotes(rowNames);removeQuotes(columnNames)}
+			(it as Question).questionBase.title = (it as Question).questionBase.title.replaceAll(repReg.get(0), repReg.get(1))
+			if((it as Question).questionBase.description != null) (it as Question).questionBase.description = (it as Question).questionBase.description.replaceAll(repReg.get(0), repReg.get(1))
+			if(it instanceof ChoiceQuestion) (it as ChoiceQuestion).options.forEach[removeQuotes]
+			if(it instanceof MatrixQuestion) {removeQuotes((it as MatrixQuestion).rowNames);removeQuotes((it as MatrixQuestion).columnNames)}
 		}
 		
 	}

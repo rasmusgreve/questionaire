@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><templates><template autoinsert="false" context="dk.itu.smdp.group2.Questionaire.Element" deleted="false" description="Insert a choice question" enabled="true" name="choicequestion">?"${question}"*&#13;
+choice[${min_selections} to ${max_selections}]&#13;
+-"${answer1}"&#13;
+-"${answer2}"&#13;
+-"${answer3}"</template><template autoinsert="false" context="dk.itu.smdp.group2.Questionaire.Element" deleted="false" description="Insert a matrix question" enabled="true" name="matrixquestion">?"${question}"*&#13;
+matrix[${max_selections_per_row}]["${column1}", "${column2}", "${column3}"]&#13;
+-"${row1}"&#13;
+-"${row2}"&#13;
+-"${row3}"</template><template autoinsert="false" context="dk.itu.smdp.group2.Questionaire.Element" deleted="false" description="Insert a number question" enabled="true" name="numberquestion">?"${question}"*&#13;
+number[${min_value} to ${max_value} step ${step}]</template><template autoinsert="false" context="dk.itu.smdp.group2.Questionaire.Element" deleted="false" description="Insert a text question" enabled="true" name="textquestion">?"${question}"*&#13;
+text[${line_count}]</template></templates>

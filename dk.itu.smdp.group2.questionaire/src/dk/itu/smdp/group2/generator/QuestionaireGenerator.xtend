@@ -17,6 +17,7 @@ import questionairemodel.ChoiceQuestion
 import questionairemodel.Element
 import questionairemodel.MatrixQuestion
 import java.util.List
+import questionairemodel.impl.ChoiceQuestionImpl
 
 /**
  * Generates code from your model files on save.
@@ -36,6 +37,12 @@ class QuestionaireGenerator implements IGenerator {
 			name = name.replaceAll(repReg.get(0), repReg.get(1))
 			resultEmail = resultEmail.replaceAll(repReg.get(0), repReg.get(1))
 			elements.forEach[removeQuotes]
+			
+			//Fix default values max selections for choice questions
+			elements.filter(ChoiceQuestionImpl).forEach[
+				if (maxSelections == 0) //If max not entered it means exactly min.
+					maxSelections = minSelections
+			]
 			
 			val fname = it.name.toFirstUpper
 			

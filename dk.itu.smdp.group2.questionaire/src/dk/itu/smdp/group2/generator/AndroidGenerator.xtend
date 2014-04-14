@@ -12,7 +12,6 @@ import questionairemodel.TextQuestion
 import questionairemodel.Question
 import questionairemodel.QuestionCondition
 import questionairemodel.Option
-import questionairemodel.QuestionBase
 
 class AndroidGenerator {
 	

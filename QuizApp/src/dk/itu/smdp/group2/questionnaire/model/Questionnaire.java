@@ -35,9 +35,26 @@ public class Questionnaire {
 		return a;
 	}
 	
+	// Untrivial Methods
+	
 	public void generateAllViews(LinearLayout ll){
 		for(Question q : questions){
 			ll.addView(q.generateView());
 		}
+	}
+
+	public int getFirstUncomplete() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	public void sendEmail() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public boolean isCompleted() {
+		// TODO Auto-generated method stub
+		return false;
 	}
 }

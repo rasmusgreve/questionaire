@@ -1,21 +1,28 @@
 package dk.itu.smdp.group2.questionnaire;
 
+import java.util.List;
+
 import dk.itu.smdp.group2.R;
 import android.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.view.ViewGroup.LayoutParams;
+import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.TextView;
+import android.widget.Toast;
 import dk.itu.smdp.group2.questionnaire.model.*;
 
 public class QuestionsFragment extends Fragment {
 	
-	private void init(LinearLayout ll) {
+	private Questionnaire init() {
 		// THIS IS WHERE AUTO GENERATED SHOULD CREATE OBJECTS
 		// AND PUT THEM IN THE SCROLLVIEW'S LINEAR LAYOUT
 		
-        Questionnaire questionnaire = new Questionnaire(this.getActivity(), "Questionnaire", "ragr@itu.dk");
+        Questionnaire questionnaire = new Questionnaire(this.getActivity(), "Questionnaire XXXXXXXXXXXXXXXXXXXxx", "ragr@itu.dk");
         
         //TextQuestion text;
         ChoiceQuestion choice;
@@ -55,9 +62,8 @@ public class QuestionsFragment extends Fragment {
         matrix.addCondition("a_little", "yes");
         matrix.addCondition("pasta");
         questionnaire.addQuestion(matrix);*/
-       
-       
-        questionnaire.generateAllViews(ll);
+        
+        return questionnaire;
 	}
 
 	@Override
@@ -68,9 +74,40 @@ public class QuestionsFragment extends Fragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
+		Questionnaire qn = init();
+		
 		View v = inflater.inflate(R.layout.questions_fragment, container, false);
-		init((LinearLayout)v.findViewById(R.id.svsLinearLayout));
+		TextView title = (TextView) v.findViewById(R.id.tvTitle);
+		LinearLayout scroll = (LinearLayout)v.findViewById(R.id.svsLinearLayout);
+		
+		title.setText(qn.getTitle());
+		
+		qn.generateAllViews(scroll);
+		createButton(qn,scroll);
+		
 		return v;
+	}
+
+	private void createButton(final Questionnaire qn, LinearLayout scroll) {
+		Button b = new Button(getActivity());
+		b.setText("Send");
+		b.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
+		
+		b.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				if(qn.isCompleted()){
+					qn.sendEmail();
+				}else{
+					int missing = qn.getFirstUncomplete();
+					String message = "Question "+missing+" must be answered.";
+					Toast.makeText(getActivity(), message, Toast.LENGTH_LONG).show();
+				}
+			}
+		});
+		
+		scroll.addView(b);
 	}
 
 	@Override

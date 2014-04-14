@@ -222,6 +222,7 @@ public class MainActivity extends Activity {
         message.setText(messageBody);
         return message;
     }
+    
     /*
      * Send e-mail functionality. Takes as arguments an e-mail address as a String,
      * a subject as a String and a message body as a String. 

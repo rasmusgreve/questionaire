@@ -21,8 +21,11 @@ QuestionBase:
 
 TextQuestion:
 	questionBase=QuestionBase
-	'text[' multiline?='long' ']'						
+	'text[' (lines=EInt | lines=SHORT_LONG) ']'						
 	;
+
+terminal SHORT_LONG returns ecore::EInt: 'short' | 'long';
+
 
 ChoiceQuestion:
 	questionBase=QuestionBase
@@ -39,11 +42,11 @@ MatrixQuestion:
 
 CalendarQuestion:
 	questionBase=QuestionBase
-	'calendar[' (	(year?='year')? ','? 
-					(month?='month')? ','? 
-					(day?='day')? ','? 
-					(hour?='hour')? ','? 
-					(minute?='minute')?
+	'calendar[' (	(year?='year' ','?)? 
+					(month?='month' ','?)? 
+					(day?='day' ','?)? 
+					(hour?='hour' ','?)?
+					(minute?='minute' ','?)?
 				) ']'
 	;
 

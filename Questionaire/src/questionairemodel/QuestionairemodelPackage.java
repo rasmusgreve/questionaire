@@ -270,13 +270,13 @@ public interface QuestionairemodelPackage extends EPackage {
 	int TEXT_QUESTION__QUESTION_BASE = QUESTION__QUESTION_BASE;
 
 	/**
-	 * The feature id for the '<em><b>Multiline</b></em>' attribute.
+	 * The feature id for the '<em><b>Lines</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TEXT_QUESTION__MULTILINE = QUESTION_FEATURE_COUNT + 0;
+	int TEXT_QUESTION__LINES = QUESTION_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>Text Question</em>' class.
@@ -846,15 +846,15 @@ public interface QuestionairemodelPackage extends EPackage {
 	EClass getTextQuestion();
 
 	/**
-	 * Returns the meta object for the attribute '{@link questionairemodel.TextQuestion#isMultiline <em>Multiline</em>}'.
+	 * Returns the meta object for the attribute '{@link questionairemodel.TextQuestion#getLines <em>Lines</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Multiline</em>'.
-	 * @see questionairemodel.TextQuestion#isMultiline()
+	 * @return the meta object for the attribute '<em>Lines</em>'.
+	 * @see questionairemodel.TextQuestion#getLines()
 	 * @see #getTextQuestion()
 	 * @generated
 	 */
-	EAttribute getTextQuestion_Multiline();
+	EAttribute getTextQuestion_Lines();
 
 	/**
 	 * Returns the meta object for class '{@link questionairemodel.ChoiceQuestion <em>Choice Question</em>}'.
@@ -1289,12 +1289,12 @@ public interface QuestionairemodelPackage extends EPackage {
 		EClass TEXT_QUESTION = eINSTANCE.getTextQuestion();
 
 		/**
-		 * The meta object literal for the '<em><b>Multiline</b></em>' attribute feature.
+		 * The meta object literal for the '<em><b>Lines</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute TEXT_QUESTION__MULTILINE = eINSTANCE.getTextQuestion_Multiline();
+		EAttribute TEXT_QUESTION__LINES = eINSTANCE.getTextQuestion_Lines();
 
 		/**
 		 * The meta object literal for the '{@link questionairemodel.impl.ChoiceQuestionImpl <em>Choice Question</em>}' class.

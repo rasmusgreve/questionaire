@@ -297,7 +297,7 @@ public class QuestionairemodelPackageImpl extends EPackageImpl implements Questi
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getTextQuestion_Multiline() {
+	public EAttribute getTextQuestion_Lines() {
 		return (EAttribute)textQuestionEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -598,7 +598,7 @@ public class QuestionairemodelPackageImpl extends EPackageImpl implements Questi
 		createEReference(questionEClass, QUESTION__QUESTION_BASE);
 
 		textQuestionEClass = createEClass(TEXT_QUESTION);
-		createEAttribute(textQuestionEClass, TEXT_QUESTION__MULTILINE);
+		createEAttribute(textQuestionEClass, TEXT_QUESTION__LINES);
 
 		choiceQuestionEClass = createEClass(CHOICE_QUESTION);
 		createEReference(choiceQuestionEClass, CHOICE_QUESTION__OPTIONS);
@@ -691,7 +691,7 @@ public class QuestionairemodelPackageImpl extends EPackageImpl implements Questi
 		initEReference(getQuestion_QuestionBase(), this.getQuestionBase(), null, "questionBase", null, 1, 1, Question.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(textQuestionEClass, TextQuestion.class, "TextQuestion", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getTextQuestion_Multiline(), ecorePackage.getEBoolean(), "multiline", null, 1, 1, TextQuestion.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getTextQuestion_Lines(), ecorePackage.getEInt(), "lines", null, 1, 1, TextQuestion.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(choiceQuestionEClass, ChoiceQuestion.class, "ChoiceQuestion", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getChoiceQuestion_Options(), this.getOption(), null, "options", null, 1, -1, ChoiceQuestion.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -716,7 +716,7 @@ public class QuestionairemodelPackageImpl extends EPackageImpl implements Questi
 
 		initEClass(integerQuestionEClass, IntegerQuestion.class, "IntegerQuestion", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getIntegerQuestion_MinValue(), ecorePackage.getEInt(), "minValue", null, 1, 1, IntegerQuestion.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getIntegerQuestion_Step(), ecorePackage.getEInt(), "step", null, 0, 1, IntegerQuestion.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getIntegerQuestion_Step(), ecorePackage.getEInt(), "step", "1", 0, 1, IntegerQuestion.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getIntegerQuestion_MaxValue(), ecorePackage.getEInt(), "maxValue", null, 1, 1, IntegerQuestion.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(questionConditionEClass, QuestionCondition.class, "QuestionCondition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);

@@ -99,10 +99,6 @@
   <children xmi:type="notation:Node" xmi:id="_tmrOSbqAEeO2GZlz7dvSwg" type="1001">
     <children xmi:type="notation:Node" xmi:id="_tmr1UrqAEeO2GZlz7dvSwg" type="4001"/>
     <children xmi:type="notation:Node" xmi:id="_tmr1U7qAEeO2GZlz7dvSwg" type="5001">
-      <children xmi:type="notation:Node" xmi:id="_tmscZLqAEeO2GZlz7dvSwg" type="2001">
-        <element xmi:type="ecore:EAttribute" href="QuestionaireModel.ecore#//TextQuestion/multiline"/>
-        <layoutConstraint xmi:type="notation:Location" xmi:id="_tmscZbqAEeO2GZlz7dvSwg"/>
-      </children>
       <styles xmi:type="notation:DrawerStyle" xmi:id="_tmr1VLqAEeO2GZlz7dvSwg"/>
       <styles xmi:type="notation:SortingStyle" xmi:id="_tmr1VbqAEeO2GZlz7dvSwg"/>
       <styles xmi:type="notation:FilteringStyle" xmi:id="_tmr1VrqAEeO2GZlz7dvSwg"/>

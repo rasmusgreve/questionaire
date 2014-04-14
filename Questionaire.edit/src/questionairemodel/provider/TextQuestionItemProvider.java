@@ -57,29 +57,29 @@ public class TextQuestionItemProvider
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
-			addMultilinePropertyDescriptor(object);
+			addLinesPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
 
 	/**
-	 * This adds a property descriptor for the Multiline feature.
+	 * This adds a property descriptor for the Lines feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addMultilinePropertyDescriptor(Object object) {
+	protected void addLinesPropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_TextQuestion_multiline_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_TextQuestion_multiline_feature", "_UI_TextQuestion_type"),
-				 QuestionairemodelPackage.Literals.TEXT_QUESTION__MULTILINE,
+				 getString("_UI_TextQuestion_lines_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_TextQuestion_lines_feature", "_UI_TextQuestion_type"),
+				 QuestionairemodelPackage.Literals.TEXT_QUESTION__LINES,
 				 true,
 				 false,
 				 false,
-				 ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE,
+				 ItemPropertyDescriptor.INTEGRAL_VALUE_IMAGE,
 				 null,
 				 null));
 	}
@@ -104,7 +104,7 @@ public class TextQuestionItemProvider
 	@Override
 	public String getText(Object object) {
 		TextQuestion textQuestion = (TextQuestion)object;
-		return getString("_UI_TextQuestion_type") + " " + textQuestion.isMultiline();
+		return getString("_UI_TextQuestion_type") + " " + textQuestion.getLines();
 	}
 
 	/**
@@ -119,7 +119,7 @@ public class TextQuestionItemProvider
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(TextQuestion.class)) {
-			case QuestionairemodelPackage.TEXT_QUESTION__MULTILINE:
+			case QuestionairemodelPackage.TEXT_QUESTION__LINES:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 		}

@@ -17,14 +17,14 @@ public class NumberQuestion extends Question {
 
 	private HashMap<Integer, RadioButton> radios;
 	
-	public NumberQuestion(String question, String description, boolean optional, Context context, int min, int max, int step)
+	public NumberQuestion(String question, String description, boolean optional, int min, int max, int step)
 	{
-		super(question, description, optional, context);
+		super(question, description, optional);
 	}
 	
 	@Override
 	public View generateView() {
-		// TODO Auto-generated method stub
+		/*
 		RelativeLayout layout = new RelativeLayout(getContext());
 		
 		// Question description
@@ -43,9 +43,9 @@ public class NumberQuestion extends Question {
 			
 			RadioButton button = new RadioButton(getContext());
 			
-		}
+		}*/
 		
-		return layout;
+		return null;//layout;
 	}
 
 	

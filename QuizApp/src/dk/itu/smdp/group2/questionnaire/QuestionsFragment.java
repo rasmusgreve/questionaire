@@ -16,14 +16,14 @@ public class QuestionsFragment extends Fragment {
 		
 		/*
 		
-		Questionnaire qn = new Questionnaire("Title");
+		Questionnaire qn = new Questionnaire(this.getActivity(),"Title","john@rambo.dk");
 		ChoiceQuestion cq;
 								//                 mandatory/min/max
 		cq = new ChoiceQuestion("Title","Description",false,1,1);
-		qn.AddQuestion(cq);
-		cq.AddCondition("food");
+		qn.addQuestion(cq);
+		cq.addCondition("food");
 		//           id      text
-		cq.AddOption("food2","I like food");
+		cq.addOption("food2","I like food");
 		...
 		
 		qn.generateAllViews(ll);

@@ -26,7 +26,8 @@ public final class R {
         public static final int radio2=0x7f070004;
         public static final int radioGroup1=0x7f070001;
         public static final int svChoiceOptions=0x7f07000a;
-        public static final int svsLinearLayout=0x7f07000b;
+        public static final int svsChoiceLL=0x7f07000b;
+        public static final int svsLinearLayout=0x7f07000c;
         public static final int tvChoiceDesc=0x7f070009;
         public static final int tvChoiceTitle=0x7f070008;
         public static final int tvTitle=0x7f070000;

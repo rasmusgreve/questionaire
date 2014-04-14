@@ -1,6 +1,6 @@
 package dk.itu.smdp.group2.questionnaire;
 
-import dk.itu.quizz.R;
+import dk.itu.smdp.group2.R;
 import android.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;

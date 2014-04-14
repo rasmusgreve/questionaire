@@ -1,14 +1,10 @@
 package dk.itu.smdp.group2.questionnaire.model;
 
-import java.security.KeyPair;
 import java.util.HashMap;
 import java.util.Map.Entry;
 
 import dk.itu.smdp.group2.R;
-import android.content.Context;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
@@ -28,7 +24,7 @@ public class ChoiceQuestion extends Question{
 		options = new HashMap<String,String>();
 	}
 	
-	public void AddOption(String id, String text){
+	public void addOption(String id, String text){
 		options.put(id, text);
 	}
 

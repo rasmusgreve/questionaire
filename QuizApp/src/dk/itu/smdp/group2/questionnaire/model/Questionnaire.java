@@ -9,15 +9,26 @@ public class Questionnaire {
 	
 	private Activity a;
 	private ArrayList<Question> questions;
+	private String email, title;
 
-	public Questionnaire(Activity a){
+	public Questionnaire(Activity a, String title, String email){
 		this.a = a;
+		this.title = title;
+		this.email = email;
 		this.questions = new ArrayList<Question>();
 	}
 	
 	public void addQuestion(Question q){
 		q.setParent(this);
 		questions.add(q);
+	}
+	
+	public String getEmail(){
+		return email;
+	}
+	
+	public String getTitle(){
+		return title;
 	}
 	
 	public Activity getActivity(){

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import android.app.Activity;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 public class Questionnaire {
 	
@@ -54,7 +55,7 @@ public class Questionnaire {
 
 	public void sendEmail() {
 		// TODO Auto-generated method stub
-		
+		Toast.makeText(getActivity(), "Pew pew, sending mailzzz!",Toast.LENGTH_LONG).show();
 	}
 
 	public boolean isCompleted() {

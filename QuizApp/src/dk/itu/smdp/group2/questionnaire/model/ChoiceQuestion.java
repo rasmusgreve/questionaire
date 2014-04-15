@@ -1,8 +1,6 @@
 package dk.itu.smdp.group2.questionnaire.model;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map.Entry;
 
 import dk.itu.smdp.group2.R;
 import android.view.View;
@@ -18,7 +16,7 @@ public class ChoiceQuestion extends Question{
 	
 	private int min,max;
 	private int numChecked = 0;
-	private HashMap<String,String> options;
+	private ArrayList<Tuple<String,String>> options;
 	
 	// results
 	private View root;
@@ -30,20 +28,20 @@ public class ChoiceQuestion extends Question{
 		min = minSelections;
 		max = maxSelections;
 		
-		options = new HashMap<String,String>();
+		options = new ArrayList<Tuple<String,String>>();
 	}
 	
 	public void addOption(String id, String text){
-		options.put(id, text);
+		options.add(new Tuple<String,String>(id, text));
 	}
 	
 	public boolean containsID(String id){
-		return options.containsKey(id);
+		return getValueForID(id) == null;
 	}
 	
 	public boolean isIDChosen(String id) {
 		//TODO: Made the assumption that both key and value are unique.
-		String value = options.get(id);
+		String value = getValueForID(id);
 		if(radiogroup != null){
 			return ((RadioButton)radiogroup.findViewById(radiogroup.getCheckedRadioButtonId())).getText().equals(value);
 		}else{ // checkbox
@@ -68,9 +66,9 @@ public class ChoiceQuestion extends Question{
 		// create options (dynamically because it is only checkbox/radio)
 		if(min == 1 && max == 1){ // radio
 			radiogroup = new RadioGroup(getParent().getActivity());
-			for(Entry<String,String> kv : this.options.entrySet()){
+			for(Tuple<String,String> kv : this.options){
 				RadioButton rb = new RadioButton(getParent().getActivity());
-				rb.setText(kv.getValue());
+				rb.setText(kv.getSecond());
 				radiogroup.addView(rb);
 				
 				// Put listener
@@ -86,9 +84,9 @@ public class ChoiceQuestion extends Question{
 			options.addView(radiogroup);
 		}else{ // checkbox
 			checkboxes = new ArrayList<CheckBox>();
-			for(Entry<String,String> kv : this.options.entrySet()){
+			for(Tuple<String,String> kv : this.options){
 				final CheckBox cb = new CheckBox(getParent().getActivity());
-				cb.setText(kv.getValue());
+				cb.setText(kv.getSecond());
 				
 				// Put listener
 				cb.setOnCheckedChangeListener(new OnCheckedChangeListener() {
@@ -134,6 +132,27 @@ public class ChoiceQuestion extends Question{
 	@Override
 	public void setVisible(boolean visible) {
 		root.setVisibility(visible ? View.VISIBLE : View.GONE);
+	}
+	
+	// PRIVATE HELPERS
+	
+	private class Tuple<T,V>{
+		private T t;
+		private V v;
+		public Tuple(T t, V v){
+			this.t = t;
+			this.v = v;
+		}
+		public T getFirst(){return t;}
+		public V getSecond(){return v;}
+	}
+	
+	private String getValueForID(String id){
+		for(Tuple<String,String> t : options){
+			if(t.getFirst().equals(id))
+				return t.getSecond();
+		}
+		return null;
 	}
 	
 	private int countChecked(ArrayList<CheckBox> arr){

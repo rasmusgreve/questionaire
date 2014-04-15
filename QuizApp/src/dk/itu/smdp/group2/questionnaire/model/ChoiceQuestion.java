@@ -55,12 +55,14 @@ public class ChoiceQuestion extends Question{
 
 	@Override
 	public View generateView() {
+		// inflate and fetch objects
 		root = this.getParent().getActivity().getLayoutInflater().inflate(R.layout.question_choice, null);
 		TextView title = (TextView) root.findViewById(R.id.tvChoiceTitle);
 		TextView desc = (TextView) root.findViewById(R.id.tvChoiceDesc);
 		TextView select = (TextView) root.findViewById(R.id.tvChoiceSelec);
 		LinearLayout options = (LinearLayout) root.findViewById(R.id.svsChoiceLL);
 		
+		// set values
 		title.setText(this.getQuestion() + (this.isOptional() ? "" : " *"));
 		desc.setText(this.getDescription());
 		if(getDescription() == null || getDescription().length() == 0) desc.setVisibility(View.GONE);

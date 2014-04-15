@@ -25,6 +25,8 @@ public abstract class Question {
 	public abstract String generateTextResult();
 	
 	public abstract boolean isAnswered();
+	
+	public abstract void setVisible(boolean visible);
 
 	//// GETTERS AND SETTERS ////
 	public String getQuestion() {
@@ -53,5 +55,21 @@ public abstract class Question {
 	
 	public ArrayList<String[]> getConditions(){
 		return conditions;
+	}
+	
+	// Non-trivial methods
+	
+	public boolean conditionsSatisfied(){
+		for(String[] sarr : conditions){
+			boolean allIDsChosen = true;
+			for(String s : sarr){
+				ChoiceQuestion cq = getParent().getQuestionWithID(s);
+				allIDsChosen = allIDsChosen && cq.isIDChosen(s);
+			}
+			if(allIDsChosen)
+				return true;
+		}
+		return false;
+		
 	}
 }

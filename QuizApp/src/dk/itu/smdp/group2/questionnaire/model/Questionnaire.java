@@ -44,8 +44,12 @@ public class Questionnaire {
 	}
 
 	public int getFirstUncomplete() {
-		// TODO Auto-generated method stub
-		return 0;
+		for(int i = 0; i < questions.size(); i++){
+			Question q = questions.get(i);
+			if(!q.isAnswered() && q.conditionsSatisfied() && !q.isOptional())
+				return i;
+		}
+		return -1;
 	}
 
 	public void sendEmail() {
@@ -54,7 +58,23 @@ public class Questionnaire {
 	}
 
 	public boolean isCompleted() {
-		// TODO Auto-generated method stub
-		return false;
+		return getFirstUncomplete() == -1;
+	}
+
+	public void checkConditions() {
+		for(Question q : questions){
+			q.setVisible(q.conditionsSatisfied());
+		}
+	}
+
+	public ChoiceQuestion getQuestionWithID(String id) {
+		for(Question q : questions){
+			if(q instanceof ChoiceQuestion){
+				ChoiceQuestion cq = (ChoiceQuestion)q;
+				if(cq.containsID(id))
+					return cq;
+			}
+		}
+		return null; // no match
 	}
 }

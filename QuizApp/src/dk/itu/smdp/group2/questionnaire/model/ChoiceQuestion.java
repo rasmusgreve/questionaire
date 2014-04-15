@@ -40,7 +40,6 @@ public class ChoiceQuestion extends Question{
 	}
 	
 	public boolean isIDChosen(String id) {
-		//TODO: Made the assumption that both key and value are unique.
 		String value = getValueForID(id);
 		if(radiogroup != null){
 			return ((RadioButton)radiogroup.findViewById(radiogroup.getCheckedRadioButtonId())).getText().equals(value);
@@ -89,7 +88,7 @@ public class ChoiceQuestion extends Question{
 			}
 			options.addView(radiogroup);
 		}else{ // checkbox
-			select.setText("Select between "+min+" and "+max+" options");
+			select.setText("Select "+((min == max) ? min : "between"+min+" and "+max)+" options");
 			
 			checkboxes = new ArrayList<CheckBox>();
 			for(Tuple<String,String> kv : this.options){

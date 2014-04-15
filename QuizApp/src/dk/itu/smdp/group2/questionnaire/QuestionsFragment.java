@@ -26,22 +26,22 @@ public class QuestionsFragment extends Fragment {
         
         //TextQuestion text;
         ChoiceQuestion choice;
-        /*MatrixQuestion matrix;
-        CalendarQuestion calendar;
-        IntegerQuestion integer;*/
+        //MatrixQuestion matrix;
+        //CalendarQuestion calendar;
+        IntegerQuestion integer;
        
-        /*questionnaire.addHeading(new Heading("Eating habits"));
+        //questionnaire.addHeading(new Heading("Eating habits"));
        
-        questionnaire.addParagraph(new Paragraph("Tell me about your eating habits"));
+        //questionnaire.addParagraph(new Paragraph("Tell me about your eating habits"));
        
-        integer = new IntegerQuestion("How often do you eat in a week!?", "", true, 1, 10, 3);
+        integer = new IntegerQuestion("How often do you eat in a week!?", "", false, 1, 10, 3);
         questionnaire.addQuestion(integer);
        
-        text = new TextQuestion("What is your favorite recipe?", "Please enter the entire recipe", true, 4);
-        questionnaire.addQuestion(text);
+        //text = new TextQuestion("What is your favorite recipe?", "Please enter the entire recipe", true, 4);
+        //questionnaire.addQuestion(text);
        
-        calendar = new CalendarQuestion("When did you last eat?", "", true, false, true, true, true, true);
-        questionnaire.addQuestion(calendar);*/
+        //calendar = new CalendarQuestion("When did you last eat?", "", true, false, true, true, true, true);
+        //questionnaire.addQuestion(calendar);
        
         choice = new ChoiceQuestion("Which of the folowing do you like the best?", "", true, 2, 2);
         choice.addOption("pasta", "Pasta");

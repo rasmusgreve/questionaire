@@ -94,7 +94,7 @@ public class ChoiceQuestion extends Question{
 				cb.setOnCheckedChangeListener(new OnCheckedChangeListener() {
 					@Override
 					public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-						numChecked++;
+						numChecked += isChecked ? 1 : -1;
 						
 						// uncheck again if too many
 						if(isChecked && numChecked > max){

@@ -18,6 +18,8 @@ public abstract class Question {
 		this.question = question;
 		this.description = description;
 		this.optional = optional;
+		
+		this.conditions = new ArrayList<String[]>();
 	}
 	
 	public abstract View generateView();
@@ -60,6 +62,9 @@ public abstract class Question {
 	// Non-trivial methods
 	
 	public boolean conditionsSatisfied(){
+		if(conditions.size() == 0)
+			return true;
+		
 		for(String[] sarr : conditions){
 			boolean allIDsChosen = true;
 			for(String s : sarr){

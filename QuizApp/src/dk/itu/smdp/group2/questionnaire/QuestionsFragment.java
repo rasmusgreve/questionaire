@@ -22,7 +22,7 @@ public class QuestionsFragment extends Fragment {
 		// THIS IS WHERE AUTO GENERATED SHOULD CREATE OBJECTS
 		// AND PUT THEM IN THE SCROLLVIEW'S LINEAR LAYOUT
 		
-        Questionnaire questionnaire = new Questionnaire(this.getActivity(), "Questionnaire XXXXXXXXXXXXXXXXXXXxx", "ragr@itu.dk");
+        Questionnaire questionnaire = new Questionnaire(this.getActivity(), "Food Questions", "ragr@itu.dk");
         
         //TextQuestion text;
         ChoiceQuestion choice;

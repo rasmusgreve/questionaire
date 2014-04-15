@@ -58,13 +58,17 @@ public class ChoiceQuestion extends Question{
 		root = this.getParent().getActivity().getLayoutInflater().inflate(R.layout.question_choice, null);
 		TextView title = (TextView) root.findViewById(R.id.tvChoiceTitle);
 		TextView desc = (TextView) root.findViewById(R.id.tvChoiceDesc);
+		TextView select = (TextView) root.findViewById(R.id.tvChoiceSelec);
 		LinearLayout options = (LinearLayout) root.findViewById(R.id.svsChoiceLL);
 		
 		title.setText(this.getQuestion() + (this.isOptional() ? "" : " *"));
 		desc.setText(this.getDescription());
+		if(getDescription() == null || getDescription().length() == 0) desc.setVisibility(View.GONE);
 		
 		// create options (dynamically because it is only checkbox/radio)
 		if(min == 1 && max == 1){ // radio
+			select.setVisibility(View.GONE);
+			
 			radiogroup = new RadioGroup(getParent().getActivity());
 			for(Tuple<String,String> kv : this.options){
 				RadioButton rb = new RadioButton(getParent().getActivity());
@@ -83,6 +87,8 @@ public class ChoiceQuestion extends Question{
 			}
 			options.addView(radiogroup);
 		}else{ // checkbox
+			select.setText("Select between "+min+" and "+max+" options");
+			
 			checkboxes = new ArrayList<CheckBox>();
 			for(Tuple<String,String> kv : this.options){
 				final CheckBox cb = new CheckBox(getParent().getActivity());

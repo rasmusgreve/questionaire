@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import android.app.Activity;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 public class Questionnaire {
 	
@@ -21,6 +22,14 @@ public class Questionnaire {
 	public void addQuestion(Question q){
 		q.setParent(this);
 		questions.add(q);
+	}
+	
+	public void addParagraph(Paragraph p){
+		addQuestion(p);
+	}
+	
+	public void addHeading(Heading h){
+		addQuestion(h);
 	}
 	
 	public String getEmail(){
@@ -44,17 +53,46 @@ public class Questionnaire {
 	}
 
 	public int getFirstUncomplete() {
-		// TODO Auto-generated method stub
-		return 0;
+		for(int i = 0; i < questions.size(); i++){
+			Question q = questions.get(i);
+			if(!q.isAnswered() && q.conditionsSatisfied() && !q.isOptional())
+				return i;
+		}
+		return -1;
+	}
+	
+	public int getQuestionNumber(int pos){
+		int textsBefore = 0;
+		for(int i = 0; i < pos; i++){
+			if(questions.get(i) instanceof Heading || questions.get(i) instanceof Paragraph)
+				textsBefore++;
+		}
+		return pos - textsBefore + 1;
 	}
 
 	public void sendEmail() {
 		// TODO Auto-generated method stub
-		
+		Toast.makeText(getActivity(), "Pew pew, sending mailzzz!",Toast.LENGTH_LONG).show();
 	}
 
 	public boolean isCompleted() {
-		// TODO Auto-generated method stub
-		return false;
+		return getFirstUncomplete() == -1;
+	}
+
+	public void checkConditions() {
+		for(Question q : questions){
+			q.setVisible(q.conditionsSatisfied());
+		}
+	}
+
+	public ChoiceQuestion getQuestionWithID(String id) {
+		for(Question q : questions){
+			if(q instanceof ChoiceQuestion){
+				ChoiceQuestion cq = (ChoiceQuestion)q;
+				if(cq.containsID(id))
+					return cq;
+			}
+		}
+		return null; // no match
 	}
 }

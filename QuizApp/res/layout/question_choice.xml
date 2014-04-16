@@ -6,7 +6,7 @@
 
     <TextView
         android:id="@+id/tvChoiceTitle"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="tvChoiceTitle"
         android:textAppearance="?android:attr/textAppearanceMedium" />
@@ -16,6 +16,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="tvChoiceDesc" />
+
+    <TextView
+        android:id="@+id/tvChoiceSelec"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="right"
+        android:text="tvChoiceSelec"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
 
     <ScrollView
         android:id="@+id/svChoiceOptions"

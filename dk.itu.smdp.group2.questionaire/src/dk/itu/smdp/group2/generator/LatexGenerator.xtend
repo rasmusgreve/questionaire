@@ -88,6 +88,15 @@ class LatexGenerator {
 		\hfill\forloop[#3]{integerC}{#1}{\value{integerC} < #2}{\arabic{integerC} & }#2
 		\end{tabular}
 		\end{center}}
+		\newcommand{\bigintegeranswer}[3]{
+		\textit{You must write a number between #1 and #2 (both inclusive)\ifthenelse{#3 > 1}{ on a #3-step scale}{}.}\par\vspace{.2cm}
+		\numberBoxes{#2}}
+		\newcounter{nbC}
+		\newcommand{\numberBoxes}[1]{
+		\setcounter{nbC}{#1 /10}
+		\bbox %
+		\ifthenelse{\value{nbC}>0}{\numberBoxes{\value{nbC}}}{}
+		}
 		
 		%Calendar question
 		\def\year{$\stackrel{\bbox\ \bbox\ \bbox\ \bbox}{\mbox{ \footnotesize Year }}\hspace{.8cm}$}
@@ -165,7 +174,15 @@ class LatexGenerator {
 	}
 	def static compileIntegerQuestion(IntegerQuestion it)  {
 		'''
+		«IF (maxValue - minValue)/step+1 > 100»
+		\bigintegeranswer{«minValue»}{«maxValue»}{«step»}
+		«ELSEIF (maxValue - minValue)/step+1 > 20»
+		\integeranswer{«minValue»}{«minValue+(19*step)»}{«step»}
+		«minValue = minValue+(20*step)»
+		«compileIntegerQuestion»
+		«ELSE»
 		\integeranswer{«minValue»}{«maxValue»}{«step»}
+		«ENDIF»
 		'''
 	}
 	def static compileCalendarQuestion(CalendarQuestion it)  {
@@ -208,8 +225,6 @@ class LatexGenerator {
 	
 	
 	def static compileToLatex(Questionaire it) {
-		staticStartCode
-		staticEndCode
 		'''
 		«staticStartCode»
 		«// TODO: Output it.name and it.email

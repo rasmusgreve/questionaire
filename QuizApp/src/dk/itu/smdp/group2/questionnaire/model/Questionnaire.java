@@ -24,6 +24,14 @@ public class Questionnaire {
 		questions.add(q);
 	}
 	
+	public void addParagraph(Paragraph p){
+		addQuestion(p);
+	}
+	
+	public void addHeading(Heading h){
+		addQuestion(h);
+	}
+	
 	public String getEmail(){
 		return email;
 	}
@@ -51,6 +59,15 @@ public class Questionnaire {
 				return i;
 		}
 		return -1;
+	}
+	
+	public int getQuestionNumber(int pos){
+		int textsBefore = 0;
+		for(int i = 0; i < pos; i++){
+			if(questions.get(i) instanceof Heading || questions.get(i) instanceof Paragraph)
+				textsBefore++;
+		}
+		return pos - textsBefore + 1;
 	}
 
 	public void sendEmail() {

@@ -12,7 +12,8 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:text="tvTitle"
-        android:textSize="32sp" />
+        android:textSize="32sp"
+        android:textStyle="bold" />
 
     <ScrollView
         android:id="@+id/svChoiceOptions"

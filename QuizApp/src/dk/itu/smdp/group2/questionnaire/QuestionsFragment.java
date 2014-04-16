@@ -30,9 +30,9 @@ public class QuestionsFragment extends Fragment {
         //CalendarQuestion calendar;
         IntegerQuestion integer;
        
-        //questionnaire.addHeading(new Heading("Eating habits"));
+        questionnaire.addHeading(new Heading("Eating habits"));
        
-        //questionnaire.addParagraph(new Paragraph("Tell me about your eating habits"));
+        questionnaire.addParagraph(new Paragraph("Tell me about your eating habits"));
        
         integer = new IntegerQuestion("How often do you eat in a week!?", "", false, 1, 10, 3);
         questionnaire.addQuestion(integer);
@@ -100,7 +100,7 @@ public class QuestionsFragment extends Fragment {
 				if(qn.isCompleted()){
 					qn.sendEmail();
 				}else{
-					int missing = qn.getFirstUncomplete();
+					int missing = qn.getQuestionNumber(qn.getFirstUncomplete());
 					String message = "Question "+missing+" must be answered.";
 					Toast.makeText(getActivity(), message, Toast.LENGTH_LONG).show();
 				}

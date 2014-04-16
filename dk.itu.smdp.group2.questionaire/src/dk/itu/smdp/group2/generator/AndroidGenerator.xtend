@@ -17,65 +17,113 @@ class AndroidGenerator {
 	
 	def static compileToAndroid(Questionaire it) {
 		'''
-		package dk.itu.smdp.group2.questionnaire;
-
-		import dk.itu.quizz.R;
-		import android.app.Fragment;
-		import android.os.Bundle;
-		import android.view.LayoutInflater;
-		import android.view.View;
-		import android.view.ViewGroup;
-		import android.widget.LinearLayout;
-		
-		public class QuestionsFragment extends Fragment {
-			@Override
-			public void onCreate(Bundle savedInstanceState) {super.onCreate(savedInstanceState);}
-			
-			@Override
-			public void onPause() {super.onPause();}
-			
-			@Override
-			public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-				View v = inflater.inflate(R.layout.questions_fragment, container, false);
-				init((LinearLayout)v.findViewById(R.id.svsLinearLayout));
-				return v;
-			}
-		
-			private Questionnaire init() {
+		«header»
 				Questionnaire questionnaire = new Questionnaire(this.getActivity(), "«name»", "«resultEmail»");
-				
-				TextQuestion text;
-				ChoiceQuestion choice;
-				MatrixQuestion matrix;
-				CalendarQuestion calendar;
-				IntegerQuestion integer;
 				
 				«FOR it : elements»
 				«buildElement»
 				
 				«ENDFOR»
 				
-				return questionnaire;
-			}
-		}
+		«footer»
 		'''
 	}
 	
+	def private static header(){
+		'''
+			package dk.itu.smdp.group2.questionnaire;
+
+			import dk.itu.smdp.group2.R;
+			import android.app.Fragment;
+			import android.os.Bundle;
+			import android.view.LayoutInflater;
+			import android.view.View;
+			import android.view.View.OnClickListener;
+			import android.view.ViewGroup;
+			import android.view.ViewGroup.LayoutParams;
+			import android.widget.Button;
+			import android.widget.LinearLayout;
+			import android.widget.TextView;
+			import android.widget.Toast;
+			import dk.itu.smdp.group2.questionnaire.model.*;
+			
+			public class QuestionsFragment extends Fragment {
+				@Override
+				public void onCreate(Bundle savedInstanceState) {super.onCreate(savedInstanceState);}
+				
+				@Override
+				public void onPause() {super.onPause();}
+				
+				@Override
+				public View onCreateView(LayoutInflater inflater, ViewGroup container,
+						Bundle savedInstanceState) {
+					Questionnaire qn = init();
+					
+					View v = inflater.inflate(R.layout.questions_fragment, container, false);
+					TextView title = (TextView) v.findViewById(R.id.tvTitle);
+					LinearLayout scroll = (LinearLayout)v.findViewById(R.id.svsLinearLayout);
+					
+					title.setText(qn.getTitle());
+					
+					qn.generateAllViews(scroll);
+					createButton(qn,scroll);
+					
+					return v;
+				}
+			
+				private void createButton(final Questionnaire qn, LinearLayout scroll) {
+					Button b = new Button(getActivity());
+					b.setText("Send");
+					b.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
+					
+					b.setOnClickListener(new OnClickListener() {
+						
+						@Override
+						public void onClick(View v) {
+							if(qn.isCompleted()){
+								qn.sendEmail();
+							}else{
+								int missing = qn.getFirstUncomplete();
+								String message = "Question "+missing+" must be answered.";
+								Toast.makeText(getActivity(), message, Toast.LENGTH_LONG).show();
+							}
+						}
+					});
+					
+					scroll.addView(b);
+				}
+			
+				private Questionnaire init() {					
+					TextQuestion text;
+					ChoiceQuestion choice;
+					MatrixQuestion matrix;
+					CalendarQuestion calendar;
+					IntegerQuestion integer;
+					
+		'''
+	}
+	
+	def private static footer(){
+		'''
+					return questionnaire;
+				}
+			}
+		'''
+	}
+	
+	
+	/*
+	 * Element generation
+	 */
+	
 	def private static buildElement(Element elem){
-		if (elem instanceof Heading) 
-			buildHeading(elem as Heading)
-		else if (elem instanceof Paragraph) 
-			buildParagraph(elem as Paragraph)
-		else if (elem instanceof TextQuestion) 
-			buildTextQuestion(elem as TextQuestion)
-		else if (elem instanceof ChoiceQuestion) 
-			buildChoiceQuestion(elem as ChoiceQuestion)
-		else if (elem instanceof MatrixQuestion) 
-			buildMatrixQuestion(elem as MatrixQuestion)
-		else if (elem instanceof CalendarQuestion) 
-			buildCalendarQuestion(elem as CalendarQuestion)
-		else if (elem instanceof IntegerQuestion) 
-			buildIntegerQuestion(elem as IntegerQuestion)
+		if (elem instanceof Heading) 				buildHeading(elem as Heading)
+		else if (elem instanceof Paragraph)			buildParagraph(elem as Paragraph)
+		else if (elem instanceof TextQuestion)		buildTextQuestion(elem as TextQuestion)
+		else if (elem instanceof ChoiceQuestion)	buildChoiceQuestion(elem as ChoiceQuestion)
+		else if (elem instanceof MatrixQuestion)	buildMatrixQuestion(elem as MatrixQuestion)
+		else if (elem instanceof CalendarQuestion)	buildCalendarQuestion(elem as CalendarQuestion)
+		else if (elem instanceof IntegerQuestion) 	buildIntegerQuestion(elem as IntegerQuestion)
 	} 
 	
 	def private static buildHeading(Heading it){

@@ -24,7 +24,7 @@ public class QuestionsFragment extends Fragment {
 		
         Questionnaire questionnaire = new Questionnaire(this.getActivity(), "Food Questions", "ragr@itu.dk");
         
-        //TextQuestion text;
+        TextQuestion text;
         ChoiceQuestion choice;
         //MatrixQuestion matrix;
         //CalendarQuestion calendar;
@@ -37,8 +37,8 @@ public class QuestionsFragment extends Fragment {
         integer = new IntegerQuestion("How often do you eat in a week!?", "", false, 1, 10, 3);
         questionnaire.addQuestion(integer);
        
-        //text = new TextQuestion("What is your favorite recipe?", "Please enter the entire recipe", true, 4);
-        //questionnaire.addQuestion(text);
+        text = new TextQuestion("What is your favorite recipe?", "Please enter the entire recipe", true, 4);
+        questionnaire.addQuestion(text);
        
         //calendar = new CalendarQuestion("When did you last eat?", "", true, false, true, true, true, true);
         //questionnaire.addQuestion(calendar);

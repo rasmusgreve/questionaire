@@ -26,7 +26,7 @@ public class QuestionsFragment extends Fragment {
         
         TextQuestion text;
         ChoiceQuestion choice;
-        //MatrixQuestion matrix;
+        MatrixQuestion matrix;
         //CalendarQuestion calendar;
         IntegerQuestion integer;
        
@@ -56,12 +56,12 @@ public class QuestionsFragment extends Fragment {
         choice.addOption("", "No");
         questionnaire.addQuestion(choice);
        
-        /*matrix = new MatrixQuestion("How do you like the following dishes?", "Description", true, 1);
+        matrix = new MatrixQuestion("How do you like the following dishes?", "Description", true, 1);
         matrix.setColumns("Really well", "Sorta", "Really bad", "Only if my mom made it");
         matrix.setRows("Kebob", "Pizza", "Chocolate");
         matrix.addCondition("a_little", "yes");
         matrix.addCondition("pasta");
-        questionnaire.addQuestion(matrix);*/
+        questionnaire.addQuestion(matrix);
         
         return questionnaire;
 	}

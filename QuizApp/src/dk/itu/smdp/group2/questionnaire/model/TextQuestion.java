@@ -33,8 +33,13 @@ public class TextQuestion extends Question {
 		desc.setText(this.getDescription());
 		if(getDescription() == null || getDescription().length() == 0) desc.setVisibility(View.GONE);
 		
-		// create spinner with values dynamically
-		editText.setHeight(editText.getHeight() * lines);
+		// set number of lines
+		if(lines == 1){
+			editText.setSingleLine();
+		}else{
+			editText.setLines(lines);
+			editText.setMaxLines(lines);
+		}
 		
 		return root;
 	}
@@ -54,8 +59,5 @@ public class TextQuestion extends Question {
 	@Override
 	public void setVisible(boolean visible) {
 		root.setVisibility(visible ? View.VISIBLE : View.GONE);
-	}
-	
-	// PRIVATE HELPERS
-	
+	}	
 }

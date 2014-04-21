@@ -1,6 +1,7 @@
 package dk.itu.smdp.group2.questionnaire.model;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import android.view.View;
 
@@ -11,7 +12,7 @@ public abstract class Question {
 	private String question;
 	private String description;
 	private boolean optional;
-	private ArrayList<String[]> conditions;
+	private List<String[]> conditions;
 	
 	public Question(String question, String description, boolean optional)
 	{
@@ -56,7 +57,7 @@ public abstract class Question {
 		this.conditions.add(conds);
 	}
 	
-	public ArrayList<String[]> getConditions(){
+	public List<String[]> getConditions(){
 		return conditions;
 	}
 	

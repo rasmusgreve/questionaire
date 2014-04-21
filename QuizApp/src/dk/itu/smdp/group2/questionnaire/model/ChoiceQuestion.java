@@ -17,6 +17,7 @@ public class ChoiceQuestion extends Question{
 	private int min,max;
 	private int numChecked = 0;
 	private ArrayList<Tuple<String,String>> options;
+	private ArrayList<Tuple<String,CompoundButton>> idViews;
 	
 	// results
 	private View root;
@@ -29,6 +30,7 @@ public class ChoiceQuestion extends Question{
 		max = maxSelections;
 		
 		options = new ArrayList<Tuple<String,String>>();
+		idViews = new ArrayList<Tuple<String,CompoundButton>>();
 	}
 	
 	public void addOption(String id, String text){
@@ -41,20 +43,12 @@ public class ChoiceQuestion extends Question{
 	
 	
 	public boolean isIDChosen(String id) {
-		String value = getValueForID(id);
-		if(radiogroup != null){
-			RadioButton selected = (RadioButton)radiogroup.findViewById(radiogroup.getCheckedRadioButtonId());
-			if(selected == null)
-				return false;
-			
-			return selected.getText().equals(value);
-		}else{ // checkbox
-			for(CheckBox cb : checkboxes){
-				if(cb.isChecked() && cb.getText().equals(value))
-					return true;
+		for(Tuple<String,CompoundButton> kv : idViews){
+			if(kv.getFirst().equals(id)){
+				return kv.getSecond().isChecked();
 			}
-			return false;
 		}
+		return false;
 	}
 
 	@Override
@@ -79,6 +73,7 @@ public class ChoiceQuestion extends Question{
 			for(Tuple<String,String> kv : this.options){
 				RadioButton rb = new RadioButton(getParent().getActivity());
 				rb.setText(kv.getSecond());
+				idViews.add(new Tuple<String,CompoundButton>(kv.getFirst(),rb));
 				radiogroup.addView(rb);
 				
 				// Put listener
@@ -99,6 +94,8 @@ public class ChoiceQuestion extends Question{
 			for(Tuple<String,String> kv : this.options){
 				final CheckBox cb = new CheckBox(getParent().getActivity());
 				cb.setText(kv.getSecond());
+				
+				idViews.add(new Tuple<String,CompoundButton>(kv.getFirst(),cb));
 				
 				// Put listener
 				cb.setOnCheckedChangeListener(new OnCheckedChangeListener() {

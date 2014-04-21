@@ -136,8 +136,7 @@ class LatexGenerator {
 	
 	def static linebreaks(String it)
 	{
-		if (it == null) null else
-		replaceAll("\r","").replaceAll("\n","\\\\\\\\")
+		it?.replaceAll("\r","")?.replaceAll("\n","\\\\\\\\")
 	}	
 	
 	def static compileHeading(Heading it)  {

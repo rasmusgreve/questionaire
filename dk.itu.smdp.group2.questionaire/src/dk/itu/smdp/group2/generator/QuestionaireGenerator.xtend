@@ -79,7 +79,7 @@ class QuestionaireGenerator implements IGenerator {
 		if(it instanceof ChoiceQuestion){
 			(it as ChoiceQuestion).options.forEach[
 				name = removeQuotes(name)
-				text = removeQuotes(name)
+				text = removeQuotes(text)
 			]
 		}
 		if(it instanceof MatrixQuestion) {
@@ -91,11 +91,8 @@ class QuestionaireGenerator implements IGenerator {
 	
 	def static removeQuotes(String it)
 	{
-		if (it == null)
-			null
-		else
-			//Remove quotes in the start and end of lines in the string
-			replaceAll("^\"","").replaceAll("\"$","")
+		//Remove quotes in the start and end of lines in the string
+		it?.replaceAll("^\"","")?.replaceAll("\"$","")
 	}
 }
 

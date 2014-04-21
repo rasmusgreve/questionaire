@@ -32,8 +32,7 @@ class AndroidGenerator {
 	
 	def static linebreaks(String it)
 	{
-		if (it == null) null else
-		replaceAll("\r","").replaceAll("\n","\\\\r\\\\n")
+		it?.replaceAll("\r","")?.replaceAll("\n","\\\\r\\\\n")
 	}	
 	
 	
@@ -183,7 +182,7 @@ class AndroidGenerator {
 	
 	def private static buildOption(Option it){
 		'''
-			choice.addOption("«linebreaks(name)»", "«linebreaks(text)»");
+			choice.addOption("«name»", "«text»");
 		'''
 	}
 	

@@ -24,8 +24,6 @@ public abstract class Question {
 	
 	public abstract View generateView();
 	
-	public abstract String generateTextResult();
-	
 	public abstract boolean isAnswered();
 	
 	public abstract void setVisible(boolean visible);

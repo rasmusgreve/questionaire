@@ -43,13 +43,6 @@ public class TextQuestion extends Question {
 		return root;
 	}
 
-	
-	public String generateTextResult()
-	{
-		// TODO: Not implemented
-		return "";
-	}
-
 	@Override
 	public boolean isAnswered() {
 		return editText.getText().toString().length() > 0;

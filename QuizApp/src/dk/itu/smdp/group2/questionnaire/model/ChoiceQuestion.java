@@ -122,12 +122,6 @@ public class ChoiceQuestion extends Question{
 	}
 
 	@Override
-	public String generateTextResult() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
 	public boolean isAnswered() {
 		if(radiogroup != null){
 			return radiogroup.getCheckedRadioButtonId() != -1;

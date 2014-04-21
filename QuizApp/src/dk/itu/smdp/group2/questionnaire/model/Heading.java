@@ -25,11 +25,6 @@ public class Heading extends Question {
 	}
 
 	@Override
-	public String generateTextResult() {
-		return "";
-	}
-
-	@Override
 	public boolean isAnswered() {
 		return true;
 	}

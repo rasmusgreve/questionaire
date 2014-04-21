@@ -76,11 +76,10 @@ public class MatrixQuestion extends Question{
 		
 		return root;
 	}
-
-	@Override
-	public String generateTextResult() {
-		// TODO Auto-generated method stub
-		return null;
+	
+	public String toString(){
+		if (!isAnswered()) return "";
+		return "";
 	}
 
 	@Override

@@ -12,106 +12,45 @@ import questionairemodel.TextQuestion
 import questionairemodel.Question
 import questionairemodel.QuestionCondition
 import questionairemodel.Option
+import java.util.List
 
 class AndroidGenerator {
 	
 	def static compileToAndroid(Questionaire it) {
 		'''
-		«header»
-				Questionnaire questionnaire = new Questionnaire(this.getActivity(), "«name»", "«resultEmail»");
-				
-				«FOR it : elements»
-				«buildElement»
-				
-				«ENDFOR»
-				
-		«footer»
-		'''
-	}
-	
-	def private static header(){
-		'''
 			package dk.itu.smdp.group2.questionnaire;
 
-			import dk.itu.smdp.group2.R;
-			import android.app.Fragment;
-			import android.os.Bundle;
-			import android.view.LayoutInflater;
-			import android.view.View;
-			import android.view.View.OnClickListener;
-			import android.view.ViewGroup;
-			import android.view.ViewGroup.LayoutParams;
-			import android.widget.Button;
-			import android.widget.LinearLayout;
-			import android.widget.TextView;
-			import android.widget.Toast;
 			import dk.itu.smdp.group2.questionnaire.model.*;
 			
-			public class QuestionsFragment extends Fragment {
-				@Override
-				public void onCreate(Bundle savedInstanceState) {super.onCreate(savedInstanceState);}
+			public class QuestionsFragment extends QuestionsFragmentBase {
 				
 				@Override
-				public void onPause() {super.onPause();}
-				
-				@Override
-				public View onCreateView(LayoutInflater inflater, ViewGroup container,
-						Bundle savedInstanceState) {
-					Questionnaire qn = init();
-					
-					View v = inflater.inflate(R.layout.questions_fragment, container, false);
-					TextView title = (TextView) v.findViewById(R.id.tvTitle);
-					LinearLayout scroll = (LinearLayout)v.findViewById(R.id.svsLinearLayout);
-					
-					title.setText(qn.getTitle());
-					
-					qn.generateAllViews(scroll);
-					createButton(qn,scroll);
-					
-					return v;
-				}
-			
-				private void createButton(final Questionnaire qn, LinearLayout scroll) {
-					Button b = new Button(getActivity());
-					b.setText("Send");
-					b.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
-					
-					b.setOnClickListener(new OnClickListener() {
-						
-						@Override
-						public void onClick(View v) {
-							if(qn.isCompleted()){
-								qn.sendEmail();
-							}else{
-								int missing = qn.getFirstUncomplete();
-								String message = "Question "+missing+" must be answered.";
-								Toast.makeText(getActivity(), message, Toast.LENGTH_LONG).show();
-							}
-						}
-					});
-					
-					scroll.addView(b);
-				}
-			
-				private Questionnaire init() {					
+				protected Questionnaire init() {					
 					TextQuestion text;
 					ChoiceQuestion choice;
 					MatrixQuestion matrix;
 					CalendarQuestion calendar;
 					IntegerQuestion integer;
+			
+					Questionnaire questionnaire = new Questionnaire(this.getActivity(), "«name»", "«resultEmail»");
 					
-		'''
-	}
-	
-	def private static footer(){
-		'''
+					«FOR it : elements»
+					«buildElement»
+					
+					«ENDFOR»
+				
 					return questionnaire;
 				}
 			}
 		'''
 	}
 	
+	def static linebreaks(String it)
+	{
+		it?.replaceAll("\r","")?.replaceAll("\n","\\\\r\\\\n")
+	}	
 	
+		
 	/*
 	 * Element generation
 	 */
@@ -128,13 +67,13 @@ class AndroidGenerator {
 	
 	def private static buildHeading(Heading it){
 		'''
-			questionnaire.addHeading(new Heading("«text»"));
+			questionnaire.addHeading(new Heading("«linebreaks(text)»"));
 		'''
 	}
 	
 	def private static buildParagraph(Paragraph it){
 		'''
-			questionnaire.addParagraph(new Paragraph("«text»"));
+			questionnaire.addParagraph(new Paragraph("«linebreaks(text)»"));
 		'''
 	}
 	
@@ -153,7 +92,7 @@ class AndroidGenerator {
 	
 	def private static buildTextQuestion(TextQuestion it){
 		'''
-			text = new TextQuestion("«questionBase.title»", "«questionBase.description»", «questionBase.mandatory», «lines»);
+			text = new TextQuestion("«linebreaks(questionBase.title)»", "«linebreaks(questionBase.description)»", «questionBase.mandatory», «lines»);
 			«buildConditions("text")»
 			questionnaire.addQuestion(text);
 		'''
@@ -161,7 +100,7 @@ class AndroidGenerator {
 	
 	def private static buildChoiceQuestion(ChoiceQuestion it){
 		'''
-			choice = new ChoiceQuestion("«questionBase.title»", "«questionBase.description»", «questionBase.mandatory», «minSelections», «maxSelections»);
+			choice = new ChoiceQuestion("«linebreaks(questionBase.title)»", "«linebreaks(questionBase.description)»", «questionBase.mandatory», «minSelections», «maxSelections»);
 			«FOR it : options»
 			«buildOption»
 			«ENDFOR»
@@ -177,9 +116,9 @@ class AndroidGenerator {
 	
 	def private static buildMatrixQuestion(MatrixQuestion it){
 		'''
-			matrix = new MatrixQuestion("«questionBase.title»", "«questionBase.description»", «questionBase.mandatory», «maxPerRow»);
-			matrix.setColumns(«FOR it : columnNames SEPARATOR ', '»"«it»"«ENDFOR»);
-			matrix.setRows(«FOR it : rowNames SEPARATOR ', '»"«it»"«ENDFOR»);
+			matrix = new MatrixQuestion("«linebreaks(questionBase.title)»", "«linebreaks(questionBase.description)»", «questionBase.mandatory», «maxPerRow»);
+			matrix.setColumns(«FOR it : columnNames SEPARATOR ', '»"«linebreaks»"«ENDFOR»);
+			matrix.setRows(«FOR it : rowNames SEPARATOR ', '»"«linebreaks»"«ENDFOR»);
 			«buildConditions("matrix")»
 			questionnaire.addQuestion(matrix);
 		'''
@@ -187,7 +126,7 @@ class AndroidGenerator {
 	
 	def private static buildCalendarQuestion(CalendarQuestion it){
 		'''
-			calendar = new CalendarQuestion("«questionBase.title»", "«questionBase.description»", «questionBase.mandatory», «year», «month», «day», «hour», «minute»);
+			calendar = new CalendarQuestion("«linebreaks(questionBase.title)»", "«linebreaks(questionBase.description)»", «questionBase.mandatory», «year», «month», «day», «hour», «minute»);
 			«buildConditions("calendar")»
 			questionnaire.addQuestion(calendar);
 		'''
@@ -195,7 +134,7 @@ class AndroidGenerator {
 	
 	def private static buildIntegerQuestion(IntegerQuestion it){
 		'''
-			integer = new IntegerQuestion("«questionBase.title»", "«questionBase.description»", «questionBase.mandatory», «minValue», «maxValue», «step»);
+			integer = new IntegerQuestion("«linebreaks(questionBase.title)»", "«linebreaks(questionBase.description)»", «questionBase.mandatory», «minValue», «maxValue», «step»);
 			«buildConditions("integer")»
 			questionnaire.addQuestion(integer);
 		'''

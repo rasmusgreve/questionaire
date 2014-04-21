@@ -2,9 +2,7 @@ package dk.itu.smdp.group2.questionnaire.model;
 
 import dk.itu.smdp.group2.R;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.EditText;
-import android.widget.Spinner;
 import android.widget.TextView;
 
 public class TextQuestion extends Question {

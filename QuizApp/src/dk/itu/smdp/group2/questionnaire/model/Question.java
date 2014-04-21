@@ -63,19 +63,16 @@ public abstract class Question {
 	// Non-trivial methods
 	
 	public boolean conditionsSatisfied(){
-		if(conditions.size() == 0)
-			return true;
-		
 		for(String[] sarr : conditions){
-			boolean allIDsChosen = true;
+			boolean anyIDChosen = false;
 			for(String s : sarr){
 				ChoiceQuestion cq = getParent().getQuestionWithID(s);
-				allIDsChosen = allIDsChosen && cq.isIDChosen(s);
+				anyIDChosen |= cq.isIDChosen(s);
 			}
-			if(allIDsChosen)
-				return true;
+			if(!anyIDChosen)
+				return false;
 		}
-		return false;
+		return true;
 		
 	}
 }

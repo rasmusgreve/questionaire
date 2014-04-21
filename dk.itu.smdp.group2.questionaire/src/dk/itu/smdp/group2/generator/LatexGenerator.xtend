@@ -52,7 +52,6 @@ class LatexGenerator {
 		
 		\newcommand{\bbox}{\framebox[0.6cm]{\rule{0cm}{0.6cm}}}
 		
-		
 		%Heading
 		\newcommand{\heading}[1]{{\huge #1}}
 		
@@ -135,17 +134,20 @@ class LatexGenerator {
 	 *         Elements        *
 	 ***************************/
 	
-	
+	def static linebreaks(String it)
+	{
+		it?.replaceAll("\r","")?.replaceAll("\n","\\\\\\\\")
+	}	
 	
 	def static compileHeading(Heading it)  {
 		'''
-		\heading{«text»}
+		\heading{«linebreaks(text)»}
 		'''
 	}
 	def static compileParagraph(Paragraph it)  {
 		'''
 		\begin{paragraph}
-		«text»
+		«linebreaks(text)»
 		\end{paragraph}
 		'''
 	}
@@ -164,7 +166,7 @@ class LatexGenerator {
 	}
 	def static compileQuestionBase(QuestionBase it)  {
 		'''
-		\question{«title»«IF mandatory» *«ENDIF»«IF description != null»\\«description»«ENDIF»}
+		\question{«linebreaks(title)»«IF mandatory» *«ENDIF»«IF description != null»\\«linebreaks(description)»«ENDIF»}
 		'''
 	}
 	def static compileTextQuestion(TextQuestion it)  {
@@ -199,9 +201,9 @@ class LatexGenerator {
 		'''
 		\vspace{0.5cm}
 		\begin{tabular}{p{4.7cm}*{«columnNames.length»}{p{«Math.round(1000.0/columnNames.length)/100.0»cm}}p{0.000001cm}}
-		&«FOR c : columnNames»\centering «c»&«ENDFOR»\\
+		&«FOR c : columnNames»\centering «linebreaks(c)»&«ENDFOR»\\
 		«FOR row : rowNames»
-		\matrixline{«columnNames.length»}{«row»}
+		\matrixline{«columnNames.length»}{«linebreaks(row)»}
 		«ENDFOR»
 		\end{tabular}
 		\vspace{0.5cm}
@@ -212,7 +214,7 @@ class LatexGenerator {
 		\choicenumber{«minSelections»}{«maxSelections»}
 		\begin{choiceoptions}
 		«FOR option : options»
-			\option{«option.text»}
+			\option{«linebreaks(option.text)»}
 		«ENDFOR»
 		\end{choiceoptions}
 		'''

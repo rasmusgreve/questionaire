@@ -1,32 +1,31 @@
 package dk.itu.smdp.group2.questionnaire.model;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import dk.itu.smdp.group2.R;
+import dk.itu.smdp.group2.questionnaire.utilities.GRadioGroup;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
-import android.widget.GridView;
-import android.widget.LinearLayout;
 import android.widget.RadioButton;
-import android.widget.RadioGroup;
+import android.widget.TableLayout;
+import android.widget.TableRow;
 import android.widget.TextView;
 
 public class MatrixQuestion extends Question{
 	
-	private int min;
+	private int max;
 	private String[] columns;
 	private String[] rows;
+	
+	private View[][] matrix;
+	private int[] checked = null;
 	
 	// results
 	private View root;
 
-	public MatrixQuestion(String question, String description, boolean optional, int minPerRow){
+	public MatrixQuestion(String question, String description, boolean optional, int maxPerRow){
 		super(question,description,optional);
-		min = minPerRow;
+		max = maxPerRow;
 	}
 
 	@Override
@@ -36,7 +35,7 @@ public class MatrixQuestion extends Question{
 		TextView title = (TextView) root.findViewById(R.id.tvMatrixTitle);
 		TextView desc = (TextView) root.findViewById(R.id.tvMatrixDesc);
 		TextView select = (TextView) root.findViewById(R.id.tvMatrixSelec);
-		GridView matrix = (GridView) root.findViewById(R.id.gvMatrix);
+		TableLayout tablelayout = (TableLayout) root.findViewById(R.id.tlMatrix);
 		
 		// set values
 		title.setText(this.getQuestion() + (this.isOptional() ? "" : " *"));
@@ -44,37 +43,97 @@ public class MatrixQuestion extends Question{
 		if(getDescription() == null || getDescription().length() == 0) desc.setVisibility(View.GONE);
 		
 		// guide text
-		if(min == 1){ // radio
+		if(max == 1){ // radio
 			select.setVisibility(View.GONE);
 		}else{ // checkbox
-			select.setText("Select "+min+" options per line");
+			select.setText("Select up to "+max+" options per line");
 		}
 		
 		// create grid titles
-		matrix.setNumColumns(columns.length);
-		List<View> list = new ArrayList<View>(columns.length*rows.length);
-		list.add(new TextView(getParent().getActivity())); // empty topleft
-		for(String c : columns){ // columns
-			TextView tv = new TextView(getParent().getActivity());
-			tv.setText(c);
-			list.add(tv);
-		}
-		// create rows
-		for(String r : rows){
-			TextView tv = new TextView(getParent().getActivity());
-			tv.setText(r);
-			list.add(tv);
-			
-			// create radio or checkbox
-			for(int i = 0; i < columns.length; i++){
-				list.add(new TextView(getParent().getActivity()));
-			}
-		}
-		
-		ArrayAdapter<View> adapter = new ArrayAdapter<View>(getParent().getActivity(), android.R.layout.simple_list_item_1, list);
-		matrix.setAdapter(adapter);
+		createMatrix(tablelayout);
 		
 		return root;
+	}
+
+	private void createMatrix(TableLayout tablelayout) {
+		tablelayout.setStretchAllColumns(true);
+		
+		TableRow.LayoutParams rowParams = new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.WRAP_CONTENT);
+		TableRow.LayoutParams params = new TableRow.LayoutParams(0, TableRow.LayoutParams.WRAP_CONTENT,1f);
+		TableRow row;
+		
+		matrix = new View[rows.length][columns.length];
+
+		// first row = column names
+		row = new TableRow(getParent().getActivity());
+		row.setLayoutParams(rowParams);
+		
+		TextView topleft = new TextView(getParent().getActivity());
+		topleft.setLayoutParams(params);
+		row.addView(topleft); // empty topleft
+		
+		for(int i = 0; i < columns.length; i++){ // columns
+			String s = columns[i];
+			TextView tv = new TextView(getParent().getActivity());
+			tv.setText(s);
+			tv.setLayoutParams(params);
+			row.addView(tv);
+		}
+		tablelayout.addView(row);
+		
+		checked = new int[rows.length];
+		
+		// create rows
+		for(int i = 0; i < rows.length; i++){
+			row = new TableRow(getParent().getActivity());
+			row.setLayoutParams(rowParams);
+			
+			String r = rows[i];
+			TextView tv = new TextView(getParent().getActivity());
+			tv.setText(r);
+			//tv.setLayoutParams(params);
+			row.addView(tv);
+			
+			// create radio or checkbox
+			if(max == 1){
+				GRadioGroup rg = new GRadioGroup();
+				for(int j = 0; j < columns.length; j++){
+					RadioButton rb = new RadioButton(getParent().getActivity());
+					matrix[i][j] = rb;
+					row.addView(rb);
+					rg.addRadioButton(rb);
+				}
+			}else{
+				final int ii = i;
+				
+				for(int j = 0; j < columns.length; j++){
+					
+					CheckBox cb = new CheckBox(getParent().getActivity());
+
+					matrix[i][j] = cb;
+					row.addView(cb);
+					
+					cb.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+						
+						@Override
+						public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+							checked[ii] += isChecked ? 1 : -1;
+							
+							// uncheck again if too many
+							if(isChecked && checked[ii] > max){
+								buttonView.setChecked(false);
+								checked[ii]--;
+							}else{
+								// make questions visible/invisible if they have this as condition
+								getParent().checkConditions();
+							}
+						}
+					});
+				}
+			}
+
+			tablelayout.addView(row);
+		}
 	}
 	
 	public String toString(){
@@ -84,8 +143,25 @@ public class MatrixQuestion extends Question{
 
 	@Override
 	public boolean isAnswered() {
-		// TODO: Implement
-		return false;
+		if(max == 1){ // radiobuttons
+			for(View[] row : matrix){
+				boolean found = false;
+				for(View v : row){
+					RadioButton rb = (RadioButton)v;
+					if(rb.isChecked())
+						found = true;
+				}
+				if(!found)
+					return false;
+			}
+			return true;
+		}else{ // checkboxes
+			for(int i : checked){
+				if(i == 0)
+					return false;
+			}
+			return true;
+		}
 	}
 	
 	@Override

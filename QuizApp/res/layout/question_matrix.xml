@@ -25,11 +25,11 @@
         android:text="tvMatrixSelec"
         android:textAppearance="?android:attr/textAppearanceSmall" />
 
-    <GridView
-        android:id="@+id/gvMatrix"
+    <TableLayout
+        android:id="@+id/tlMatrix"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:numColumns="3" >
-    </GridView>
+        android:layout_height="wrap_content" >
+
+    </TableLayout>
 
 </LinearLayout>

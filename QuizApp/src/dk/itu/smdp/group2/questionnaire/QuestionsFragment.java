@@ -1,9 +1,5 @@
 package dk.itu.smdp.group2.questionnaire;
 
-import java.util.List;
-
-import dk.itu.smdp.group2.R;
-import android.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,11 +10,12 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+import dk.itu.smdp.group2.R;
 import dk.itu.smdp.group2.questionnaire.model.*;
 
-public class QuestionsFragment extends Fragment {
+public class QuestionsFragment extends QuestionsFragmentBase {
 	
-	private Questionnaire init() {
+	protected Questionnaire init() {
 		// THIS IS WHERE AUTO GENERATED SHOULD CREATE OBJECTS
 		// AND PUT THEM IN THE SCROLLVIEW'S LINEAR LAYOUT
 		
@@ -56,7 +53,7 @@ public class QuestionsFragment extends Fragment {
         choice.addOption("", "No");
         questionnaire.addQuestion(choice);
        
-        matrix = new MatrixQuestion("How do you like the following dishes?", "Description", true, 1);
+        matrix = new MatrixQuestion("How do you like the following dishes?", "Description", true, 2);
         matrix.setColumns("Really well", "Sorta", "Really bad", "Only if my mom made it");
         matrix.setRows("Kebob", "Pizza", "Chocolate");
         matrix.addCondition("a_little", "yes");
@@ -76,6 +73,7 @@ public class QuestionsFragment extends Fragment {
 			Bundle savedInstanceState) {
 		Questionnaire qn = init();
 		
+		
 		View v = inflater.inflate(R.layout.questions_fragment, container, false);
 		TextView title = (TextView) v.findViewById(R.id.tvTitle);
 		LinearLayout scroll = (LinearLayout)v.findViewById(R.id.svsLinearLayout);
@@ -84,6 +82,7 @@ public class QuestionsFragment extends Fragment {
 		
 		qn.generateAllViews(scroll);
 		createButton(qn,scroll);
+		qn.checkConditions();
 		
 		return v;
 	}

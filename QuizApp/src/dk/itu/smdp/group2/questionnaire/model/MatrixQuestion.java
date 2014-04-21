@@ -138,7 +138,18 @@ public class MatrixQuestion extends Question{
 	
 	public String toString(){
 		if (!isAnswered()) return "";
-		return "";
+		String answer = "";
+		
+		for(int x = 0; x < matrix.length; x++){
+			String s = "";
+			
+			for(int y = 0; y < matrix[y].length; y++)
+					if (((CompoundButton)matrix[x][y]).isChecked())
+						s += (s.length() == 0 ? "" : ", ") + columns[y];
+			
+			answer += "[" + s + "]";
+		}
+		return answer;	
 	}
 
 	@Override

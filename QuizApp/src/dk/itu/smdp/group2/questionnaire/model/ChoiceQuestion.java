@@ -39,6 +39,7 @@ public class ChoiceQuestion extends Question{
 		return getValueForID(id) == null;
 	}
 	
+	
 	public boolean isIDChosen(String id) {
 		String value = getValueForID(id);
 		if(radiogroup != null){
@@ -139,6 +140,19 @@ public class ChoiceQuestion extends Question{
 	@Override
 	public void setVisible(boolean visible) {
 		root.setVisibility(visible ? View.VISIBLE : View.GONE);
+	}
+	
+	@Override
+	public String toString(){
+		// if the user has not answered the question legally return empty string.
+		if (!isAnswered()) return "";
+		// if the question is a radiogroup return the option of that radio
+		if (radiogroup != null) return options.get(radiogroup.getCheckedRadioButtonId()).getSecond();
+		// if the question is a series of textboxes return the answer from each checked checkbox
+		String answer = "";
+		for (int i = 0; i < checkboxes.size(); i++) 
+			if (checkboxes.get(i).isChecked()) answer += options.get(i).getSecond() + ", ";
+		return answer.substring(0, answer.length() - 3);
 	}
 	
 	// PRIVATE HELPERS

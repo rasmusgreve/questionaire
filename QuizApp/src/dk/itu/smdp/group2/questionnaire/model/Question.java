@@ -29,6 +29,9 @@ public abstract class Question {
 	public abstract boolean isAnswered();
 	
 	public abstract void setVisible(boolean visible);
+	
+	@Override
+	public abstract String toString();
 
 	//// GETTERS AND SETTERS ////
 	public String getQuestion() {

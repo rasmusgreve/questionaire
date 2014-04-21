@@ -60,6 +60,13 @@ public class IntegerQuestion extends Question {
 		root.setVisibility(visible ? View.VISIBLE : View.GONE);
 	}
 	
+	@Override
+	public String toString(){
+		if (this.isAnswered())
+			return (String)spinner.getSelectedItem();
+		return "";
+	}
+	
 	// PRIVATE HELPERS
 	
 	private String[] getValues(){

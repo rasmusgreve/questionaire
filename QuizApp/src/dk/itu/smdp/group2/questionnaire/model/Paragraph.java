@@ -38,5 +38,10 @@ public class Paragraph extends Question {
 	public void setVisible(boolean visible) {
 		
 	}
+	
+	@Override
+	public String toString(){
+		return "";
+	}
 
 }

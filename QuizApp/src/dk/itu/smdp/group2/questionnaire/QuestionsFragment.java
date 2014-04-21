@@ -13,7 +13,7 @@ public class QuestionsFragment extends QuestionsFragmentBase {
         TextQuestion text;
         ChoiceQuestion choice;
         MatrixQuestion matrix;
-        //CalendarQuestion calendar;
+        CalendarQuestion calendar;
         IntegerQuestion integer;
        
         questionnaire.addHeading(new Heading("Eating habits"));
@@ -26,8 +26,8 @@ public class QuestionsFragment extends QuestionsFragmentBase {
         text = new TextQuestion("What is your favorite recipe?", "Please enter the entire recipe", true, 4);
         questionnaire.addQuestion(text);
        
-        //calendar = new CalendarQuestion("When did you last eat?", "", true, false, true, true, true, true);
-        //questionnaire.addQuestion(calendar);
+        calendar = new CalendarQuestion("When did you last eat?", "", true, false, true, true, true, true);
+        questionnaire.addQuestion(calendar);
        
         choice = new ChoiceQuestion("Which of the folowing do you like the best?", "", true, 2, 2);
         choice.addOption("pasta", "Pasta");

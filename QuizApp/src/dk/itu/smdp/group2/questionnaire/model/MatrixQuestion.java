@@ -17,7 +17,7 @@ public class MatrixQuestion extends Question{
 	private String[] columns;
 	private String[] rows;
 	
-	private View[][] matrix;
+	private CompoundButton[][] matrix;
 	private int[] checked = null;
 	
 	// results
@@ -62,7 +62,7 @@ public class MatrixQuestion extends Question{
 		TableRow.LayoutParams params = new TableRow.LayoutParams(0, TableRow.LayoutParams.WRAP_CONTENT,1f);
 		TableRow row;
 		
-		matrix = new View[rows.length][columns.length];
+		matrix = new CompoundButton[rows.length][columns.length];
 
 		// first row = column names
 		row = new TableRow(getParent().getActivity());
@@ -157,6 +157,7 @@ public class MatrixQuestion extends Question{
 			return true;
 		}else{ // checkboxes
 			for(int i : checked){
+				System.out.println(i);
 				if(i == 0)
 					return false;
 			}

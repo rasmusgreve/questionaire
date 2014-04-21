@@ -36,14 +36,18 @@ public class ChoiceQuestion extends Question{
 	}
 	
 	public boolean containsID(String id){
-		return getValueForID(id) == null;
+		return getValueForID(id) != null;
 	}
 	
 	
 	public boolean isIDChosen(String id) {
 		String value = getValueForID(id);
 		if(radiogroup != null){
-			return ((RadioButton)radiogroup.findViewById(radiogroup.getCheckedRadioButtonId())).getText().equals(value);
+			RadioButton selected = (RadioButton)radiogroup.findViewById(radiogroup.getCheckedRadioButtonId());
+			if(selected == null)
+				return false;
+			
+			return selected.getText().equals(value);
 		}else{ // checkbox
 			for(CheckBox cb : checkboxes){
 				if(cb.isChecked() && cb.getText().equals(value))

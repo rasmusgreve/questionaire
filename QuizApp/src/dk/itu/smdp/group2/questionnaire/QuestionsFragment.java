@@ -56,7 +56,7 @@ public class QuestionsFragment extends Fragment {
         choice.addOption("", "No");
         questionnaire.addQuestion(choice);
        
-        matrix = new MatrixQuestion("How do you like the following dishes?", "Description", true, 1);
+        matrix = new MatrixQuestion("How do you like the following dishes?", "Description", true, 2);
         matrix.setColumns("Really well", "Sorta", "Really bad", "Only if my mom made it");
         matrix.setRows("Kebob", "Pizza", "Chocolate");
         matrix.addCondition("a_little", "yes");
@@ -76,6 +76,7 @@ public class QuestionsFragment extends Fragment {
 			Bundle savedInstanceState) {
 		Questionnaire qn = init();
 		
+		
 		View v = inflater.inflate(R.layout.questions_fragment, container, false);
 		TextView title = (TextView) v.findViewById(R.id.tvTitle);
 		LinearLayout scroll = (LinearLayout)v.findViewById(R.id.svsLinearLayout);
@@ -84,6 +85,7 @@ public class QuestionsFragment extends Fragment {
 		
 		qn.generateAllViews(scroll);
 		createButton(qn,scroll);
+		qn.checkConditions();
 		
 		return v;
 	}

@@ -1,8 +1,12 @@
 package dk.itu.smdp.group2.questionnaire.model;
 
 import dk.itu.smdp.group2.R;
+import dk.itu.smdp.group2.questionnaire.utilities.GRadioGroup;
 import android.view.View;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
+import android.widget.CompoundButton.OnCheckedChangeListener;
+import android.widget.RadioButton;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -14,6 +18,7 @@ public class MatrixQuestion extends Question{
 	private String[] rows;
 	
 	private View[][] matrix;
+	private int[] checked = null;
 	
 	// results
 	private View root;
@@ -76,6 +81,8 @@ public class MatrixQuestion extends Question{
 		}
 		tablelayout.addView(row);
 		
+		checked = new int[rows.length];
+		
 		// create rows
 		for(int i = 0; i < rows.length; i++){
 			row = new TableRow(getParent().getActivity());
@@ -88,12 +95,43 @@ public class MatrixQuestion extends Question{
 			row.addView(tv);
 			
 			// create radio or checkbox
-			for(int j = 0; j < columns.length; j++){
-				// TODO: Create radio (incl group) or checkbox
-				matrix[i][j] = new CheckBox(getParent().getActivity());
-				//matrix[i][j].setLayoutParams(params);
-				row.addView(matrix[i][j]);
+			if(max == 1){
+				GRadioGroup rg = new GRadioGroup();
+				for(int j = 0; j < columns.length; j++){
+					RadioButton rb = new RadioButton(getParent().getActivity());
+					matrix[i][j] = rb;
+					row.addView(rb);
+					rg.addRadioButton(rb);
+				}
+			}else{
+				final int ii = i;
+				
+				for(int j = 0; j < columns.length; j++){
+					
+					CheckBox cb = new CheckBox(getParent().getActivity());
+
+					matrix[i][j] = cb;
+					row.addView(cb);
+					
+					cb.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+						
+						@Override
+						public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+							checked[ii] += isChecked ? 1 : -1;
+							
+							// uncheck again if too many
+							if(isChecked && checked[ii] > max){
+								buttonView.setChecked(false);
+								checked[ii]--;
+							}else{
+								// make questions visible/invisible if they have this as condition
+								getParent().checkConditions();
+							}
+						}
+					});
+				}
 			}
+
 			tablelayout.addView(row);
 		}
 	}
@@ -105,8 +143,25 @@ public class MatrixQuestion extends Question{
 
 	@Override
 	public boolean isAnswered() {
-		// TODO: Implement
-		return false;
+		if(max == 1){ // radiobuttons
+			for(View[] row : matrix){
+				boolean found = false;
+				for(View v : row){
+					RadioButton rb = (RadioButton)v;
+					if(rb.isChecked())
+						found = true;
+				}
+				if(!found)
+					return false;
+			}
+			return true;
+		}else{ // checkboxes
+			for(int i : checked){
+				if(i == 0)
+					return false;
+			}
+			return true;
+		}
 	}
 	
 	@Override

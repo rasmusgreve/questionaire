@@ -80,8 +80,12 @@ public class Questionnaire {
 	}
 
 	public void checkConditions() {
+		System.out.println("check called");
 		for(Question q : questions){
-			q.setVisible(q.conditionsSatisfied());
+			
+			boolean sat = q.conditionsSatisfied();
+			System.out.println("q "+q.getQuestion()+" "+sat);
+			q.setVisible(sat);
 		}
 	}
 

@@ -143,7 +143,7 @@ public class MatrixQuestion extends Question{
 		for(int x = 0; x < matrix.length; x++){
 			String s = "";
 			
-			for(int y = 0; y < matrix[y].length; y++)
+			for(int y = 0; y < matrix[x].length; y++)
 					if (((CompoundButton)matrix[x][y]).isChecked())
 						s += (s.length() == 0 ? "" : ", ") + columns[y];
 			

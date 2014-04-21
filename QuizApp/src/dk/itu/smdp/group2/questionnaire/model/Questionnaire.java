@@ -72,7 +72,7 @@ public class Questionnaire {
 
 	public void sendEmail() {
 		// TODO Auto-generated method stub
-		Toast.makeText(getActivity(), "Pew pew, sending mailzzz!",Toast.LENGTH_LONG).show();
+		Toast.makeText(getActivity(), generateTextResult(),Toast.LENGTH_LONG).show();
 	}
 
 	public boolean isCompleted() {
@@ -104,7 +104,7 @@ public class Questionnaire {
 		if (!isCompleted()) return "";
 		String s = "";
 		for(int i = 0; i < questions.size(); i++)
-			if(questions.get(i) instanceof Question)
+			if(!(questions.get(i) instanceof Paragraph) && !(questions.get(i) instanceof Heading))
 				s += (s.length() == 0 ? "" : "\n") + getQuestionNumber(i) + ") " + questions.get(i);
 		return s;
 				

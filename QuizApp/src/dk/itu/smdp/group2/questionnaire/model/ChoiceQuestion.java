@@ -3,6 +3,7 @@ package dk.itu.smdp.group2.questionnaire.model;
 import java.util.ArrayList;
 
 import dk.itu.smdp.group2.R;
+import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
@@ -141,13 +142,12 @@ public class ChoiceQuestion extends Question{
 	public String toString(){
 		// if the user has not answered the question legally return empty string.
 		if (!isAnswered()) return "";
-		// if the question is a radiogroup return the option of that radio
-		if (radiogroup != null) return options.get(radiogroup.getCheckedRadioButtonId()).getSecond();
-		// if the question is a series of textboxes return the answer from each checked checkbox
+		
 		String answer = "";
-		for (int i = 0; i < checkboxes.size(); i++) 
-			if (checkboxes.get(i).isChecked()) answer += options.get(i).getSecond() + ", ";
-		return answer.substring(0, answer.length() - 3);
+		for (Tuple<String, CompoundButton> t : idViews) 
+			if (t.getSecond().isChecked()) 
+				answer += (answer.length() == 0 ? "" : ", ") + t.getSecond().getText().toString();
+		return answer;
 	}
 	
 	// PRIVATE HELPERS

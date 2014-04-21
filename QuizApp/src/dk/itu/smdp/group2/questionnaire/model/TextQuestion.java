@@ -1,6 +1,5 @@
 package dk.itu.smdp.group2.questionnaire.model;
 
-import dk.itu.smdp.group2.R;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
@@ -44,20 +43,19 @@ public class TextQuestion extends Question {
 		return root;
 	}
 
-	
-	public String generateTextResult()
-	{
-		// TODO: Not implemented
-		return "";
-	}
-
 	@Override
 	public boolean isAnswered() {
-		return editText.getText().length() > 0;
+		return editText.getText().toString().length() > 0;
 	}
 
 	@Override
 	public void setVisible(boolean visible) {
 		root.setVisibility(visible ? View.VISIBLE : View.GONE);
 	}	
+	
+	@Override
+	public String toString(){
+		if (!isAnswered()) return "";
+		return editText.getText().toString();
+	}
 }

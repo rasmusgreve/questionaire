@@ -12,6 +12,7 @@ import questionairemodel.TextQuestion
 import questionairemodel.Question
 import questionairemodel.QuestionCondition
 import questionairemodel.Option
+import java.util.List
 
 class AndroidGenerator {
 	
@@ -28,6 +29,16 @@ class AndroidGenerator {
 		«footer»
 		'''
 	}
+	
+	def static linebreaks(String it)
+	{
+		it?.replaceAll("\r","")?.replaceAll("\n","\\\\r\\\\n")
+	}	
+	
+	
+	/*
+	 * Compilation
+	 */
 	
 	def private static header(){
 		'''
@@ -128,13 +139,13 @@ class AndroidGenerator {
 	
 	def private static buildHeading(Heading it){
 		'''
-			questionnaire.addHeading(new Heading("«text»"));
+			questionnaire.addHeading(new Heading("«linebreaks(text)»"));
 		'''
 	}
 	
 	def private static buildParagraph(Paragraph it){
 		'''
-			questionnaire.addParagraph(new Paragraph("«text»"));
+			questionnaire.addParagraph(new Paragraph("«linebreaks(text)»"));
 		'''
 	}
 	
@@ -153,7 +164,7 @@ class AndroidGenerator {
 	
 	def private static buildTextQuestion(TextQuestion it){
 		'''
-			text = new TextQuestion("«questionBase.title»", "«questionBase.description»", «questionBase.mandatory», «lines»);
+			text = new TextQuestion("«linebreaks(questionBase.title)»", "«linebreaks(questionBase.description)»", «questionBase.mandatory», «lines»);
 			«buildConditions("text")»
 			questionnaire.addQuestion(text);
 		'''
@@ -161,7 +172,7 @@ class AndroidGenerator {
 	
 	def private static buildChoiceQuestion(ChoiceQuestion it){
 		'''
-			choice = new ChoiceQuestion("«questionBase.title»", "«questionBase.description»", «questionBase.mandatory», «minSelections», «maxSelections»);
+			choice = new ChoiceQuestion("«linebreaks(questionBase.title)»", "«linebreaks(questionBase.description)»", «questionBase.mandatory», «minSelections», «maxSelections»);
 			«FOR it : options»
 			«buildOption»
 			«ENDFOR»
@@ -177,9 +188,9 @@ class AndroidGenerator {
 	
 	def private static buildMatrixQuestion(MatrixQuestion it){
 		'''
-			matrix = new MatrixQuestion("«questionBase.title»", "«questionBase.description»", «questionBase.mandatory», «maxPerRow»);
-			matrix.setColumns(«FOR it : columnNames SEPARATOR ', '»"«it»"«ENDFOR»);
-			matrix.setRows(«FOR it : rowNames SEPARATOR ', '»"«it»"«ENDFOR»);
+			matrix = new MatrixQuestion("«linebreaks(questionBase.title)»", "«linebreaks(questionBase.description)»", «questionBase.mandatory», «maxPerRow»);
+			matrix.setColumns(«FOR it : columnNames SEPARATOR ', '»"«linebreaks»"«ENDFOR»);
+			matrix.setRows(«FOR it : rowNames SEPARATOR ', '»"«linebreaks»"«ENDFOR»);
 			«buildConditions("matrix")»
 			questionnaire.addQuestion(matrix);
 		'''
@@ -187,7 +198,7 @@ class AndroidGenerator {
 	
 	def private static buildCalendarQuestion(CalendarQuestion it){
 		'''
-			calendar = new CalendarQuestion("«questionBase.title»", "«questionBase.description»", «questionBase.mandatory», «year», «month», «day», «hour», «minute»);
+			calendar = new CalendarQuestion("«linebreaks(questionBase.title)»", "«linebreaks(questionBase.description)»", «questionBase.mandatory», «year», «month», «day», «hour», «minute»);
 			«buildConditions("calendar")»
 			questionnaire.addQuestion(calendar);
 		'''
@@ -195,7 +206,7 @@ class AndroidGenerator {
 	
 	def private static buildIntegerQuestion(IntegerQuestion it){
 		'''
-			integer = new IntegerQuestion("«questionBase.title»", "«questionBase.description»", «questionBase.mandatory», «minValue», «maxValue», «step»);
+			integer = new IntegerQuestion("«linebreaks(questionBase.title)»", "«linebreaks(questionBase.description)»", «questionBase.mandatory», «minValue», «maxValue», «step»);
 			«buildConditions("integer")»
 			questionnaire.addQuestion(integer);
 		'''

@@ -27,15 +27,14 @@ import questionairemodel.impl.ChoiceQuestionImpl
 class QuestionaireGenerator implements IGenerator {
 
 	String latex_cmd = "/usr/local/texlive/2012/bin/universal-darwin/pdflatex" //How to do this??
-	
-	static val repReg = #["^\"(.*)\"$", "$1"]
 
 	override void doGenerate(Resource resource, IFileSystemAccess fsa) {
 		resource.allContents.toIterable.filter(typeof(Questionaire)).forEach [ Questionaire it |
 			
 			//Remove quotes
-			name = name.replaceAll(repReg.get(0), repReg.get(1))
-			resultEmail = resultEmail.replaceAll(repReg.get(0), repReg.get(1))
+			name = name.replaceAll("[^a-zA-Z0-9_-]","") //Remove illegal chars (this needs to be a valid file name)
+			resultEmail = removeQuotes(resultEmail)
+			
 			elements.forEach[removeQuotes]
 			
 			//Fix default values max selections for choice questions
@@ -67,29 +66,33 @@ class QuestionaireGenerator implements IGenerator {
 	
 	def static removeQuotes(Element it){
 		if(it instanceof Heading){
-			(it as Heading).text = (it as Heading).text.replaceAll(repReg.get(0), repReg.get(1))
+			(it as Heading).text = removeQuotes((it as Heading).text)
 		}
 		if(it instanceof Paragraph){
-			(it as Paragraph).text = (it as Paragraph).text.replaceAll(repReg.get(0), repReg.get(1))
+			(it as Paragraph).text = removeQuotes((it as Paragraph).text)
 		}
 		if(it instanceof Question){
-			(it as Question).questionBase.title = (it as Question).questionBase.title.replaceAll(repReg.get(0), repReg.get(1))
-			if((it as Question).questionBase.description != null) (it as Question).questionBase.description = (it as Question).questionBase.description.replaceAll(repReg.get(0), repReg.get(1))
-			if(it instanceof ChoiceQuestion) (it as ChoiceQuestion).options.forEach[removeQuotes]
-			if(it instanceof MatrixQuestion) {removeQuotes((it as MatrixQuestion).rowNames);removeQuotes((it as MatrixQuestion).columnNames)}
+			val base = (it as Question).questionBase
+			base.title = removeQuotes(base.title)
+			base.description = removeQuotes(base.description)
 		}
-		
-	}	
-	
-	def static removeQuotes(List<String> list) {
-		var List<String> oldNames = list.immutableCopy
-		list.clear
-		oldNames.forEach[list.add(it.replaceAll(repReg.get(0), repReg.get(1)))]
+		if(it instanceof ChoiceQuestion){
+			(it as ChoiceQuestion).options.forEach[
+				name = removeQuotes(name)
+				text = removeQuotes(text)
+			]
+		}
+		if(it instanceof MatrixQuestion) {
+			val q = (it as MatrixQuestion);
+			q.rowNames.forEach[elem, i|q.rowNames.set(i,removeQuotes(elem))]
+			q.columnNames.forEach[elem, i|q.columnNames.set(i,removeQuotes(elem))]
+		}
 	}
 	
-	def static removeQuotes(Option it){
-		if(name!=null) name = name.replaceAll(repReg.get(0), repReg.get(1))
-		text = text.replaceAll(repReg.get(0), repReg.get(1))
+	def static removeQuotes(String it)
+	{
+		//Remove quotes in the start and end of lines in the string
+		it?.replaceAll("^\"","")?.replaceAll("\"$","")
 	}
 }
 

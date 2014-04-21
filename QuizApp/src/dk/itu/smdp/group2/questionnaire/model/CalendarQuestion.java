@@ -11,6 +11,10 @@ public class CalendarQuestion extends Question {
 	private View root;
 	
 	private boolean year,month,day,hour,minute;
+	
+	// results
+	private DatePicker date;
+	private TimePicker time;
 
 	public CalendarQuestion(String question, String desc, boolean optional,
 			boolean year, boolean month, boolean day, boolean hour, boolean minute) {
@@ -28,8 +32,8 @@ public class CalendarQuestion extends Question {
 		root = this.getParent().getActivity().getLayoutInflater().inflate(R.layout.question_calendar, null);
 		TextView title = (TextView) root.findViewById(R.id.tvCalendarTitle);
 		TextView desc = (TextView) root.findViewById(R.id.tvCalendarDesc);
-		DatePicker date = (DatePicker) root.findViewById(R.id.dpCalendar);
-		TimePicker time = (TimePicker) root.findViewById(R.id.tpCalendar);
+		date = (DatePicker) root.findViewById(R.id.dpCalendar);
+		time = (TimePicker) root.findViewById(R.id.tpCalendar);
 		
 		// set values
 		title.setText(this.getQuestion() + (this.isOptional() ? "" : " *"));

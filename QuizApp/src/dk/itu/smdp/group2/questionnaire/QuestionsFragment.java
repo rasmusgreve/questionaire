@@ -42,7 +42,7 @@ public class QuestionsFragment extends QuestionsFragmentBase {
         choice.addOption("", "No");
         questionnaire.addQuestion(choice);
        
-        matrix = new MatrixQuestion("How do you like the following dishes?", "Description", true, 2);
+        matrix = new MatrixQuestion("How do you like the following dishes?", "Description", false, 2);
         matrix.setColumns("Really well", "Sorta", "Really bad", "Only if my mom made it");
         matrix.setRows("Kebob", "Pizza", "Chocolate");
         matrix.addCondition("a_little", "yes");

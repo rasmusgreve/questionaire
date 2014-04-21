@@ -3,6 +3,7 @@ package dk.itu.smdp.group2.questionnaire.utilities;
 import java.util.ArrayList;
 import java.util.List;
 
+import dk.itu.smdp.group2.questionnaire.model.Questionnaire;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.RadioButton;
@@ -10,6 +11,7 @@ import android.widget.RadioButton;
 public class GRadioGroup {
 
     List<RadioButton> radios = new ArrayList<RadioButton>();
+    Questionnaire qn;
 
     /**
      * Constructor, which allows you to pass number of RadioButton instances,
@@ -27,8 +29,8 @@ public class GRadioGroup {
         }
     }
     
-    public GRadioGroup(){
-    	
+    public GRadioGroup(Questionnaire qn){
+    	this.qn = qn;
     }
     
     public void addRadioButton(RadioButton rb){
@@ -52,6 +54,7 @@ public class GRadioGroup {
 
             RadioButton rb = (RadioButton) v;
             rb.setChecked(true);
+            qn.checkConditions();
         }
     };
 

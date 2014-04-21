@@ -25,11 +25,6 @@ public class Paragraph extends Question {
 	}
 
 	@Override
-	public String generateTextResult() {
-		return "";
-	}
-
-	@Override
 	public boolean isAnswered() {
 		return true;
 	}
@@ -37,6 +32,11 @@ public class Paragraph extends Question {
 	@Override
 	public void setVisible(boolean visible) {
 		
+	}
+	
+	@Override
+	public String toString(){
+		return "";
 	}
 
 }

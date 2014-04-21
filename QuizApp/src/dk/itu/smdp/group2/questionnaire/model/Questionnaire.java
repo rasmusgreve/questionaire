@@ -95,4 +95,14 @@ public class Questionnaire {
 		}
 		return null; // no match
 	}
+	
+	public String generateTextResult(){
+		if (!isCompleted()) return "";
+		String s = "";
+		for(int i = 0; i < questions.size(); i++)
+			if(questions.get(i) instanceof Question)
+				s += (s.length() == 0 ? "" : "\n") + getQuestionNumber(i) + ") " + questions.get(i);
+		return s;
+				
+	}
 }

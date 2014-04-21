@@ -1,32 +1,26 @@
 package dk.itu.smdp.group2.questionnaire.model;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import dk.itu.smdp.group2.R;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
-import android.widget.CompoundButton.OnCheckedChangeListener;
-import android.widget.GridView;
-import android.widget.LinearLayout;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
+import android.widget.TableLayout;
+import android.widget.TableRow;
 import android.widget.TextView;
 
 public class MatrixQuestion extends Question{
 	
-	private int min;
+	private int max;
 	private String[] columns;
 	private String[] rows;
+	
+	private View[][] matrix;
 	
 	// results
 	private View root;
 
-	public MatrixQuestion(String question, String description, boolean optional, int minPerRow){
+	public MatrixQuestion(String question, String description, boolean optional, int maxPerRow){
 		super(question,description,optional);
-		min = minPerRow;
+		max = maxPerRow;
 	}
 
 	@Override
@@ -36,7 +30,7 @@ public class MatrixQuestion extends Question{
 		TextView title = (TextView) root.findViewById(R.id.tvMatrixTitle);
 		TextView desc = (TextView) root.findViewById(R.id.tvMatrixDesc);
 		TextView select = (TextView) root.findViewById(R.id.tvMatrixSelec);
-		GridView matrix = (GridView) root.findViewById(R.id.gvMatrix);
+		TableLayout tablelayout = (TableLayout) root.findViewById(R.id.tlMatrix);
 		
 		// set values
 		title.setText(this.getQuestion() + (this.isOptional() ? "" : " *"));
@@ -44,37 +38,64 @@ public class MatrixQuestion extends Question{
 		if(getDescription() == null || getDescription().length() == 0) desc.setVisibility(View.GONE);
 		
 		// guide text
-		if(min == 1){ // radio
+		if(max == 1){ // radio
 			select.setVisibility(View.GONE);
 		}else{ // checkbox
-			select.setText("Select "+min+" options per line");
+			select.setText("Select up to "+max+" options per line");
 		}
 		
 		// create grid titles
-		matrix.setNumColumns(columns.length);
-		List<View> list = new ArrayList<View>(columns.length*rows.length);
-		list.add(new TextView(getParent().getActivity())); // empty topleft
-		for(String c : columns){ // columns
-			TextView tv = new TextView(getParent().getActivity());
-			tv.setText(c);
-			list.add(tv);
-		}
-		// create rows
-		for(String r : rows){
-			TextView tv = new TextView(getParent().getActivity());
-			tv.setText(r);
-			list.add(tv);
-			
-			// create radio or checkbox
-			for(int i = 0; i < columns.length; i++){
-				list.add(new TextView(getParent().getActivity()));
-			}
-		}
-		
-		ArrayAdapter<View> adapter = new ArrayAdapter<View>(getParent().getActivity(), android.R.layout.simple_list_item_1, list);
-		matrix.setAdapter(adapter);
+		createMatrix(tablelayout);
 		
 		return root;
+	}
+
+	private void createMatrix(TableLayout tablelayout) {
+		tablelayout.setStretchAllColumns(true);
+		
+		TableRow.LayoutParams rowParams = new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.WRAP_CONTENT);
+		TableRow.LayoutParams params = new TableRow.LayoutParams(0, TableRow.LayoutParams.WRAP_CONTENT,1f);
+		TableRow row;
+		
+		matrix = new View[rows.length][columns.length];
+
+		// first row = column names
+		row = new TableRow(getParent().getActivity());
+		row.setLayoutParams(rowParams);
+		
+		TextView topleft = new TextView(getParent().getActivity());
+		topleft.setLayoutParams(params);
+		row.addView(topleft); // empty topleft
+		
+		for(int i = 0; i < columns.length; i++){ // columns
+			String s = columns[i];
+			TextView tv = new TextView(getParent().getActivity());
+			tv.setText(s);
+			tv.setLayoutParams(params);
+			row.addView(tv);
+		}
+		tablelayout.addView(row);
+		
+		// create rows
+		for(int i = 0; i < rows.length; i++){
+			row = new TableRow(getParent().getActivity());
+			row.setLayoutParams(rowParams);
+			
+			String r = rows[i];
+			TextView tv = new TextView(getParent().getActivity());
+			tv.setText(r);
+			//tv.setLayoutParams(params);
+			row.addView(tv);
+			
+			// create radio or checkbox
+			for(int j = 0; j < columns.length; j++){
+				// TODO: Create radio (incl group) or checkbox
+				matrix[i][j] = new CheckBox(getParent().getActivity());
+				//matrix[i][j].setLayoutParams(params);
+				row.addView(matrix[i][j]);
+			}
+			tablelayout.addView(row);
+		}
 	}
 
 	@Override

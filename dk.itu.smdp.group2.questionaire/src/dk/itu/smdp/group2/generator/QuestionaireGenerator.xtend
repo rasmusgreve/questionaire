@@ -46,7 +46,7 @@ class QuestionaireGenerator implements IGenerator {
 			val fname = it.name.toFirstUpper
 			
 			// generate Android implementation
-			fsa.generateFile("android/" + fname + ".java", AndroidGenerator.compileToAndroid(it))
+			fsa.generateFile("android/QuestionsFragment.java", AndroidGenerator.compileToAndroid(it))
 			//TODO: other Android stuff?
 			
 			

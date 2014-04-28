@@ -1,23 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">QuizApp</string>
-    <string-array name="question1">
-    	<item>Are you a fan of Justin Bieber?</item>
-    
-    	<item>Yes</item>
-    
-    	<item>No</item>
-    
-    	<item>I do not know who he is</item>
-    
-    </string-array>
-    <string-array name="question2">
-    	<item>Do you play sports?</item>
-    
-    	<item>Often</item>
-    
-    	<item>Sometimes</item>
-    
-    	<item>Not really</item>
-    </string-array>    
+    <string name="app_name">QuestionnaireApp</string> 
 </resources>

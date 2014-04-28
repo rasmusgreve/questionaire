@@ -13,6 +13,7 @@ import questionairemodel.QuestionCondition
 import questionairemodel.Questionaire
 import questionairemodel.TextQuestion
 import java.util.ArrayList
+import org.eclipse.emf.common.util.EList
 
 class LatexGenerator {
 	
@@ -42,7 +43,6 @@ class LatexGenerator {
 		\RequirePackage{forloop}
 		
 		\definecolor{shadecolor}{rgb}{0.95,0.95,0.95}
-		\definecolor{framecolor}{rgb}{0,0,0}
 		\setlength{\fboxrule}{0.3mm}
 		
 		\parindent0cm 
@@ -52,12 +52,19 @@ class LatexGenerator {
 		
 		\newcommand{\bbox}{\framebox[0.6cm]{\rule{0cm}{0.6cm}}}
 		
+		
+		%Title
+		\newcommand{\mytitle}[1]{{\huge #1} \par \vspace{.4cm}}
+		
+		%Email
+		\newcommand{\email}[1]{\textit{When filled out, please send this questionnaire to \underline{#1}.}}
+		
 		%Heading
-		\newcommand{\heading}[1]{{\huge #1}}
+		\newcommand{\heading}[1]{\vspace{.5cm}{\large \textbf{#1}}}
 		
 		%Paragraph
 		\renewenvironment{paragraph}{%
-		\def\FrameCommand{\fcolorbox{framecolor}{shadecolor}}%
+		\def\FrameCommand{\fcolorbox{white}{white}}%
 		\MakeFramed {\FrameRestore}}%
 		{\endMakeFramed}
 		
@@ -67,6 +74,17 @@ class LatexGenerator {
 		\catcode `@11
 		\def\question{\@startsection {chapter}{1}{\z@}{-3.5ex plus
 		-1ex minus  -.2ex}{1.5ex plus .2ex}{}}
+		
+		\newcommand{\questionseparator}{
+		{\color{shadecolor}\hrule\vspace{.1cm}\hrule}
+		\vspace{.2cm}}
+		
+		%Questioncondition
+		\newenvironment{condition}{%
+		\def\FrameCommand{\fcolorbox{white}{shadecolor}}%
+		\MakeFramed {\FrameRestore}}%
+		{\endMakeFramed}
+		
 		
 		
 		%Text question
@@ -82,7 +100,7 @@ class LatexGenerator {
 		%Integer question
 		\newcounter{integerC}
 		\newcommand{\integeranswer}[3]{\begin{center}
-		\begin{tabular}{*{#2}{c}}
+		\begin{tabular}{*{20}{c}}
 		\hfill\forloop[#3]{integerC}{#1}{\value{integerC} < #2}{$\Box$ & }$\Box$\\
 		\hfill\forloop[#3]{integerC}{#1}{\value{integerC} < #2}{\arabic{integerC} & }#2
 		\end{tabular}
@@ -122,10 +140,6 @@ class LatexGenerator {
 	
 	def static staticEndCode() {
 		'''
-		
-		\begin{paragraph}
-		Thank you for filling out our questionaire.
-		\end{paragraph}
 		\end{document}
 		'''
 	}
@@ -162,11 +176,13 @@ class LatexGenerator {
 		«IF (it instanceof CalendarQuestion)»«compileCalendarQuestion(it as CalendarQuestion)»«ENDIF»
 		«IF (it instanceof MatrixQuestion)»«compileMatrixQuestion(it as MatrixQuestion)»«ENDIF»
 		«IF (it instanceof ChoiceQuestion)»«compileChoiceQuestion(it as ChoiceQuestion)»«ENDIF»
+		\questionseparator
 		'''
 	}
 	def static compileQuestionBase(QuestionBase it)  {
 		'''
 		\question{«linebreaks(title)»«IF mandatory» *«ENDIF»«IF description != null»\\«linebreaks(description)»«ENDIF»}
+		«it.conditions.compileQuestionConditions»
 		'''
 	}
 	def static compileTextQuestion(TextQuestion it)  {
@@ -219,8 +235,16 @@ class LatexGenerator {
 		\end{choiceoptions}
 		'''
 	}
-	def static compileQuestionCondition(QuestionCondition it)  {
-		
+	def static compileQuestionConditions(EList<QuestionCondition> it)  {
+		if(it.length > 0)
+		'''
+		\begin{condition}
+		Answer this question if you answered all of the following:\\
+		«FOR cond : it SEPARATOR "\\\\"»
+		 - «FOR opt : cond.option SEPARATOR " OR "»«opt.text»«ENDFOR»
+		«ENDFOR»
+		\end{condition}
+		'''
 	}
 
 	
@@ -229,8 +253,13 @@ class LatexGenerator {
 	def static compileToLatex(Questionaire it) {
 		'''
 		«staticStartCode»
-		«// TODO: Output it.name and it.email
-		»
+		\mytitle{«name»}
+		\email{«resultEmail»}
+		
+		\vspace{.5cm}
+		\hrule\vspace{.1cm}\hrule
+		\vspace{.2cm}
+		
 		«FOR element : elements»
 			«IF (element instanceof Heading)»«compileHeading(element as Heading)»«ENDIF»
 			«IF (element instanceof Paragraph)»«compileParagraph(element as Paragraph)»«ENDIF»

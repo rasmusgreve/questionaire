@@ -16,9 +16,9 @@ public class CalendarQuestion extends Question {
 	private DatePicker date;
 	private TimePicker time;
 
-	public CalendarQuestion(String question, String desc, boolean optional,
+	public CalendarQuestion(String question, String desc, boolean mandatory,
 			boolean year, boolean month, boolean day, boolean hour, boolean minute) {
-		super(question,desc,optional);
+		super(question,desc,mandatory);
 		this.year = year;
 		this.month = month;
 		this.day = day;
@@ -36,7 +36,7 @@ public class CalendarQuestion extends Question {
 		time = (TimePicker) root.findViewById(R.id.tpCalendar);
 		
 		// set values
-		title.setText(this.getQuestion() + (this.isOptional() ? "" : " *"));
+		title.setText(this.getQuestionText());
 		desc.setText(this.getDescription());
 		if(getDescription() == null || getDescription().length() == 0) desc.setVisibility(View.GONE);
 		
@@ -60,8 +60,19 @@ public class CalendarQuestion extends Question {
 
 	@Override
 	public String toString() {
-		// TODO Auto-generated method stub
-		return null;
+		StringBuilder builder = new StringBuilder();
+		
+		if(year) builder.append(date.getYear());
+		if(year && (month || day)) builder.append("-");
+		if(month) builder.append(date.getMonth());
+		if((year || month) && day) builder.append("-");
+		if(day) builder.append(date.getDayOfMonth());
+		if((year || month || day) && (hour || minute)) builder.append(" ");
+		if(hour) builder.append(time.getCurrentHour());
+		if(hour && minute) builder.append(":");
+		if(minute) builder.append(time.getCurrentMinute());
+		
+		return builder.toString();
 	}
 
 }

@@ -12,9 +12,9 @@ public class TextQuestion extends Question {
 	private View root;
 	private EditText editText;
 	
-	public TextQuestion(String question, String description, boolean optional, int lines)
+	public TextQuestion(String question, String description, boolean mandatory, int lines)
 	{
-		super(question, description, optional);
+		super(question, description, mandatory);
 		this.lines = lines;
 	}
 	
@@ -27,7 +27,7 @@ public class TextQuestion extends Question {
 		editText = (EditText) root.findViewById(R.id.spEditText);
 		
 		// set values
-		title.setText(this.getQuestion() + (this.isOptional() ? "" : " *"));
+		title.setText(this.getQuestionText());
 		desc.setText(this.getDescription());
 		if(getDescription() == null || getDescription().length() == 0) desc.setVisibility(View.GONE);
 		

@@ -9,7 +9,7 @@ public class Paragraph extends Question {
 	private View root;
 	
 	public Paragraph(String title){
-		super(title,"",true);
+		super(title,"",false);
 	}
 
 	@Override
@@ -31,7 +31,7 @@ public class Paragraph extends Question {
 
 	@Override
 	public void setVisible(boolean visible) {
-		
+		// always visible
 	}
 	
 	@Override

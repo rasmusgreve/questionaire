@@ -11,14 +11,14 @@ public abstract class Question {
 	
 	private String question;
 	private String description;
-	private boolean optional;
+	private boolean mandatory;
 	private List<String[]> conditions;
 	
-	public Question(String question, String description, boolean optional)
+	public Question(String question, String description, boolean mandatory)
 	{
 		this.question = question;
 		this.description = description;
-		this.optional = optional;
+		this.mandatory = mandatory;
 		
 		this.conditions = new ArrayList<String[]>();
 	}
@@ -41,8 +41,8 @@ public abstract class Question {
 		return description;
 	}
 	
-	public boolean isOptional() {
-		return optional;
+	public boolean isMandatory() {
+		return mandatory;
 	}
 	
 	public void setParent(Questionnaire qn){
@@ -62,6 +62,10 @@ public abstract class Question {
 	}
 	
 	// Non-trivial methods
+	
+	public String getQuestionText(){
+		return getParent().getQuestionNumber(this)+". "+this.getQuestion() + (this.isMandatory() ? " *" : "");
+	}
 	
 	public boolean conditionsSatisfied(){
 		for(String[] sarr : conditions){

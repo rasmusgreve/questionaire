@@ -15,9 +15,9 @@ public class IntegerQuestion extends Question {
 	private View root;
 	private Spinner spinner;
 	
-	public IntegerQuestion(String question, String description, boolean optional, int min, int max, int step)
+	public IntegerQuestion(String question, String description, boolean mandatory, int min, int max, int step)
 	{
-		super(question, description, optional);
+		super(question, description, mandatory);
 		this.min = min;
 		this.max = max;
 		this.step = step;
@@ -32,7 +32,7 @@ public class IntegerQuestion extends Question {
 		spinner = (Spinner) root.findViewById(R.id.spInteger);
 		
 		// set values
-		title.setText(this.getQuestion() + (this.isOptional() ? "" : " *"));
+		title.setText(this.getQuestionText());
 		desc.setText(this.getDescription());
 		if(getDescription() == null || getDescription().length() == 0) desc.setVisibility(View.GONE);
 		

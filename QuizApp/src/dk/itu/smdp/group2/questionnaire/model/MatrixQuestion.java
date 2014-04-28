@@ -23,8 +23,8 @@ public class MatrixQuestion extends Question{
 	// results
 	private View root;
 
-	public MatrixQuestion(String question, String description, boolean optional, int maxPerRow){
-		super(question,description,optional);
+	public MatrixQuestion(String question, String description, boolean mandatory, int maxPerRow){
+		super(question,description,mandatory);
 		max = maxPerRow;
 	}
 
@@ -38,7 +38,7 @@ public class MatrixQuestion extends Question{
 		TableLayout tablelayout = (TableLayout) root.findViewById(R.id.tlMatrix);
 		
 		// set values
-		title.setText(this.getQuestion() + (this.isOptional() ? "" : " *"));
+		title.setText(this.getQuestionText());
 		desc.setText(this.getDescription());
 		if(getDescription() == null || getDescription().length() == 0) desc.setVisibility(View.GONE);
 		

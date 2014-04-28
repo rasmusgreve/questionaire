@@ -3,6 +3,7 @@ package dk.itu.smdp.group2.questionnaire.model;
 import java.util.ArrayList;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
@@ -55,7 +56,7 @@ public class Questionnaire {
 	public int getFirstUncomplete() {
 		for(int i = 0; i < questions.size(); i++){
 			Question q = questions.get(i);
-			if(!q.isAnswered() && q.conditionsSatisfied() && !q.isOptional())
+			if(!q.isAnswered() && q.conditionsSatisfied() && q.isMandatory())
 				return i;
 		}
 		return -1;
@@ -69,10 +70,22 @@ public class Questionnaire {
 		}
 		return pos - textsBefore + 1;
 	}
+	
+	public int getQuestionNumber(Question q){
+		return getQuestionNumber(questions.indexOf(q));
+	}
 
 	public void sendEmail() {
-		// TODO Auto-generated method stub
-		Toast.makeText(getActivity(), generateTextResult(),Toast.LENGTH_LONG).show();
+		Intent i = new Intent(Intent.ACTION_SEND);
+		i.setType("message/rfc822");
+		i.putExtra(Intent.EXTRA_EMAIL, new String[]{this.getEmail()});
+		i.putExtra(Intent.EXTRA_SUBJECT, this.getTitle()+" Answer");
+		i.putExtra(Intent.EXTRA_TEXT, this.generateTextResult());
+		try{
+			getActivity().startActivity(Intent.createChooser(i, "Send answer in mail..."));
+		}catch(android.content.ActivityNotFoundException ex){
+			Toast.makeText(getActivity(), "No email clients installed.", Toast.LENGTH_SHORT).show();
+		}
 	}
 
 	public boolean isCompleted() {

@@ -25,8 +25,8 @@ public class ChoiceQuestion extends Question{
 	private RadioGroup radiogroup = null;
 	private ArrayList<CheckBox> checkboxes = null;
 
-	public ChoiceQuestion(String question, String description, boolean optional, int minSelections, int maxSelections){
-		super(question,description,optional);
+	public ChoiceQuestion(String question, String description, boolean mandatory, int minSelections, int maxSelections){
+		super(question,description,mandatory);
 		min = minSelections;
 		max = maxSelections;
 		
@@ -62,7 +62,7 @@ public class ChoiceQuestion extends Question{
 		LinearLayout options = (LinearLayout) root.findViewById(R.id.svsChoiceLL);
 		
 		// set values
-		title.setText(this.getQuestion() + (this.isOptional() ? "" : " *"));
+		title.setText(this.getQuestionText());
 		desc.setText(this.getDescription());
 		if(getDescription() == null || getDescription().length() == 0) desc.setVisibility(View.GONE);
 		

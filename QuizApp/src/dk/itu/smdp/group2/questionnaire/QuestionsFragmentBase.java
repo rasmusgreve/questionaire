@@ -55,7 +55,7 @@ public abstract class QuestionsFragmentBase extends Fragment {
 				if(qn.isCompleted()){
 					qn.sendEmail();
 				}else{
-					int missing = qn.getFirstUncomplete();
+					int missing = qn.getQuestionNumber(qn.getFirstUncomplete());
 					String message = "Question "+missing+" must be answered.";
 					Toast.makeText(getActivity(), message, Toast.LENGTH_LONG).show();
 				}

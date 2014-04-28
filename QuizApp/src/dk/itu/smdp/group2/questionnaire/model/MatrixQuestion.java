@@ -138,7 +138,7 @@ public class MatrixQuestion extends Question{
 	
 	public String toString(){
 		if (!isAnswered()) return "";
-		String answer = "";
+		StringBuilder builder = new StringBuilder();
 		
 		for(int x = 0; x < matrix.length; x++){
 			String s = "";
@@ -147,9 +147,10 @@ public class MatrixQuestion extends Question{
 					if (((CompoundButton)matrix[x][y]).isChecked())
 						s += (s.length() == 0 ? "" : ", ") + columns[y];
 			
-			answer += "[" + s + "]";
+			builder.append(rows[x]+ ": " + s + "\n");
 		}
-		return answer;	
+		builder.setLength(builder.length() - 1);
+		return builder.toString();
 	}
 
 	@Override

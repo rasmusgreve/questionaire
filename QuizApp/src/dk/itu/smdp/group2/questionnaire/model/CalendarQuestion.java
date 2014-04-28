@@ -1,5 +1,7 @@
 package dk.itu.smdp.group2.questionnaire.model;
 
+import java.util.Calendar;
+
 import dk.itu.smdp.group2.R;
 import android.view.View;
 import android.widget.DatePicker;
@@ -41,6 +43,7 @@ public class CalendarQuestion extends Question {
 		if(getDescription() == null || getDescription().length() == 0) desc.setVisibility(View.GONE);
 		
 		time.setIs24HourView(true);
+		time.setCurrentHour(Calendar.getInstance().get(Calendar.HOUR_OF_DAY));
 		
 		date.setVisibility((year || month || day) ? View.VISIBLE : View.GONE);
 		time.setVisibility((hour || minute) ? View.VISIBLE : View.GONE);

@@ -49,6 +49,8 @@ class QuestionaireValidator extends AbstractQuestionaireValidator {
 		}
 	}
 	
+	
+	
 	@Check
 	def integerStepMatchesRange(IntegerQuestion it)
 	{
@@ -77,9 +79,39 @@ class QuestionaireValidator extends AbstractQuestionaireValidator {
 	@Check
 	def choiceSelectionRangeValue(ChoiceQuestion it)
 	{
-		if (minSelections >= maxSelections && maxSelections != 0)
+		if (minSelections > maxSelections && maxSelections != 0)
 		{
 			error("Max selections must be >= min selections", 
+				QuestionairemodelPackage.Literals.CHOICE_QUESTION__MAX_SELECTIONS
+			);
+		}
+	}
+	
+	@Check
+	def choiceQuestionSelectionsMin(ChoiceQuestion it)
+	{
+		if (minSelections <= 0){
+			error("Min selections must be >= 0 selections", 
+				QuestionairemodelPackage.Literals.CHOICE_QUESTION__MIN_SELECTIONS
+			);
+		}
+	}
+	
+	@Check
+	def choiceQuestionSelectionsCount(ChoiceQuestion it)
+	{
+		if (minSelections > options.length){
+			error("Min selections must be less than the amount of answers", 
+				QuestionairemodelPackage.Literals.CHOICE_QUESTION__MIN_SELECTIONS
+			);
+		}
+	}
+	
+	@Check
+	def choiceQuestionSelectionsCountMax(ChoiceQuestion it)
+	{
+		if (maxSelections > options.length){
+			warning("Max selections should be less than the amount of answers", 
 				QuestionairemodelPackage.Literals.CHOICE_QUESTION__MAX_SELECTIONS
 			);
 		}

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="ASCII"?>
+<questionairemodel:Questionaire xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:questionairemodel="platform:/resource/Questionaire/model/QuestionaireModel.ecore" name="Food Questionnaire" resultEmail="ragr@itu.dk">
+  <elements xsi:type="questionairemodel:TextQuestion" lines="5">
+    <questionBase title="What is your favourite dish?" description="Please enter the entire recipe."/>
+  </elements>
+  <elements xsi:type="questionairemodel:IntegerQuestion" minValue="1" maxValue="10">
+    <questionBase title="How many times per day do you eat?" mandatory="true"/>
+  </elements>
+  <elements xsi:type="questionairemodel:ChoiceQuestion" minSelections="1" maxSelections="1">
+    <questionBase title="What do you like the most?" mandatory="true"/>
+    <options name="chocolate" text="After Eight and Marabou"/>
+    <options name="fruit" text="Bananas, apples and pears"/>
+    <options name="sweets" text="Other sweets"/>
+  </elements>
+  <elements xsi:type="questionairemodel:CalendarQuestion" year="true" month="true" day="true">
+    <questionBase title="When did you last visit the dentist?">
+      <conditions option="//@elements.2/@options.0 //@elements.2/@options.2"/>
+    </questionBase>
+  </elements>
+</questionairemodel:Questionaire>

@@ -12,22 +12,6 @@ public class GRadioGroup {
 
     List<RadioButton> radios = new ArrayList<RadioButton>();
     Questionnaire qn;
-
-    /**
-     * Constructor, which allows you to pass number of RadioButton instances,
-     * making a group.
-     * 
-     * @param radios
-     *            One RadioButton or more.
-     */
-    public GRadioGroup(RadioButton... radios) {
-        super();
-
-        for (RadioButton rb : radios) {
-            this.radios.add(rb);
-            rb.setOnClickListener(onClick);
-        }
-    }
     
     public GRadioGroup(Questionnaire qn){
     	this.qn = qn;

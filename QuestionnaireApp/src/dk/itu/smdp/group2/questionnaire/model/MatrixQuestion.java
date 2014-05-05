@@ -2,6 +2,7 @@ package dk.itu.smdp.group2.questionnaire.model;
 
 import dk.itu.smdp.group2.R;
 import dk.itu.smdp.group2.questionnaire.utilities.GRadioGroup;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
@@ -60,6 +61,8 @@ public class MatrixQuestion extends Question{
 		
 		TableRow.LayoutParams rowParams = new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.WRAP_CONTENT);
 		TableRow.LayoutParams params = new TableRow.LayoutParams(0, TableRow.LayoutParams.WRAP_CONTENT,1f);
+		TableRow.LayoutParams comp_params = new TableRow.LayoutParams(0, TableRow.LayoutParams.WRAP_CONTENT,1f);
+		comp_params.gravity = Gravity.CENTER;
 		TableRow row;
 		
 		matrix = new CompoundButton[rows.length][columns.length];
@@ -91,14 +94,16 @@ public class MatrixQuestion extends Question{
 			String r = rows[i];
 			TextView tv = new TextView(getParent().getActivity());
 			tv.setText(r);
-			//tv.setLayoutParams(params);
+			tv.setLayoutParams(params);
+			tv.setSingleLine(false);
 			row.addView(tv);
 			
 			// create radio or checkbox
 			if(max == 1){
-				GRadioGroup rg = new GRadioGroup();
+				GRadioGroup rg = new GRadioGroup(getParent());
 				for(int j = 0; j < columns.length; j++){
 					RadioButton rb = new RadioButton(getParent().getActivity());
+					rb.setLayoutParams(comp_params);
 					matrix[i][j] = rb;
 					row.addView(rb);
 					rg.addRadioButton(rb);
@@ -109,6 +114,7 @@ public class MatrixQuestion extends Question{
 				for(int j = 0; j < columns.length; j++){
 					
 					CheckBox cb = new CheckBox(getParent().getActivity());
+					cb.setLayoutParams(comp_params);
 
 					matrix[i][j] = cb;
 					row.addView(cb);

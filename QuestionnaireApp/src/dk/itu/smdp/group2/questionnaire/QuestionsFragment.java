@@ -21,7 +21,7 @@ public class QuestionsFragment extends QuestionsFragmentBase {
 		text = new TextQuestion("What is your favorite dish?", "Please enter the entire recipe.", false, 5);
 		questionnaire.addQuestion(text);
 		
-		integer = new IntegerQuestion("How many times per day do you eat?", "", true, 1, 10, 1);
+		integer = new IntegerQuestion("How many times per day do you eat?", "", true, 1, 8, 3);
 		questionnaire.addQuestion(integer);
 		
 		choice = new ChoiceQuestion("What do you like the most?", "", true, 1, 1);

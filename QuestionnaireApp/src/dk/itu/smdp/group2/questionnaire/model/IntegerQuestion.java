@@ -70,7 +70,7 @@ public class IntegerQuestion extends Question {
 	// PRIVATE HELPERS
 	
 	private String[] getValues(){
-		String[] result = new String[(max-min+1)/step+1];
+		String[] result = new String[((max - min + 1) / step) + 2];
 		result[0] = "Not Selected";
 		int cur = min;
 		for(int i = 1; i < result.length; i++){

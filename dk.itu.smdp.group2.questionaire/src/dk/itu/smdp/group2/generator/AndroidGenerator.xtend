@@ -104,6 +104,7 @@ class AndroidGenerator {
 			«FOR it : options»
 			«buildOption»
 			«ENDFOR»
+			«buildConditions("choice")»
 			questionnaire.addQuestion(choice);
 		'''
 	}

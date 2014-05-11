@@ -12,6 +12,13 @@ import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 
+/**
+ * A Question where the respondent chooses answers for several rows with
+ * a number of identical choices for them all.
+ * 
+ * @author Emil
+ *
+ */
 public class MatrixQuestion extends Question{
 	
 	private int max;
@@ -24,6 +31,18 @@ public class MatrixQuestion extends Question{
 	// results
 	private View root;
 
+	/**
+	 * Initializes the MatrixQuestion with the given parameters. It is necessary
+	 * to add the rows and set the columns afterwards for complete and correct
+	 * behavior.
+	 * 
+	 * @param question The question to answer.
+	 * @param desc The more detailed description to the question if necessary.
+	 * Null or empty string will be seen as no description.
+	 * @param mandatory True if the Question should be marked as mandatory for the
+	 * Questionnaire to be complete.
+	 * @param maxPerRow The maximum number of selections per row (inclusive).
+	 */
 	public MatrixQuestion(String question, String description, boolean mandatory, int maxPerRow){
 		super(question,description,mandatory);
 		max = maxPerRow;
@@ -142,6 +161,7 @@ public class MatrixQuestion extends Question{
 		}
 	}
 	
+	@Override
 	public String toString(){
 		if (!isAnswered()) return "";
 		StringBuilder builder = new StringBuilder();
@@ -188,10 +208,23 @@ public class MatrixQuestion extends Question{
 		root.setVisibility(visible ? View.VISIBLE : View.GONE);
 	}
 
+	/**
+	 * Sets the columns of possible choices (for each row)
+	 * to the names given.
+	 * 
+	 * @param names Any number of Strings defining the
+	 * possible choices.
+	 */
 	public void setColumns(String... names) {
 		this.columns = names;
 	}
 
+	/**
+	 * Sets the rows of questions to consider.
+	 * 
+	 * @param rows Any number of Strings defining the
+	 * things to answer.
+	 */
 	public void setRows(String... rows) {
 		this.rows = rows;
 	}

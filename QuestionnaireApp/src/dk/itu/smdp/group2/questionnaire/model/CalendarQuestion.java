@@ -8,6 +8,13 @@ import android.widget.DatePicker;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
+/**
+ * A Question that requires 'calendar' information as the answer, like
+ * year, month, day, hour, minute or any combination hereof.
+ * 
+ * @author Emil
+ *
+ */
 public class CalendarQuestion extends Question {
 	
 	private View root;
@@ -18,6 +25,21 @@ public class CalendarQuestion extends Question {
 	private DatePicker date;
 	private TimePicker time;
 
+	/**
+	 * Instantiates the CalendarQuestion with the given parameters for use in
+	 * the Questionnaire.
+	 * 
+	 * @param question The question to answer.
+	 * @param desc The more detailed description to the question if necessary.
+	 * Null or empty string will be seen as no description.
+	 * @param mandatory True if the Question should be marked as mandatory for the
+	 * Questionnaire to be complete.
+	 * @param year True if the user should select a Year.
+	 * @param month True if the user should select a Month.
+	 * @param day True if the user should select a Day.
+	 * @param hour True if the user should select a Hour.
+	 * @param minute True if the user should select a Minute.
+	 */
 	public CalendarQuestion(String question, String desc, boolean mandatory,
 			boolean year, boolean month, boolean day, boolean hour, boolean minute) {
 		super(question,desc,mandatory);

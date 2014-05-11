@@ -4,10 +4,24 @@ import dk.itu.smdp.group2.R;
 import android.view.View;
 import android.widget.TextView;
 
+/**
+ * Indicates a Heading in the Questionnaire where a big title is written. This
+ * is in itself not a Question, but will appear in the list of Question as a
+ * sort of separator.
+ * 
+ * @author Emil
+ *
+ */
 public class Heading extends Question {
 	
 	private View root;
 	
+	/**
+	 * Simply initializes a Heading with the given title
+	 * to display.
+	 * 
+	 * @param title The title of the heading.
+	 */
 	public Heading(String title){
 		super(title,"",false);
 	}

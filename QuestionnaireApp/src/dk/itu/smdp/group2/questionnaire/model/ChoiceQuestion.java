@@ -13,6 +13,13 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
+/**
+ *  A Question where the user must select a number of answers based
+ *  on the given options to choose from.
+ *  
+ * @author Emil
+ *
+ */
 public class ChoiceQuestion extends Question{
 	
 	private int min,max;
@@ -25,6 +32,19 @@ public class ChoiceQuestion extends Question{
 	private RadioGroup radiogroup = null;
 	private ArrayList<CheckBox> checkboxes = null;
 
+	/**
+	 * Initializes the ChoiceQuestion with the given parameters. Further addition
+	 * of options is necessary for a complete ChoiceQuestion.
+	 * 
+	 * @param question The question to answer.
+	 * @param desc The more detailed description to the question if necessary.
+	 * Null or empty string will be seen as no description.
+	 * @param mandatory True if the Question should be marked as mandatory for the
+	 * Questionnaire to be complete.
+	 * @param minSelections The minimum number of selections the respondent must select.
+	 * @param maxSelections The maximum number of answers (inclusive) that the 
+	 * respondent can select.
+	 */
 	public ChoiceQuestion(String question, String description, boolean mandatory, int minSelections, int maxSelections){
 		super(question,description,mandatory);
 		min = minSelections;
@@ -34,15 +54,40 @@ public class ChoiceQuestion extends Question{
 		idViews = new ArrayList<Tuple<String,CompoundButton>>();
 	}
 	
+	/**
+	 * Adds a possible option to the ChoiceQuestion for the
+	 * respondent to select.
+	 * 
+	 * @param id The unique id of this choice, for possible
+	 * reference in conditions of later Questions in the
+	 * Questionnaire.
+	 * @param text The visible text defining the option.
+	 */
 	public void addOption(String id, String text){
 		options.add(new Tuple<String,String>(id, text));
 	}
 	
+	/**
+	 * Checks if this ChoiceQuestion has an option with
+	 * the given ID.
+	 * 
+	 * @param id The ID to search for.
+	 * @return True, if this ChoiceQuestion has an option
+	 * with the given ID.
+	 */
 	public boolean containsID(String id){
 		return getValueForID(id) != null;
 	}
 	
-	
+	/**
+	 * Checks if the respondent has chosen the option with
+	 * the given ID.
+	 * 
+	 * @param id The ID to search for.
+	 * @return True, if this ChoiceQuestion has an option
+	 * with the given ID and it has been selected by the
+	 * respondent.
+	 */
 	public boolean isIDChosen(String id) {
 		for(Tuple<String,CompoundButton> kv : idViews){
 			if(kv.getFirst().equals(id)){

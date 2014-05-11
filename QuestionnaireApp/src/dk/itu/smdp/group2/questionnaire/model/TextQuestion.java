@@ -5,6 +5,13 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
+/**
+ * A Question where the respondent is simply required to
+ * write a piece of text.
+ * 
+ * @author Emil
+ *
+ */
 public class TextQuestion extends Question {
 	
 	private int lines;
@@ -12,6 +19,16 @@ public class TextQuestion extends Question {
 	private View root;
 	private EditText editText;
 	
+	/**
+	 * Initializes the TextQuestion with the given parameters.
+	 * 
+	 * @param question The question to answer.
+	 * @param desc The more detailed description to the question if necessary.
+	 * Null or empty string will be seen as no description.
+	 * @param mandatory True if the Question should be marked as mandatory for the
+	 * Questionnaire to be complete.
+	 * @param lines The number of lines the resulting EditText should expect.
+	 */
 	public TextQuestion(String question, String description, boolean mandatory, int lines)
 	{
 		super(question, description, mandatory);

@@ -4,10 +4,25 @@ import dk.itu.smdp.group2.R;
 import android.view.View;
 import android.widget.TextView;
 
+/**
+ * A paragraph that separates the Questionnaire into several
+ * parts. It doesn't have any major effect at the moment,
+ * except as a separator, but could potentially dictate
+ * sub-numbering of the Questions or division of the
+ * Questionnaire into several pages.
+ * 
+ * @author Emil
+ *
+ */
 public class Paragraph extends Question {
 	
 	private View root;
 	
+	/**
+	 * Initializes the Paragraph with the given title.
+	 * 
+	 * @param title The title (to write) of the Paragraph.
+	 */
 	public Paragraph(String title){
 		super(title,"",false);
 	}

@@ -6,6 +6,14 @@ import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+/**
+ * A Question where the respondent is required to answer with a
+ * number. This number will be within a given range and possibly
+ * with a step size to reduce the number of possible choices.
+ * 
+ * @author Emil
+ *
+ */
 public class IntegerQuestion extends Question {
 	
 	private int min;
@@ -15,6 +23,20 @@ public class IntegerQuestion extends Question {
 	private View root;
 	private Spinner spinner;
 	
+	/**
+	 * Initializes this IntegerQuestion with the given parameters.
+	 * 
+	 * @param question The question to answer.
+	 * @param desc The more detailed description to the question if necessary.
+	 * Null or empty string will be seen as no description.
+	 * @param mandatory True if the Question should be marked as mandatory for the
+	 * Questionnaire to be complete.
+	 * @param min The minimum number possible to select (inclusive).
+	 * @param max The maximum number possible to select (inclusive, unless the
+	 * stepsize misses it).
+	 * @param step The step between each possible choice. If this doesn't match
+	 * with the min and max it might not be possible to select the maximum value.
+	 */
 	public IntegerQuestion(String question, String description, boolean mandatory, int min, int max, int step)
 	{
 		super(question, description, mandatory);
@@ -41,13 +63,6 @@ public class IntegerQuestion extends Question {
 		spinner.setAdapter(spinnerArrayAdapter);
 		
 		return root;
-	}
-
-	
-	public String generateTextResult()
-	{
-		// TODO: Not implemented
-		return "";
 	}
 
 	@Override

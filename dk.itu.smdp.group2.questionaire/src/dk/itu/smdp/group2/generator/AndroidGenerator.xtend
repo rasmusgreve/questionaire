@@ -16,6 +16,10 @@ import java.util.List
 
 class AndroidGenerator {
 	
+	/*
+	 * Compile the model to android code for placement in a file
+	 * called 'QuestionsFragment'.
+	 */
 	def static compileToAndroid(Questionaire it) {
 		'''
 			package dk.itu.smdp.group2.questionnaire;
@@ -45,6 +49,9 @@ class AndroidGenerator {
 		'''
 	}
 	
+	/*
+	 * Replace linebreaks with correct character escape sequences.
+	 */
 	def static linebreaks(String it)
 	{
 		it?.replaceAll("\r","")?.replaceAll("\n","\\\\r\\\\n")
@@ -64,19 +71,27 @@ class AndroidGenerator {
 		else if (elem instanceof CalendarQuestion)	buildCalendarQuestion(elem as CalendarQuestion)
 		else if (elem instanceof IntegerQuestion) 	buildIntegerQuestion(elem as IntegerQuestion)
 	} 
-	
+	/*
+	 * Build a heading element
+	 */
 	def private static buildHeading(Heading it){
 		'''
 			questionnaire.addHeading(new Heading("«linebreaks(text)»"));
 		'''
 	}
 	
+	/*
+	 * Build a paragraph element
+	 */	
 	def private static buildParagraph(Paragraph it){
 		'''
 			questionnaire.addParagraph(new Paragraph("«linebreaks(text)»"));
 		'''
 	}
 	
+	/*
+	 * Build a list of conditions for a given question type
+	 */
 	def private static buildConditions(Question it, String item)	{
 		'''
 			«FOR it : questionBase.conditions»
@@ -84,12 +99,19 @@ class AndroidGenerator {
 			«ENDFOR»
 		'''
 	}
+	
+	/*
+	 * Build a condition for a given question type
+	 */
 	def private static buildCondition(QuestionCondition it, String item){
 		'''
 			«item».addCondition(«FOR it : option SEPARATOR ', '»"«name»"«ENDFOR»);
 		'''
 	}
 	
+	/*
+	 * Build a text question
+	 */
 	def private static buildTextQuestion(TextQuestion it){
 		'''
 			text = new TextQuestion("«linebreaks(questionBase.title)»", "«linebreaks(questionBase.description)»", «questionBase.mandatory», «lines»);
@@ -98,6 +120,9 @@ class AndroidGenerator {
 		'''
 	}
 	
+	/*
+	 * Build a choice question
+	 */
 	def private static buildChoiceQuestion(ChoiceQuestion it){
 		'''
 			choice = new ChoiceQuestion("«linebreaks(questionBase.title)»", "«linebreaks(questionBase.description)»", «questionBase.mandatory», «minSelections», «maxSelections»);
@@ -109,12 +134,18 @@ class AndroidGenerator {
 		'''
 	}
 	
+	/*
+	 * Build an option for a choice question
+	 */
 	def private static buildOption(Option it){
 		'''
 			choice.addOption("«name»", "«text»");
 		'''
 	}
 	
+	/*
+	 * Build a matrix question
+	 */
 	def private static buildMatrixQuestion(MatrixQuestion it){
 		'''
 			matrix = new MatrixQuestion("«linebreaks(questionBase.title)»", "«linebreaks(questionBase.description)»", «questionBase.mandatory», «maxPerRow»);
@@ -125,6 +156,9 @@ class AndroidGenerator {
 		'''
 	}
 	
+	/*
+	 * Build a calendar question
+	 */
 	def private static buildCalendarQuestion(CalendarQuestion it){
 		'''
 			calendar = new CalendarQuestion("«linebreaks(questionBase.title)»", "«linebreaks(questionBase.description)»", «questionBase.mandatory», «year», «month», «day», «hour», «minute»);
@@ -133,6 +167,9 @@ class AndroidGenerator {
 		'''
 	}
 	
+	/*
+	 * Build an integer question
+	 */
 	def private static buildIntegerQuestion(IntegerQuestion it){
 		'''
 			integer = new IntegerQuestion("«linebreaks(questionBase.title)»", "«linebreaks(questionBase.description)»", «questionBase.mandatory», «minValue», «maxValue», «step»);

@@ -6,7 +6,10 @@ import org.eclipse.xtext.conversion.ValueConverterException;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.util.Strings;
 
-
+/**
+ * A value converter responsible for converting the keywords 'long' and 'short'
+ * to integers
+ */
 public class TextQuestionLengthConverter extends org.eclipse.xtext.common.services.DefaultTerminalConverters{
 
 	@ValueConverter(rule = "SHORT_LONG")

@@ -17,6 +17,10 @@ import org.eclipse.emf.common.util.EList
 
 class LatexGenerator {
 	
+	
+	/*
+	 * Common static start code that doesn't change with the model
+	 */
 	def static staticStartCode(){
 		'''
 		%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -138,6 +142,9 @@ class LatexGenerator {
 		'''
 	}
 	
+	/*
+	 * Common static ending code that doesn't change with the model
+	 */
 	def static staticEndCode() {
 		'''
 		\end{document}
@@ -148,16 +155,26 @@ class LatexGenerator {
 	 *         Elements        *
 	 ***************************/
 	
+	/*
+	 * Replace linebreaks with the latex command \\
+	 */
 	def static linebreaks(String it)
 	{
 		it?.replaceAll("\r","")?.replaceAll("\n","\\\\\\\\")
 	}	
 	
+	/*
+	 * Generate a heading
+	 */
 	def static compileHeading(Heading it)  {
 		'''
 		\heading{«linebreaks(text)»}
 		'''
 	}
+	
+	/*
+	 * Generate a paragraph
+	 */
 	def static compileParagraph(Paragraph it)  {
 		'''
 		\begin{paragraph}
@@ -166,7 +183,9 @@ class LatexGenerator {
 		'''
 	}
 
-
+	/*
+	 * Common method for generating questions
+	 */
 	def static compileQuestion(Question it)  {
 		'''
 		%%«it.class.name»
@@ -179,17 +198,27 @@ class LatexGenerator {
 		\questionseparator
 		'''
 	}
+	
+	/*
+	 * Generate the shared start codes for all questions
+	 */
 	def static compileQuestionBase(QuestionBase it)  {
 		'''
 		\question{«linebreaks(title)»«IF mandatory» *«ENDIF»«IF description != null»\\«linebreaks(description)»«ENDIF»}
 		«it.conditions.compileQuestionConditions»
 		'''
 	}
+	/*
+	 * Generate a text question
+	 */
 	def static compileTextQuestion(TextQuestion it)  {
 		'''
 		\textanswer{«lines»}
 		'''
 	}
+	/*
+	 * Generate an integer question
+	 */
 	def static compileIntegerQuestion(IntegerQuestion it)  {
 		'''
 		«IF (maxValue - minValue)/step+1 > 100»
@@ -203,6 +232,9 @@ class LatexGenerator {
 		«ENDIF»
 		'''
 	}
+	/*
+	 * Generate a calendar question
+	 */
 	def static compileCalendarQuestion(CalendarQuestion it)  {
 		'''
 		«IF year»\year«ENDIF»
@@ -212,7 +244,9 @@ class LatexGenerator {
 		«IF minute»\minute«ENDIF»
 		'''
 	}
-	
+	/*
+	 * Generate a matrix question
+	 */
 	def static compileMatrixQuestion(MatrixQuestion it)  {
 		'''
 		\vspace{0.5cm}
@@ -225,6 +259,10 @@ class LatexGenerator {
 		\vspace{0.5cm}
 		'''
 	}
+	
+	/*
+	 * Generate a choice question
+	 */
 	def static compileChoiceQuestion(ChoiceQuestion it)  {
 		'''
 		\choicenumber{«minSelections»}{«maxSelections»}
@@ -235,6 +273,10 @@ class LatexGenerator {
 		\end{choiceoptions}
 		'''
 	}
+	
+	/*
+	 * Generate a sentence describing some given conditions
+	 */
 	def static compileQuestionConditions(EList<QuestionCondition> it)  {
 		if(it.length > 0)
 		'''
@@ -249,7 +291,9 @@ class LatexGenerator {
 
 	
 	
-	
+	/*
+	 * Generate latex code from the given model
+	 */
 	def static compileToLatex(Questionaire it) {
 		'''
 		«staticStartCode»

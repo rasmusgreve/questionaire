@@ -19,6 +19,9 @@ import questionairemodel.Option
  */
 class QuestionaireQuickfixProvider extends DefaultQuickfixProvider {
 
+	/*
+	 * Remove the step setting from integer questions
+	 */
 	@Fix(QuestionaireValidator.INTEGERQUESTION_STEP)
 	def removeStep(Issue issue, IssueResolutionAcceptor acceptor) {
 		acceptor.accept(issue, 'Remove the step setting', 'Remove the step setting from the document', null) [
@@ -31,6 +34,9 @@ class QuestionaireQuickfixProvider extends DefaultQuickfixProvider {
 		]
 	}
 	
+	/*
+	 * Reduce the min settings of an integer question to be max-1
+	 */
 	@Fix(QuestionaireValidator.INTEGERQUESTION_MINMAX)
 	def reduceMin(Issue issue, IssueResolutionAcceptor acceptor) {
 		if (!issue.data.get(0).equals("1")) //If min can be reduced
@@ -43,6 +49,9 @@ class QuestionaireQuickfixProvider extends DefaultQuickfixProvider {
 		}	
 	}
 	
+	/*
+	 * Increase the max setting of an integer question to be min+1
+	 */
 	@Fix(QuestionaireValidator.INTEGERQUESTION_MINMAX)
 	def increaseMax(Issue issue, IssueResolutionAcceptor acceptor) {
 		acceptor.accept(issue, "Increase the maximum value", "Increase the maximum value to be above the minimum", null, 
@@ -52,6 +61,9 @@ class QuestionaireQuickfixProvider extends DefaultQuickfixProvider {
 			]);
 	}
 	
+	/*
+	 * Change the step value of an integer question to be the nearest good value
+	 */
 	@Fix(QuestionaireValidator.INTEGERQUESTION_STEP)
 	def adjustStep(Issue issue, IssueResolutionAcceptor acceptor) {
 		acceptor.accept(issue, "Change step to nearest good value", "Change the step value to the closest value that allows selection of both the minimum and maximum value", null, 
@@ -76,6 +88,9 @@ class QuestionaireQuickfixProvider extends DefaultQuickfixProvider {
 		]);
 	}
 
+	/*
+	 * Increase the max setting of an integer question to match the step value
+	 */
 	@Fix(QuestionaireValidator.INTEGERQUESTION_STEP)
 	def adjustMaxForStep(Issue issue, IssueResolutionAcceptor acceptor) {
 		acceptor.accept(issue, "Increase maximum to match step", "Change the max value such that the chosen step value fits", null, 
@@ -86,6 +101,9 @@ class QuestionaireQuickfixProvider extends DefaultQuickfixProvider {
 		]);
 	}
 	
+	/*
+	 * Set the length of a text question to be 1 line
+	 */
 	@Fix(QuestionaireValidator.TEXTQUESTION_SHORTLONG)
 	def insertDefaultLength(Issue issue, IssueResolutionAcceptor acceptor) {
 		acceptor.accept(issue, "Set length to 1", "Set the length of the text question answer 1 meaning one line of text", null, 
@@ -94,7 +112,10 @@ class QuestionaireQuickfixProvider extends DefaultQuickfixProvider {
 				tq.lines = 1;
 		]);
 	}
-	
+
+	/*
+	 * Set the length of a text question to be 5 lines
+	 */
 	@Fix(QuestionaireValidator.TEXTQUESTION_SHORTLONG)
 	def insertDefaultLongLength(Issue issue, IssueResolutionAcceptor acceptor) {
 		acceptor.accept(issue, "Set length to 5", "Set the length of the text question answer 5 meaning five lines of text", null, 
@@ -104,6 +125,9 @@ class QuestionaireQuickfixProvider extends DefaultQuickfixProvider {
 		]);
 	}
 	
+	/*
+	 * Make option names unique by appending a number to the name
+	 */
 	@Fix(QuestionaireValidator.OPTION_NAME_UNIQUE)
 	def makeOptionNameUnique(Issue issue, IssueResolutionAcceptor acceptor) {
 		acceptor.accept(issue, "Make the name of this option unique", "Make the name of this option unique by appending a number", null, 
@@ -118,6 +142,9 @@ class QuestionaireQuickfixProvider extends DefaultQuickfixProvider {
 		]);
 	}
 	
+	/*
+	 * Append a integer to the end of a string, but inside the quotes if quotes are present
+	 */
 	def nameId(String name, int id)
 	{
 		if (name.startsWith("\"")){
@@ -129,7 +156,10 @@ class QuestionaireQuickfixProvider extends DefaultQuickfixProvider {
 		}
 	}
 	
-
+	/*
+	 * Is a given triple of min, max and step valid
+	 * i.e. is it possible to select both min and max with the given step
+	 */
 	def validStep(int min, int max, int step)
 	{
 		if (step < 1) 

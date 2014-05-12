@@ -25,6 +25,9 @@ class QuestionaireValidator extends AbstractQuestionaireValidator {
 	public static val String TEXTQUESTION_SHORTLONG = "textQuestionShortLong";
 	public static val String OPTION_NAME_UNIQUE = "optionName";
 
+	/*
+	 * Validate that the lines parameter must be positive
+	 */
 	@Check
 	def checkTextQuestionLength(TextQuestion it) {
 		if (lines <= 0)
@@ -37,6 +40,9 @@ class QuestionaireValidator extends AbstractQuestionaireValidator {
 		}
 	}
 
+	/*
+	 * Validate that the range settings of an integer question must have max >= min
+	 */
 	@Check
 	def checkIntegerQuestionRange(IntegerQuestion it) {
 		if (maxValue <= minValue)
@@ -50,7 +56,10 @@ class QuestionaireValidator extends AbstractQuestionaireValidator {
 	}
 	
 	
-	
+	/*
+	 * Validate that for an integer question the step settings makes it possible
+	 * to select both the minimum and maximum value
+	 */
 	@Check
 	def integerStepMatchesRange(IntegerQuestion it)
 	{
@@ -65,6 +74,9 @@ class QuestionaireValidator extends AbstractQuestionaireValidator {
 		}
 	}
 	
+	/*
+	 * Validate that the step setting for integer questions is positive
+	 */
 	@Check
 	def integerStepValid(IntegerQuestion it)
 	{
@@ -76,6 +88,9 @@ class QuestionaireValidator extends AbstractQuestionaireValidator {
 		}
 	}
 	
+	/*
+	 * Validate that the allowed selection range for choice questions is positive
+	 */
 	@Check
 	def choiceSelectionRangeValue(ChoiceQuestion it)
 	{
@@ -87,6 +102,9 @@ class QuestionaireValidator extends AbstractQuestionaireValidator {
 		}
 	}
 	
+	/*
+	 * Validate that min selections for choice questions is not negative
+	 */
 	@Check
 	def choiceQuestionSelectionsMin(ChoiceQuestion it)
 	{
@@ -97,6 +115,10 @@ class QuestionaireValidator extends AbstractQuestionaireValidator {
 		}
 	}
 	
+	/*
+	 * Validate that min selections for choice questions is possible to fulfill by
+	 * requiring at least one more possible option selection
+	 */
 	@Check
 	def choiceQuestionSelectionsCount(ChoiceQuestion it)
 	{
@@ -107,6 +129,10 @@ class QuestionaireValidator extends AbstractQuestionaireValidator {
 		}
 	}
 	
+	/*
+	 * Validate that the max selections for choice question isn't set
+	 * unnecessarily high (above the number of options)
+	 */
 	@Check
 	def choiceQuestionSelectionsCountMax(ChoiceQuestion it)
 	{
@@ -117,6 +143,9 @@ class QuestionaireValidator extends AbstractQuestionaireValidator {
 		}
 	}
 	
+	/*
+	 * Validate that all option id's (names) are unique
+	 */
 	@Check
 	def optionIdUnqiue(Questionaire it)
 	{
@@ -145,6 +174,10 @@ class QuestionaireValidator extends AbstractQuestionaireValidator {
 		
 	}
 	
+	/*
+	 * Validate that all conditional questions are positions after the conditions
+	 * they depend upon
+	 */
 	@Check
 	def conditionalAfterCondition(Questionaire it)
 	{
@@ -173,6 +206,10 @@ class QuestionaireValidator extends AbstractQuestionaireValidator {
 		]
 	}
 	
+	/*
+	 * Validate that max selections per row for matrix questions is in the valid
+	 * range
+	 */
 	@Check 
 	def matrixQuestionMaxPerRowRange(MatrixQuestion it)
 	{
@@ -190,6 +227,9 @@ class QuestionaireValidator extends AbstractQuestionaireValidator {
 		}
 	}
 	
+	/*
+	 * Validate that matrix questions have at least 1 column
+	 */
 	@Check
 	def matrixQuestionMustHaveColumns(MatrixQuestion it)
 	{
@@ -201,6 +241,10 @@ class QuestionaireValidator extends AbstractQuestionaireValidator {
 		}
 	}
 	
+	/*
+	 * Validate that matrix questions should have more than 1 row
+	 * (otherwise you should use a choice question)
+	 */
 	@Check
 	def matrixQuestionShouldHaveMultipleLines(MatrixQuestion it)
 	{

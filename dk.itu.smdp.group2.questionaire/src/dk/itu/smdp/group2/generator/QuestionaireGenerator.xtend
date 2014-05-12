@@ -26,8 +26,6 @@ import questionairemodel.impl.ChoiceQuestionImpl
  */
 class QuestionaireGenerator implements IGenerator {
 
-	String latex_cmd = "/usr/local/texlive/2012/bin/universal-darwin/pdflatex" //How to do this??
-
 	override void doGenerate(Resource resource, IFileSystemAccess fsa) {
 		resource.allContents.toIterable.filter(typeof(Questionaire)).forEach [ Questionaire it |
 			
@@ -47,23 +45,16 @@ class QuestionaireGenerator implements IGenerator {
 			
 			// generate Android implementation
 			fsa.generateFile("android/QuestionsFragment.java", AndroidGenerator.compileToAndroid(it))
-			//TODO: other Android stuff?
-			
 			
 			// generate Latex
 			fsa.generateFile("latex/" + fname +".tex", LatexGenerator.compileToLatex(it))
-			//TODO: other Latex stuff?
-			val projectName = resource.URI.segment(1)
-			val project = ResourcesPlugin.workspace.root.getProject(projectName)
-			var path = new File(project.location + "/src-gen/latex/")
-			var cmd = #[latex_cmd, fname + ".tex"]
-			try{
-				Runtime.runtime.exec(cmd, null, path)
-			}
-			catch(Exception e){}
+			
 		]
 	}
 	
+	/*
+	 * Remove quotes from the start and end of all strings
+	 */
 	def static removeQuotes(Element it){
 		if(it instanceof Heading){
 			(it as Heading).text = removeQuotes((it as Heading).text)
